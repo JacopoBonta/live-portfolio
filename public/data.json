@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T18:56:57.947Z",
+  "generatedAt": "2026-09-09T19:02:05.582Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -20,6 +20,10 @@
     {
       "label": "GitHub",
       "url": "https://github.com/JacopoBonta"
+    },
+    {
+      "label": "Cubbit",
+      "url": "https://github.com/cubbit"
     },
     {
       "label": "sugo — PR review agent",
