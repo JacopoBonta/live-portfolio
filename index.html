@@ -293,6 +293,7 @@
 <nav class="secnav" id="secnav" aria-label="Sections">
   <a href="#stats-section">Stats</a>
   <a href="#about">About</a>
+  <a href="#contributions-section">Contributions</a>
   <a href="#featured-section">Featured</a>
   <a href="#repos-section">Repos</a>
   <a href="#activity">Activity</a>
@@ -322,16 +323,16 @@
     </div>
   </section>
 
-  <section id="contributions-section" aria-label="Contribution activity" hidden>
-    <h2>Public contributions</h2>
-    <p class="heat-summary" id="heat-summary"></p>
-    <div class="heatmap"><div class="heatgrid" id="heatgrid" aria-hidden="true"></div></div>
-  </section>
-
   <section class="about" id="about">
     <h2>About</h2>
     <p id="about-text">Loading snapshot…</p>
     <div class="links" id="links"></div>
+  </section>
+
+  <section id="contributions-section" aria-label="Contribution activity" hidden>
+    <h2>Public contributions</h2>
+    <p class="heat-summary" id="heat-summary"></p>
+    <div class="heatmap"><div class="heatgrid" id="heatgrid" aria-hidden="true"></div></div>
   </section>
 
   <section id="featured-section">
@@ -808,8 +809,8 @@
   function buildCommands(data) {
     var cmds = [];
     var sections = [
-      ['Stats', 'stats-section'], ['About', 'about'], ['Featured', 'featured-section'],
-      ['Repositories', 'repos-section'], ['Activity', 'activity'], ['Contributions', 'contributions-section'],
+      ['Stats', 'stats-section'], ['About', 'about'], ['Public contributions', 'contributions-section'],
+      ['Featured', 'featured-section'], ['Repositories', 'repos-section'], ['Activity', 'activity'],
     ];
     sections.forEach(function (s) {
       if (!document.getElementById(s[1])) return;
