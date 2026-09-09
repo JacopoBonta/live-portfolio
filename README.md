@@ -35,10 +35,16 @@ current about a minute later.
 
 ## Experience features (all in `index.html`, no dependencies)
 
-- **Command palette (⌘K / Ctrl-K)** — jump to a section, apply a language
-  filter, open a repo on GitHub, copy the page link. Type-to-filter,
-  ArrowUp/Down + Enter, Esc to close; also openable with the **Menu ⌘K**
-  button in the footer for touch users.
+- **Command palette (⌘K / Ctrl-K)** — switch the theme mode, jump to a
+  section, apply a language filter, open a repo on GitHub, copy the page link.
+  Type-to-filter, ArrowUp/Down + Enter, Esc to close. Keyboard-only (no visible
+  trigger) so it stays an easter egg.
+- **Theme modes** — system by default (follows the OS light/dark setting, live
+  while the page is open), forced light or dark via the palette's **Theme**
+  group. The choice persists in `localStorage['live-portfolio-theme']`
+  ("system" removes the key so it keeps tracking the OS). Resolved in a
+  bootstrap script before the CSS applies, so a first visit never flashes the
+  wrong theme; JS-off keeps the dark default.
 - **Public contribution heatmap** — 53-week calendar rendered from
   `data.contributions`, a 5-step accent scale computed from the profile's own
   day-count distribution. Hidden when the field is missing (old snapshots).
@@ -48,9 +54,9 @@ current about a minute later.
   from its per-repo `languages` map.
 - **Sticky section nav** — appears (blurred) once the masthead scrolls away.
 - **Scroll reveals** — subtle fade/slide on first intersection.
-- All motion is gated: `prefers-reduced-motion: reduce` and JS-off get exactly
-  the plain static page; the effects follow the same pattern as the cursor
-  glow/card spotlight.
+- Theme, motion and JS gating all follow the same progressive pattern:
+  `prefers-reduced-motion: reduce` and JS-off get exactly the plain static
+  page; theme mode "system" resolves via `prefers-color-scheme` in JS.
 
 ## New data fields (`public/data.json`)
 

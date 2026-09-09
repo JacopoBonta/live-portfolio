@@ -11,9 +11,62 @@
 <meta property="og:url" content="https://JacopoBonta.github.io/live-portfolio/">
 <meta property="og:image" content="https://JacopoBonta.github.io/live-portfolio/public/avatar.png">
 <meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0d0f12">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230d0f12'/%3E%3Ccircle cx='8' cy='8' r='3.5' fill='%237fb3cc'/%3E%3C/svg%3E">
+<script>
+/* Theme bootstrap: runs before <style> so data-theme is set before any CSS
+   applies (no flash of the wrong theme). Modes: "system" (default), "light",
+   "dark". Explicit modes persist in localStorage; "system" removes the key so
+   it keeps tracking the OS default. */
+(function () {
+  'use strict';
+  var KEY = 'live-portfolio-theme';
+  var darkQuery = window.matchMedia
+    ? window.matchMedia('(prefers-color-scheme: dark)')
+    : null;
+  var mode = 'system';
+
+  function stored() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+  function systemTheme() { return darkQuery && darkQuery.matches ? 'dark' : 'light'; }
+  function resolve() { return mode === 'system' ? systemTheme() : mode; }
+
+  function apply() {
+    var t = resolve();
+    document.documentElement.setAttribute('data-theme', t);
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#0d0f12' : '#f5f6f8');
+  }
+
+  function set(next) {
+    if (next !== 'system' && next !== 'light' && next !== 'dark') return;
+    mode = next;
+    try {
+      if (next === 'system') localStorage.removeItem(KEY);
+      else localStorage.setItem(KEY, next);
+    } catch (e) { /* private mode: apply anyway, don't persist */ }
+    apply();
+  }
+
+  var saved = stored();
+  if (saved === 'light' || saved === 'dark') mode = saved;
+  apply();
+
+  // OS theme changes update the page only while mode is "system".
+  if (darkQuery) {
+    var onChange = function () { if (mode === 'system') apply(); };
+    if (darkQuery.addEventListener) darkQuery.addEventListener('change', onChange);
+    else if (darkQuery.addListener) darkQuery.addListener(onChange); // older Safari
+  }
+
+  window.__themeMode = { get: function () { return mode; }, set: set };
+})();
+</script>
 <style>
   :root {
+    color-scheme: dark;
     --bg: #0d0f12;
     --surface: #12151a;
     --surface-2: #171b21;
@@ -22,8 +75,32 @@
     --muted: #8b949e;
     --text: #e6e9ee;
     --accent: #7fb3cc;
+    /* rgba slots for gradients/overlays that today assume darkness */
+    --glow-rgb: 127, 179, 204;      /* ambient glow + card spotlight */
+    --heat-rgb: 127, 179, 204;      /* heatmap scale */
+    --nav-bg: rgba(13, 15, 18, 0.82);   /* sticky nav blur backdrop */
+    --overlay-bg: rgba(13, 15, 18, 0.6);/* palette backdrop */
+    --shadow: 0 16px 48px rgba(0, 0, 0, 0.5); /* palette drop shadow */
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  /* Light mode: resolved in JS (data-theme), so no prefers-color-scheme
+     duplication here. Accent is the same-hue blue darkened to pass AA as text. */
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #f5f6f8;
+    --surface: #ffffff;
+    --surface-2: #eef0f3;
+    --border: #dde1e6;
+    --border-strong: #c3c9d1;
+    --muted: #5c6470;
+    --text: #1a1d21;
+    --accent: #276d9e;
+    --glow-rgb: 39, 109, 158;
+    --heat-rgb: 39, 109, 158;
+    --nav-bg: rgba(245, 246, 248, 0.85);
+    --overlay-bg: rgba(15, 19, 26, 0.4);
+    --shadow: 0 16px 48px rgba(15, 19, 26, 0.18);
   }
   * { box-sizing: border-box; }
   html { background: var(--bg); }
@@ -75,6 +152,8 @@
   .about p a {
     color: var(--accent); text-decoration: underline;
     text-decoration-color: var(--border-strong); text-underline-offset: 3px;
+    /* inline vertical padding widens the hit area without moving the text */
+    padding: 4px 0;
   }
   .about p a:hover { text-decoration-color: var(--accent); }
   .about .links { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
@@ -159,7 +238,7 @@
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
     opacity: 0; transition: opacity 400ms ease;
     background: radial-gradient(560px circle at var(--mx, 50%) var(--my, 40%),
-                rgba(127, 179, 204, 0.06), transparent 70%);
+                rgba(var(--glow-rgb), 0.06), transparent 70%);
   }
   .glow-layer.on { opacity: 1; }
   main.wrap { position: relative; z-index: 1; }
@@ -170,7 +249,7 @@
     content: ""; position: absolute; inset: 0; border-radius: 6px; pointer-events: none;
     opacity: 0; transition: opacity 300ms ease;
     background: radial-gradient(240px circle at var(--cx, 50%) var(--cy, 50%),
-                rgba(127, 179, 204, 0.08), transparent 65%);
+                rgba(var(--glow-rgb), 0.08), transparent 65%);
   }
   body.fx .card:hover::after { opacity: 1; }
   .card, .about .links a, .chip, .repo-row .name, .feed .repo-link, .past-summary {
@@ -190,10 +269,10 @@
     gap: 3px; width: max-content; padding: 2px 0;
   }
   .heatcell { width: 10px; height: 10px; border-radius: 2px; background: var(--surface-2); }
-  .heatcell.l1 { background: rgba(127, 179, 204, 0.25); }
-  .heatcell.l2 { background: rgba(127, 179, 204, 0.45); }
-  .heatcell.l3 { background: rgba(127, 179, 204, 0.65); }
-  .heatcell.l4 { background: rgba(127, 179, 204, 0.9); }
+  .heatcell.l1 { background: rgba(var(--heat-rgb), 0.25); }
+  .heatcell.l2 { background: rgba(var(--heat-rgb), 0.45); }
+  .heatcell.l3 { background: rgba(var(--heat-rgb), 0.65); }
+  .heatcell.l4 { background: rgba(var(--heat-rgb), 0.9); }
   .heat-summary { font-family: var(--mono); font-size: 13px; color: var(--muted); margin: 0 0 12px; }
   .heat-summary .total { color: var(--text); }
 
@@ -201,7 +280,7 @@
   .secnav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 20;
     display: none; justify-content: center; gap: 4px; padding: 8px 16px;
-    background: rgba(13, 15, 18, 0.82); backdrop-filter: blur(8px);
+    background: var(--nav-bg); backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
     transform: translateY(-100%); transition: transform 240ms ease;
@@ -217,14 +296,14 @@
   /* command palette */
   .palette-backdrop {
     position: fixed; inset: 0; z-index: 50; display: none;
-    background: rgba(13, 15, 18, 0.6); backdrop-filter: blur(2px);
+    background: var(--overlay-bg); backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
   }
   .palette-backdrop.open { display: flex; align-items: flex-start; justify-content: center; padding: 12vh 16px 16px; }
   .palette {
     width: 100%; max-width: 560px; background: var(--surface);
     border: 1px solid var(--border-strong); border-radius: 6px;
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5); overflow: hidden;
+    box-shadow: var(--shadow); overflow: hidden;
     display: flex; flex-direction: column; max-height: 60vh;
   }
   .palette .palette-input {
@@ -830,7 +909,18 @@
   // stay an easter egg for those who explore.
 
   function buildCommands(data) {
+    data = data || {}; // early ⌘K call passes null: Theme/Sections/Copy still build
     var cmds = [];
+    // Theme group first, so it's visible as soon as the palette opens.
+    var themes = [['System — follow OS', 'system'], ['Light', 'light'], ['Dark', 'dark']];
+    var currentTheme = window.__themeMode ? window.__themeMode.get() : 'system';
+    themes.forEach(function (t) {
+      cmds.push({
+        group: 'Theme', label: 'Theme: ' + t[0],
+        hint: t[1] === currentTheme ? 'current' : 'theme',
+        act: function () { if (window.__themeMode) window.__themeMode.set(t[1]); }
+      });
+    });
     var sections = [
       ['Stats', 'stats-section'], ['About', 'about'], ['Public contributions', 'contributions-section'],
       ['Featured', 'featured-section'], ['Repositories', 'repos-section'], ['Activity', 'activity'],
@@ -933,6 +1023,8 @@
     lastFocus = document.activeElement;
     backdrop.classList.add('open');
     input.value = '';
+    // Rebuild so the Theme "current" hint is accurate after any switch.
+    buildCommands(window.__portfolioData);
     renderList();
     input.focus();
   }
@@ -1004,6 +1096,10 @@
       observer.observe(s);
     });
   }
+
+  // Build Theme/Sections/Copy/GitHub commands right away so ⌘K works even
+  // before data.json resolves; Languages/Repos join when the snapshot lands.
+  buildCommands(null);
 
   // Commands need the snapshot; build after data.json resolves (the existing
   // fetch in the first IIFE sets window state). Poll cheaply for it.
