@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T13:05:01.888Z",
+  "generatedAt": "2026-09-09T13:07:19.221Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -31,10 +31,10 @@
     }
   ],
   "stats": {
-    "publicRepos": 18,
+    "publicRepos": 19,
     "totalStars": 1,
     "followers": 17,
-    "lastPush": "2026-07-06"
+    "lastPush": "2026-09-09"
   },
   "featured": [
     {
@@ -118,6 +118,22 @@
       "createdAt": "2026-04-24",
       "pushedAt": "2026-05-29",
       "updatedAt": "2026-04-25"
+    },
+    {
+      "name": "live-portfolio",
+      "description": "Live portfolio — static page generated from public GitHub data, refreshed by the harness",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/live-portfolio",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "HTML",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2026-09-09",
+      "pushedAt": "2026-09-09",
+      "updatedAt": "2026-09-09"
     },
     {
       "name": "opencode-artifacts-plugin",
