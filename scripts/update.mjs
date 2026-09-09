@@ -131,6 +131,66 @@ function fetchLanguages(names) {
   return out;
 }
 
+// Contribution calendar — public contributions only, so private activity
+// never reaches data.json regardless of which token runs the generator.
+function fetchContributions() {
+  const from = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000)
+    .toISOString()
+    .slice(0, 10);
+  const to = new Date().toISOString().slice(0, 10);
+  const q = `query($login: String!, $from: DateTime!, $to: DateTime!) {
+    user(login: $login) {
+      contributionsCollection(from: $from, to: $to) {
+        onlyPublicContributions: contributionCalendar {
+          weeks {
+            contributionDays { date contributionCount }
+          }
+        }
+      }
+    }
+  }`;
+  let cal;
+  try {
+    const res = ghJson([
+      'graphql',
+      '-f', `login=${OWNER}`,
+      '-F', `from=${from}T00:00:00Z`,
+      '-F', `to=${to}T23:59:59Z`,
+      '-f', `query=${q}`,
+    ]);
+    cal = res?.data?.user?.contributionsCollection?.onlyPublicContributions;
+  } catch {
+    return null; // non-fatal: the page just omits the heatmap section
+  }
+  if (!cal || !Array.isArray(cal.weeks) || !cal.weeks.length) return null;
+
+  // Re-anchor to GitHub's standard layout: 53 week columns, each a full
+  // Sun–Sat column, column-major flat array. The API anchors week columns to
+  // the from-date's weekday instead, so pad the head to the preceding Sunday
+  // and the tail to a whole 7-day column. Zeros contribute nothing to totals.
+  const cells = [];
+  for (const week of cal.weeks) {
+    for (const day of week.contributionDays) {
+      cells.push(Number(day.contributionCount) || 0);
+    }
+  }
+  const first = cal.weeks[0]?.contributionDays?.[0]?.date;
+  if (!first) return null;
+  const lead = new Date(`${first}T00:00:00Z`).getUTCDay(); // 0 = Sunday
+  const padded = [...Array(lead).fill(0), ...cells];
+  const tail = (7 - (padded.length % 7)) % 7;
+  const days = padded.concat(Array(tail).fill(0));
+
+  return {
+    start: first.slice(0, 10),
+    end: to,
+    // The calendar object carries no total field in the current schema — sum
+    // the day counts instead.
+    total: cells.reduce((s, n) => s + n, 0),
+    days,
+  };
+}
+
 function fetchEvents() {
   const events = ghJson([`users/${OWNER}/events/public?per_page=30`]);
   const out = [];
@@ -194,7 +254,7 @@ function fetchEvents() {
 
 // ---------------------------------------------------------------- merge
 
-function buildData(cfg, profile, repos, pinned, languages, events) {
+function buildData(cfg, profile, repos, pinned, languages, events, contributions) {
   // Config-driven curation: hide list, description/homepage overrides, and the
   // Past-projects cutoff (repos not pushed within archiveAfterDays days).
   const hide = new Set(Array.isArray(cfg.hide) ? cfg.hide : []);
@@ -272,6 +332,7 @@ function buildData(cfg, profile, repos, pinned, languages, events) {
     repos: [...curated].sort((a, b) => b.stars - a.stars || (b.pushedAt || '').localeCompare(a.pushedAt || '')),
     events: events.slice(0, 15),
     eventCount: events.length,
+    contributions: contributions ?? null,
   };
 }
 
@@ -315,10 +376,11 @@ const repos = fetchRepos();
 const pinned = fetchPinned();
 const featuredNames = (cfg.featured ?? []).slice(0, 10);
 const languages = fetchLanguages(featuredNames);
+const contributions = fetchContributions();
 const events = fetchEvents();
-console.log(`update: ${repos.length} own public repos, ${events.length} recent public events, ${pinned.length} pinned`);
+console.log(`update: ${repos.length} own public repos, ${events.length} recent public events, ${pinned.length} pinned, ${contributions ? contributions.total : 'no'} public contributions`);
 
-const data = buildData(cfg, profile, repos, pinned, languages, events);
+const data = buildData(cfg, profile, repos, pinned, languages, events, contributions);
 
 writeAtomic(DATA_OUT, JSON.stringify(data, null, 2) + '\n');
 console.log(`update: wrote ${DATA_OUT} (${data.repos.length} repos, generated ${data.generatedAt})`);
