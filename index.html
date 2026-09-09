@@ -61,6 +61,7 @@
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
   .stat { background: var(--surface); padding: 16px 20px; }
   .stat .num { font-family: var(--mono); font-size: 28px; line-height: 1.2; font-weight: 600; }
+  .stat .num#stat-langs { font-size: 20px; line-height: 1.7; }
   .stat .lbl { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 2px; }
 
   /* about */
@@ -96,10 +97,12 @@
     border-bottom: 1px solid var(--border);
   }
   .repo-row:last-child { border-bottom: none; }
+  .repo-row.past .name { color: var(--muted); }
   .repo-row .name { font-family: var(--mono); font-size: 16px; font-weight: 600; flex: none; min-width: 180px; padding: 2px 0; }
   .repo-row .desc { color: var(--muted); font-size: 13px; flex: 1; min-width: 0; }
   .repo-row .meta { font-family: var(--mono); font-size: 13px; color: var(--muted); flex: none; display: flex; gap: 16px; }
   .repo-empty { color: var(--muted); padding: 12px 0; }
+  .none { color: var(--border-strong); }
 
   /* activity */
   .feed { list-style: none; margin: 0; padding: 0; }
@@ -117,8 +120,26 @@
   .error-banner {
     display: none; background: var(--surface); border: 1px solid var(--border-strong);
     border-left: 3px solid var(--accent); border-radius: 6px; padding: 16px 20px; margin-bottom: 8px;
+    max-width: 72ch;
   }
   .error-banner.show { display: block; }
+
+  /* past projects disclosure */
+  .past-wrap { margin-top: 16px; }
+  .past-summary {
+    cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .past-summary::-webkit-details-marker { display: none; }
+  .past-summary:hover { color: var(--text); border-color: var(--border-strong); }
+  .past-summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .past-summary .count { color: var(--accent); }
+  .past-summary .chev { flex: none; transition: transform 0.15s ease; }
+  details[open] > .past-summary .chev { transform: rotate(90deg); }
+  .past-body { margin-top: 8px; }
 
   @media (max-width: 640px) {
     .wrap { padding: 32px 16px 48px; }
@@ -151,7 +172,7 @@
   <section aria-label="GitHub stats">
     <div class="stats" id="stats">
       <div class="stat"><div class="num" id="stat-repos">–</div><div class="lbl">public repos</div></div>
-      <div class="stat"><div class="num" id="stat-stars">–</div><div class="lbl">stars</div></div>
+      <div class="stat"><div class="num" id="stat-langs">–</div><div class="lbl">main language</div></div>
       <div class="stat"><div class="num" id="stat-followers">–</div><div class="lbl">followers</div></div>
       <div class="stat"><div class="num mono" id="stat-push">–</div><div class="lbl">last push</div></div>
     </div>
@@ -171,7 +192,14 @@
   <section>
     <h2>All public repositories</h2>
     <div class="filters" id="filters"></div>
-    <div id="repos"><p class="repo-empty">Loading…</p></div>
+    <div id="repos" aria-live="polite"><p class="repo-empty">Loading…</p></div>
+    <details class="past-wrap" id="past-projects">
+      <summary class="past-summary">
+        <svg class="chev" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M3 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Past projects · <span class="count" id="past-count">–</span>
+      </summary>
+      <div class="past-body" id="past"></div>
+    </details>
   </section>
 
   <section>
@@ -231,8 +259,9 @@
 
   function renderStats(data) {
     var s = data.stats || {};
+    var langs = data.languages || [];
     $('stat-repos').textContent = s.publicRepos != null ? s.publicRepos : '–';
-    $('stat-stars').textContent = s.totalStars != null ? s.totalStars : '–';
+    $('stat-langs').textContent = langs.length ? langs[0].name : '–';
     $('stat-followers').textContent = s.followers != null ? s.followers : '–';
     $('stat-push').textContent = s.lastPush || '–';
   }
@@ -242,13 +271,53 @@
     var links = $('links');
     links.innerHTML = '';
     (data.links || []).forEach(function (l) {
+      if (!l || typeof l.url !== 'string' || !/^https?:\/\//.test(l.url)) return;
       var a = document.createElement('a');
       a.href = l.url;
       a.textContent = l.label;
+      a.rel = 'noopener noreferrer';
       var gh = /^https:\/\/github\.com\//.test(l.url);
-      if (gh) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+      if (gh) { a.target = '_blank'; }
       links.appendChild(a);
     });
+  }
+
+  function relativeDate(iso) {
+    if (!iso) return null;
+    var then = new Date(iso + 'T00:00:00Z').getTime();
+    if (isNaN(then)) return null;
+    // Whole UTC calendar days (floor, not round) so the label matches the
+    // calendar the rest of the page uses.
+    var days = Math.floor((Date.now() - then) / 86400000);
+    if (days <= 0) return 'today';
+    if (days < 45) return days + ' days ago';
+    var months = Math.floor(days / 30.44);
+    if (months < 18) return months + (months === 1 ? ' month ago' : ' months ago');
+    var years = Math.floor(days / 365.25);
+    return years + (years === 1 ? ' year ago' : ' years ago');
+  }
+
+  function pushedCell(r) {
+    var rel = relativeDate(r.pushedAt);
+    if (!rel) return '<span>' + esc(r.pushedAt || '—') + '</span>';
+    return '<span title="pushed ' + esc(r.pushedAt) + '">' + esc(rel) + '</span>';
+  }
+
+  function repoRow(r, past) {
+    var row = document.createElement('div');
+    row.className = 'repo-row' + (past ? ' past' : '');
+    var meta = '';
+    if (r.language) meta += langDot(r.language);
+    meta += '<span>★ ' + r.stars + '</span>';
+    meta += pushedCell(r);
+    row.innerHTML =
+      '<a class="name" href="' + esc(r.htmlUrl) + '">' + esc(r.name) + '</a>' +
+      '<span class="desc">' + (r.description ? esc(r.description) : '<span class="none">—</span>') + '</span>' +
+      '<span class="meta">' + meta + '</span>';
+    var a = row.querySelector('.name');
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    return row;
   }
 
   function renderFeatured(data) {
@@ -265,7 +334,7 @@
       var meta = '';
       if (r.language) meta += langDot(r.language);
       meta += '<span class="stars">★ ' + r.stars + '</span>';
-      meta += '<span>pushed ' + esc(r.pushedAt || '—') + '</span>';
+      meta += pushedCell(r);
       card.innerHTML =
         '<a class="name" href="' + esc(r.htmlUrl) + '">' + esc(r.name) + '</a>' +
         '<p class="desc">' + esc(r.description || 'No description.') + '</p>' +
@@ -303,9 +372,10 @@
   }
 
   function renderRepos(data) {
+    renderPast(data);
     var box = $('repos');
     box.innerHTML = '';
-    var repos = data.repos || [];
+    var repos = (data.repos || []).filter(function (r) { return !r.past; });
     if (!repos.length) {
       box.innerHTML = '<p class="repo-empty">No public repositories found.</p>';
       return;
@@ -315,21 +385,26 @@
       box.innerHTML = '<p class="repo-empty">No repositories in ' + esc(state.filter) + '.</p>';
       return;
     }
-    shown.forEach(function (r) {
-      var row = document.createElement('div');
-      row.className = 'repo-row';
-      var meta = '';
-      if (r.language) meta += langDot(r.language);
-      meta += '<span>★ ' + r.stars + '</span>';
-      meta += '<span>' + esc(r.pushedAt || '—') + '</span>';
-      row.innerHTML =
-        '<a class="name" href="' + esc(r.htmlUrl) + '">' + esc(r.name) + '</a>' +
-        '<span class="desc">' + esc(r.description || '') + '</span>' +
-        '<span class="meta">' + meta + '</span>';
-      row.querySelector('.name').target = '_blank';
-      row.querySelector('.name').rel = 'noopener noreferrer';
-      box.appendChild(row);
-    });
+    shown.forEach(function (r) { box.appendChild(repoRow(r, false)); });
+  }
+
+  function renderPast(data) {
+    var wrap = $('past-projects');
+    var box = $('past');
+    box.innerHTML = '';
+    var past = (data.repos || []).filter(function (r) { return r.past; });
+    var shown = state.filter === 'all' ? past : past.filter(function (r) { return r.language === state.filter; });
+    $('past-count').textContent = String(past.length);
+    if (!past.length) {
+      wrap.style.display = 'none';
+      return;
+    }
+    wrap.style.display = '';
+    if (!shown.length) {
+      box.innerHTML = '<p class="repo-empty">No past projects in ' + esc(state.filter) + '.</p>';
+      return;
+    }
+    shown.forEach(function (r) { box.appendChild(repoRow(r, true)); });
   }
 
   var VERBS = {
@@ -354,24 +429,33 @@
       var verb = VERBS[e.kind] || e.kind;
       var detail = '';
       var d = e.detail || {};
-      if (e.kind === 'push' && d.commits) detail += d.commits + (d.commits === 1 ? ' commit' : ' commits');
+      if (e.kind === 'push' && d.commits > 0) detail += d.commits + (d.commits === 1 ? ' commit' : ' commits');
       if (e.kind === 'pr-opened' || e.kind === 'pr-merged' || e.kind === 'pr-closed') {
         detail += '#' + d.number + (d.title ? ' — ' + d.title : '');
       }
       if (e.kind === 'issue-opened' || e.kind === 'issue-closed') {
         detail += '#' + d.number + (d.title ? ' — ' + d.title : '');
       }
-      if (e.kind === 'push' && d.message) detail += ' · “' + d.message + '”';
+      if (e.kind === 'push' && d.commits > 0 && d.message) detail += ' · “' + d.message + '”';
       if (e.kind === 'release' && d.tag) detail += d.tag;
       if (e.kind.indexOf('create-') === 0 && d.ref) detail += d.ref;
 
       var repoUrl = e.repo ? 'https://github.com/' + e.repo : null;
+      var numLink = null;
+      if (repoUrl && d.number != null) {
+        if (e.kind.indexOf('pr-') === 0) numLink = repoUrl + '/pull/' + d.number;
+        if (e.kind.indexOf('issue-') === 0) numLink = repoUrl + '/issues/' + d.number;
+      }
       li.innerHTML =
         '<span class="when">' + esc(e.date || '') + '</span>' +
         '<span class="what">' + esc(verb) + ' ' +
         (repoUrl ? '<a class="repo-link" href="' + esc(repoUrl) + '">' + esc(e.repo) + '</a>' : esc(e.repo || '')) +
         (detail ? ' <span class="detail">' + esc(detail) + '</span>' : '') +
         '</span>';
+      if (numLink) {
+        var span = li.querySelector('.detail');
+        span.innerHTML = '<a class="repo-link" href="' + esc(numLink) + '">' + esc(detail) + '</a>';
+      }
       var a = li.querySelector('.repo-link');
       if (a) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
       box.appendChild(li);
@@ -398,10 +482,11 @@
       renderAll(data);
     })
     .catch(function (err) {
-      showError('Could not load the live snapshot (' + err.message + '). The harness regenerates public/data.json — try again later.');
+      showError('Could not load the live snapshot (' + err.message + '). Try again later.');
       $('about-text').textContent = 'Snapshot unavailable.';
       $('featured').innerHTML = '<p class="repo-empty">Snapshot unavailable.</p>';
       $('repos').innerHTML = '<p class="repo-empty">Snapshot unavailable.</p>';
+      $('past-projects').style.display = 'none';
       $('events').innerHTML = '<li><span class="what">Snapshot unavailable.</span></li>';
       $('generated-at').textContent = 'live snapshot — unavailable';
     });

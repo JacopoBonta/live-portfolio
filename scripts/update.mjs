@@ -72,8 +72,10 @@ function writeAtomic(file, content) {
 // ---------------------------------------------------------------- fetch
 
 function fetchProfile() {
-  const u = ghJson(['user']); // authenticated user == OWNER
-  if (u.login !== OWNER) fail(`gh authenticated as ${u.login}, expected ${OWNER}`);
+  // Public profile endpoint — works with any token, including the CI
+  // GITHUB_TOKEN (whose authenticated /user would be github-actions[bot]).
+  const u = ghJson([`users/${OWNER}`]);
+  if (u.login !== OWNER) fail(`expected profile for ${OWNER}, got ${u.login}`);
   return {
     login: u.login,
     name: u.name,
@@ -168,7 +170,9 @@ function fetchEvents() {
         const action = e.payload?.action ?? null;
         if (action === 'opened' || action === 'closed') {
           kind = `issue-${action}`;
-          detail = { title: e.payload?.issue?.title ?? null, number: e.payload?.number ?? null };
+          // IssuesEvent payloads carry only action + issue — the number lives
+          // on the issue object (unlike PullRequestEvent's top-level number).
+          detail = { title: e.payload?.issue?.title ?? null, number: e.payload?.issue?.number ?? null };
         }
         break;
       }
@@ -191,23 +195,41 @@ function fetchEvents() {
 // ---------------------------------------------------------------- merge
 
 function buildData(cfg, profile, repos, pinned, languages, events) {
+  // Config-driven curation: hide list, description/homepage overrides, and the
+  // Past-projects cutoff (repos not pushed within archiveAfterDays days).
+  const hide = new Set(Array.isArray(cfg.hide) ? cfg.hide : []);
+  const overrides = cfg.overrides && typeof cfg.overrides === 'object' ? cfg.overrides : {};
+  const archiveAfterDays = Number.isFinite(cfg.archiveAfterDays) ? cfg.archiveAfterDays : 730;
+  const cutoff = Date.now() - archiveAfterDays * 24 * 60 * 60 * 1000;
+  const curated = repos
+    .filter((r) => !hide.has(r.name))
+    .map((r) => {
+      const o = overrides[r.name] || {};
+      return {
+        ...r,
+        description: o.description ?? r.description,
+        homepage: o.homepage ?? r.homepage,
+        past: !r.pushedAt || new Date(`${r.pushedAt}T00:00:00Z`).getTime() < cutoff,
+      };
+    });
+
   // Featured resolution: curated override -> pinned -> top-starred.
   let featured = [];
   if (Array.isArray(cfg.featured) && cfg.featured.length > 0) {
     featured = cfg.featured
-      .map((name) => repos.find((r) => r.name === name))
+      .map((name) => curated.find((r) => r.name === name))
       .filter(Boolean);
   }
   if (featured.length === 0 && pinned.length > 0) {
-    featured = pinned.map((name) => repos.find((r) => r.name === name)).filter(Boolean);
+    featured = pinned.map((name) => curated.find((r) => r.name === name)).filter(Boolean);
   }
   if (featured.length === 0) {
-    featured = [...repos].sort((a, b) => b.stars - a.stars || (b.pushedAt || '').localeCompare(a.pushedAt || '')).slice(0, 3);
+    featured = [...curated].sort((a, b) => b.stars - a.stars || (b.pushedAt || '').localeCompare(a.pushedAt || '')).slice(0, 3);
   }
 
   // Language byte counts for the repos we enriched.
   const langBytes = {};
-  for (const r of repos) {
+  for (const r of curated) {
     const counts = languages[r.name] || {};
     for (const [lang, bytes] of Object.entries(counts)) {
       langBytes[lang] = (langBytes[lang] || 0) + bytes;
@@ -220,9 +242,9 @@ function buildData(cfg, profile, repos, pinned, languages, events) {
 
   const stats = {
     publicRepos: profile.publicRepos,
-    totalStars: repos.reduce((s, r) => s + r.stars, 0),
+    totalStars: curated.reduce((s, r) => s + r.stars, 0),
     followers: profile.followers,
-    lastPush: repos.reduce((m, r) => (r.pushedAt && (!m || r.pushedAt > m) ? r.pushedAt : m), null),
+    lastPush: curated.reduce((m, r) => (r.pushedAt && (!m || r.pushedAt > m) ? r.pushedAt : m), null),
   };
 
   return {
@@ -247,7 +269,7 @@ function buildData(cfg, profile, repos, pinned, languages, events) {
       languages: languages[r.name] || null,
     })),
     languages: languagesSummary,
-    repos: [...repos].sort((a, b) => b.stars - a.stars || (b.pushedAt || '').localeCompare(a.pushedAt || '')),
+    repos: [...curated].sort((a, b) => b.stars - a.stars || (b.pushedAt || '').localeCompare(a.pushedAt || '')),
     events: events.slice(0, 15),
     eventCount: events.length,
   };

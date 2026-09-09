@@ -2,3 +2,5 @@
 node_modules/
 _site/
 *.log
+.dsh-scheduler/
+.dsh-preview/
