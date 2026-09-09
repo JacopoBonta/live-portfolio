@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jacopo Bonta — live portfolio</title>
+<meta name="description" content="Live portfolio of Jacopo Bonta, fullstack developer. Repos, stars and public activity pulled from GitHub and refreshed automatically.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230d0f12'/%3E%3Ccircle cx='8' cy='8' r='3.5' fill='%23ffb454'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #0d0f12;
+    --surface: #12151a;
+    --surface-2: #171b21;
+    --border: #232830;
+    --border-strong: #323945;
+    --muted: #8b949e;
+    --text: #e6e9ee;
+    --accent: #ffb454;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--text); text-decoration: none; }
+  a:hover { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 48px 24px 64px; }
+  .mono { font-family: var(--mono); }
+
+  /* masthead */
+  .masthead { display: flex; gap: 24px; align-items: flex-start; margin-bottom: 40px; }
+  .avatar { width: 88px; height: 88px; border-radius: 6px; border: 1px solid var(--border); flex: none; }
+  .masthead h1 { font-size: 40px; line-height: 1.1; margin: 0 0 4px; letter-spacing: -0.02em; font-weight: 700; }
+  .tagline { margin: 0 0 8px; color: var(--muted); font-size: 20px; line-height: 1.3; }
+  .live-line { margin: 0; font-family: var(--mono); font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+  .live-dot {
+    display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); flex: none;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  /* section labels */
+  section { margin: 48px 0 0; }
+  h2 {
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
+    margin: 0 0 16px;
+  }
+
+  /* stats */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .stat { background: var(--surface); padding: 16px 20px; }
+  .stat .num { font-family: var(--mono); font-size: 28px; line-height: 1.2; font-weight: 600; }
+  .stat .lbl { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* about */
+  .about p { max-width: 560px; margin: 0; color: var(--text); }
+  .about .links { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .about .links a {
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 6px; padding: 4px 12px;
+  }
+  .about .links a:hover { color: var(--accent); border-color: var(--border-strong); }
+
+  /* featured */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .card .name { font-family: var(--mono); font-size: 16px; font-weight: 600; }
+  .card .name:hover { color: var(--accent); }
+  .card .desc { font-size: 16px; color: var(--muted); margin: 0; flex: 1; }
+  .card .meta { font-family: var(--mono); font-size: 13px; color: var(--muted); display: flex; gap: 16px; align-items: center; }
+  .card .meta .stars { color: var(--text); }
+  .lang { display: inline-flex; align-items: center; gap: 8px; }
+  .lang-dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+
+  /* repo index */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .chip {
+    font-family: var(--mono); font-size: 13px; color: var(--muted); background: none;
+    border: 1px solid var(--border); border-radius: 6px; padding: 4px 12px; cursor: pointer;
+  }
+  .chip:hover { color: var(--text); border-color: var(--border-strong); }
+  .chip[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
+  .repo-row {
+    display: flex; align-items: baseline; gap: 16px; padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .repo-row:last-child { border-bottom: none; }
+  .repo-row .name { font-family: var(--mono); font-size: 16px; font-weight: 600; flex: none; min-width: 180px; padding: 2px 0; }
+  .repo-row .desc { color: var(--muted); font-size: 13px; flex: 1; min-width: 0; }
+  .repo-row .meta { font-family: var(--mono); font-size: 13px; color: var(--muted); flex: none; display: flex; gap: 16px; }
+  .repo-empty { color: var(--muted); padding: 12px 0; }
+
+  /* activity */
+  .feed { list-style: none; margin: 0; padding: 0; }
+  .feed li { display: flex; gap: 12px; padding: 8px 0; font-size: 13px; border-bottom: 1px solid var(--border); }
+  .feed li:last-child { border-bottom: none; }
+  .feed .when { font-family: var(--mono); font-size: 13px; color: var(--muted); flex: none; width: 88px; }
+  .feed .what { color: var(--text); min-width: 0; }
+  .feed .what .repo-link { font-family: var(--mono); font-size: 13px; display: inline-block; padding: 2px 0; }
+  .feed .what .detail { color: var(--muted); }
+
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); font-family: var(--mono); font-size: 13px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer a { color: var(--muted); border-bottom: 1px solid var(--border-strong); display: inline-block; padding: 2px 0; }
+  footer a:hover { color: var(--accent); }
+
+  .error-banner {
+    display: none; background: var(--surface); border: 1px solid var(--border-strong);
+    border-left: 3px solid var(--accent); border-radius: 6px; padding: 16px 20px; margin-bottom: 8px;
+  }
+  .error-banner.show { display: block; }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 32px 16px 48px; }
+    .masthead { flex-direction: column; gap: 16px; }
+    .masthead h1 { font-size: 28px; }
+    .tagline { font-size: 16px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .repo-row { flex-wrap: wrap; gap: 4px 12px; }
+    .repo-row .name { min-width: 0; }
+    .feed .when { width: 76px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .live-dot { animation: none; }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="error-banner" id="error-banner" role="alert"></div>
+
+  <header class="masthead">
+    <img class="avatar" src="public/avatar.png" alt="" width="88" height="88">
+    <div>
+      <h1>Jacopo Bonta</h1>
+      <p class="tagline">Fullstack developer. Curious yet determined.</p>
+      <p class="live-line"><span class="live-dot" aria-hidden="true"></span><span id="generated-at">live snapshot — loading…</span></p>
+    </div>
+  </header>
+
+  <section aria-label="GitHub stats">
+    <div class="stats" id="stats">
+      <div class="stat"><div class="num" id="stat-repos">–</div><div class="lbl">public repos</div></div>
+      <div class="stat"><div class="num" id="stat-stars">–</div><div class="lbl">stars</div></div>
+      <div class="stat"><div class="num" id="stat-followers">–</div><div class="lbl">followers</div></div>
+      <div class="stat"><div class="num mono" id="stat-push">–</div><div class="lbl">last push</div></div>
+    </div>
+  </section>
+
+  <section class="about">
+    <h2>About</h2>
+    <p id="about-text">Loading snapshot…</p>
+    <div class="links" id="links"></div>
+  </section>
+
+  <section>
+    <h2>Featured</h2>
+    <div class="cards" id="featured"><p class="repo-empty">Loading…</p></div>
+  </section>
+
+  <section>
+    <h2>All public repositories</h2>
+    <div class="filters" id="filters"></div>
+    <div id="repos"><p class="repo-empty">Loading…</p></div>
+  </section>
+
+  <section>
+    <h2>Recent public activity</h2>
+    <ul class="feed" id="events"><li><span class="when">…</span><span class="what">Loading…</span></li></ul>
+  </section>
+
+  <footer>
+    <span>generated from GitHub data by the harness</span>
+    <a href="https://github.com/JacopoBonta" class="mono">github.com/JacopoBonta</a>
+  </footer>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var LANG_COLORS = {
+    JavaScript: '#f1e05a', TypeScript: '#3178c6', Go: '#00ADD8', Python: '#3572A5',
+    Rust: '#dea584', HTML: '#e34c26', CSS: '#563d7c', Shell: '#89e051', C: '#555555',
+    'C++': '#f34b7d', 'C#': '#178600', Java: '#b07219', Kotlin: '#A97BFF',
+    Swift: '#F05138', Ruby: '#701516', PHP: '#4F5D95', Vue: '#41b883', Dart: '#00B4AB'
+  };
+  var NEUTRAL = '#8b949e';
+
+  var state = { data: null, filter: 'all' };
+
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function langColor(name) { return LANG_COLORS[name] || NEUTRAL; }
+  function langDot(name) {
+    return '<span class="lang"><span class="lang-dot" style="background:' + langColor(name) + '"></span>' + esc(name) + '</span>';
+  }
+  function showError(msg) {
+    var b = $('error-banner');
+    b.textContent = msg;
+    b.classList.add('show');
+  }
+
+  function renderHeader(data) {
+    var when = new Date(data.generatedAt);
+    $('generated-at').textContent = 'live snapshot — refreshed ' + when.toLocaleString(undefined, {
+      year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+    });
+    var p = data.profile || {};
+    var h1 = document.querySelector('.masthead h1');
+    var tag = document.querySelector('.tagline');
+    if (p.name && h1) h1.textContent = p.name;
+    if (data.site && data.site.tagline && tag) tag.textContent = data.site.tagline;
+    var avatar = document.querySelector('.avatar');
+    if (avatar && p.login) avatar.alt = p.login + "'s avatar";
+  }
+
+  function renderStats(data) {
+    var s = data.stats || {};
+    $('stat-repos').textContent = s.publicRepos != null ? s.publicRepos : '–';
+    $('stat-stars').textContent = s.totalStars != null ? s.totalStars : '–';
+    $('stat-followers').textContent = s.followers != null ? s.followers : '–';
+    $('stat-push').textContent = s.lastPush || '–';
+  }
+
+  function renderAbout(data) {
+    $('about-text').textContent = data.about || 'No about text yet.';
+    var links = $('links');
+    links.innerHTML = '';
+    (data.links || []).forEach(function (l) {
+      var a = document.createElement('a');
+      a.href = l.url;
+      a.textContent = l.label;
+      var gh = /^https:\/\/github\.com\//.test(l.url);
+      if (gh) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+      links.appendChild(a);
+    });
+  }
+
+  function renderFeatured(data) {
+    var box = $('featured');
+    box.innerHTML = '';
+    var items = data.featured || [];
+    if (!items.length) {
+      box.innerHTML = '<p class="repo-empty">No featured repositories yet — the harness fills this from pinned or top-starred repos.</p>';
+      return;
+    }
+    items.forEach(function (r) {
+      var card = document.createElement('div');
+      card.className = 'card';
+      var meta = '';
+      if (r.language) meta += langDot(r.language);
+      meta += '<span class="stars">★ ' + r.stars + '</span>';
+      meta += '<span>pushed ' + esc(r.pushedAt || '—') + '</span>';
+      card.innerHTML =
+        '<a class="name" href="' + esc(r.htmlUrl) + '">' + esc(r.name) + '</a>' +
+        '<p class="desc">' + esc(r.description || 'No description.') + '</p>' +
+        '<div class="meta">' + meta + '</div>';
+      card.querySelector('.name').target = '_blank';
+      card.querySelector('.name').rel = 'noopener noreferrer';
+      box.appendChild(card);
+    });
+  }
+
+  function renderFilters(data) {
+    var box = $('filters');
+    box.innerHTML = '';
+    var repos = data.repos || [];
+    var counts = {};
+    repos.forEach(function (r) { if (r.language) counts[r.language] = (counts[r.language] || 0) + 1; });
+    var langs = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
+
+    function chip(label, value, count) {
+      var b = document.createElement('button');
+      b.className = 'chip';
+      b.type = 'button';
+      b.setAttribute('aria-pressed', state.filter === value ? 'true' : 'false');
+      b.textContent = label + ' · ' + count;
+      b.addEventListener('click', function () {
+        state.filter = value;
+        renderFilters(data);
+        renderRepos(data);
+      });
+      return b;
+    }
+    box.appendChild(chip('all', 'all', repos.length));
+    langs.forEach(function (l) { box.appendChild(chip(l, l, counts[l])); });
+    if (!langs.length) box.style.display = 'none';
+  }
+
+  function renderRepos(data) {
+    var box = $('repos');
+    box.innerHTML = '';
+    var repos = data.repos || [];
+    if (!repos.length) {
+      box.innerHTML = '<p class="repo-empty">No public repositories found.</p>';
+      return;
+    }
+    var shown = state.filter === 'all' ? repos : repos.filter(function (r) { return r.language === state.filter; });
+    if (!shown.length) {
+      box.innerHTML = '<p class="repo-empty">No repositories in ' + esc(state.filter) + '.</p>';
+      return;
+    }
+    shown.forEach(function (r) {
+      var row = document.createElement('div');
+      row.className = 'repo-row';
+      var meta = '';
+      if (r.language) meta += langDot(r.language);
+      meta += '<span>★ ' + r.stars + '</span>';
+      meta += '<span>' + esc(r.pushedAt || '—') + '</span>';
+      row.innerHTML =
+        '<a class="name" href="' + esc(r.htmlUrl) + '">' + esc(r.name) + '</a>' +
+        '<span class="desc">' + esc(r.description || '') + '</span>' +
+        '<span class="meta">' + meta + '</span>';
+      row.querySelector('.name').target = '_blank';
+      row.querySelector('.name').rel = 'noopener noreferrer';
+      box.appendChild(row);
+    });
+  }
+
+  var VERBS = {
+    'push': 'pushed to', 'starred': 'starred', 'forked': 'forked',
+    'repo-created': 'created repo', 'create-repository': 'created repo',
+    'create-branch': 'created branch in', 'create-tag': 'created tag in',
+    'pr-opened': 'opened PR in', 'pr-merged': 'merged PR in', 'pr-closed': 'closed PR in',
+    'issue-opened': 'opened issue in', 'issue-closed': 'closed issue in',
+    'release': 'released', 'publicized': 'open-sourced'
+  };
+
+  function renderEvents(data) {
+    var box = $('events');
+    box.innerHTML = '';
+    var evs = data.events || [];
+    if (!evs.length) {
+      box.innerHTML = '<li><span class="what">No recent public activity.</span></li>';
+      return;
+    }
+    evs.forEach(function (e) {
+      var li = document.createElement('li');
+      var verb = VERBS[e.kind] || e.kind;
+      var detail = '';
+      var d = e.detail || {};
+      if (e.kind === 'push' && d.commits) detail += d.commits + (d.commits === 1 ? ' commit' : ' commits');
+      if (e.kind === 'pr-opened' || e.kind === 'pr-merged' || e.kind === 'pr-closed') {
+        detail += '#' + d.number + (d.title ? ' — ' + d.title : '');
+      }
+      if (e.kind === 'issue-opened' || e.kind === 'issue-closed') {
+        detail += '#' + d.number + (d.title ? ' — ' + d.title : '');
+      }
+      if (e.kind === 'push' && d.message) detail += ' · “' + d.message + '”';
+      if (e.kind === 'release' && d.tag) detail += d.tag;
+      if (e.kind.indexOf('create-') === 0 && d.ref) detail += d.ref;
+
+      var repoUrl = e.repo ? 'https://github.com/' + e.repo : null;
+      li.innerHTML =
+        '<span class="when">' + esc(e.date || '') + '</span>' +
+        '<span class="what">' + esc(verb) + ' ' +
+        (repoUrl ? '<a class="repo-link" href="' + esc(repoUrl) + '">' + esc(e.repo) + '</a>' : esc(e.repo || '')) +
+        (detail ? ' <span class="detail">' + esc(detail) + '</span>' : '') +
+        '</span>';
+      var a = li.querySelector('.repo-link');
+      if (a) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+      box.appendChild(li);
+    });
+  }
+
+  function renderAll(data) {
+    renderHeader(data);
+    renderStats(data);
+    renderAbout(data);
+    renderFeatured(data);
+    renderFilters(data);
+    renderRepos(data);
+    renderEvents(data);
+  }
+
+  fetch('public/data.json', { headers: { 'Accept': 'application/json' } })
+    .then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function (data) {
+      state.data = data;
+      renderAll(data);
+    })
+    .catch(function (err) {
+      showError('Could not load the live snapshot (' + err.message + '). The harness regenerates public/data.json — try again later.');
+      $('about-text').textContent = 'Snapshot unavailable.';
+      $('featured').innerHTML = '<p class="repo-empty">Snapshot unavailable.</p>';
+      $('repos').innerHTML = '<p class="repo-empty">Snapshot unavailable.</p>';
+      $('events').innerHTML = '<li><span class="what">Snapshot unavailable.</span></li>';
+      $('generated-at').textContent = 'live snapshot — unavailable';
+    });
+})();
+</script>
+</body>
+</html>

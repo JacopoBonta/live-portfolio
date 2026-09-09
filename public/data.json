@@ -1,0 +1,356 @@
+{
+  "generatedAt": "2026-09-09T13:05:01.888Z",
+  "profile": {
+    "login": "JacopoBonta",
+    "name": "Jacopo",
+    "bio": null,
+    "company": "@cubbit ",
+    "location": null,
+    "followers": 17,
+    "htmlUrl": "https://github.com/JacopoBonta",
+    "avatar": "public/avatar.png"
+  },
+  "site": {
+    "title": "Jacopo Bonta",
+    "tagline": "Fullstack developer. Curious yet determined.",
+    "description": "Live portfolio of Jacopo Bonta — fullstack developer. Kept current automatically: repos, stars and public activity are pulled from GitHub and refreshed by the harness itself."
+  },
+  "about": "I am a fullstack developer at Cubbit, mainly working on the user-facing product applications. I like small tools that solve a real problem, typed languages that get out of the way, and interfaces that read as if someone actually designed them. This page is not a résumé frozen at some past date: it is generated from my public GitHub data and refreshed by the same agent that helps me build these projects.",
+  "links": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/JacopoBonta"
+    },
+    {
+      "label": "sugo",
+      "url": "https://github.com/JacopoBonta/sugo"
+    },
+    {
+      "label": "opencode-artifacts-plugin",
+      "url": "https://github.com/JacopoBonta/opencode-artifacts-plugin"
+    }
+  ],
+  "stats": {
+    "publicRepos": 18,
+    "totalStars": 1,
+    "followers": 17,
+    "lastPush": "2026-07-06"
+  },
+  "featured": [
+    {
+      "name": "sugo",
+      "description": null,
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/sugo",
+      "stars": 1,
+      "forks": 0,
+      "watchers": 1,
+      "openIssues": 2,
+      "language": "Go",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2026-04-24",
+      "pushedAt": "2026-05-29",
+      "updatedAt": "2026-04-25",
+      "languageColor": "#00ADD8",
+      "languages": {
+        "Go": 92719
+      }
+    },
+    {
+      "name": "opencode-artifacts-plugin",
+      "description": null,
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/opencode-artifacts-plugin",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "TypeScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2026-06-30",
+      "pushedAt": "2026-07-06",
+      "updatedAt": "2026-07-01",
+      "languageColor": "#3178c6",
+      "languages": {
+        "TypeScript": 326741,
+        "CSS": 28161,
+        "HTML": 305
+      }
+    }
+  ],
+  "languages": [
+    {
+      "name": "TypeScript",
+      "bytes": 326741,
+      "color": "#3178c6"
+    },
+    {
+      "name": "Go",
+      "bytes": 92719,
+      "color": "#00ADD8"
+    },
+    {
+      "name": "CSS",
+      "bytes": 28161,
+      "color": "#563d7c"
+    },
+    {
+      "name": "HTML",
+      "bytes": 305,
+      "color": "#e34c26"
+    }
+  ],
+  "repos": [
+    {
+      "name": "sugo",
+      "description": null,
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/sugo",
+      "stars": 1,
+      "forks": 0,
+      "watchers": 1,
+      "openIssues": 2,
+      "language": "Go",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2026-04-24",
+      "pushedAt": "2026-05-29",
+      "updatedAt": "2026-04-25"
+    },
+    {
+      "name": "opencode-artifacts-plugin",
+      "description": null,
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/opencode-artifacts-plugin",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "TypeScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2026-06-30",
+      "pushedAt": "2026-07-06",
+      "updatedAt": "2026-07-01"
+    },
+    {
+      "name": "legal-vault",
+      "description": "Legal Vault project x Cubbit Claude Hackathon",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/legal-vault",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "TypeScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2026-04-03",
+      "pushedAt": "2026-04-03",
+      "updatedAt": "2026-04-03"
+    },
+    {
+      "name": "youtube-downloader",
+      "description": null,
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/youtube-downloader",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 2,
+      "language": "Python",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2019-08-25",
+      "pushedAt": "2023-05-01",
+      "updatedAt": "2021-05-07"
+    },
+    {
+      "name": "todolist",
+      "description": "A to-do list web app written in Angular 2",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/todolist",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 13,
+      "language": "TypeScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2018-03-02",
+      "pushedAt": "2023-03-01",
+      "updatedAt": "2022-01-27"
+    },
+    {
+      "name": "casual-platform",
+      "description": null,
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/casual-platform",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "TypeScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2017-08-29",
+      "pushedAt": "2021-04-22",
+      "updatedAt": "2021-04-22"
+    },
+    {
+      "name": "mowgli",
+      "description": "Mowgli is a game developed using Corona SDK for some friends",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/mowgli",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "Lua",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2019-08-03",
+      "pushedAt": "2019-09-12",
+      "updatedAt": "2019-09-12"
+    },
+    {
+      "name": "express-api-template",
+      "description": "Express based API template",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/express-api-template",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "JavaScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2019-08-25",
+      "pushedAt": "2019-08-26",
+      "updatedAt": "2019-08-26"
+    },
+    {
+      "name": "arduino-serial-comunication",
+      "description": "A library that allows you to communicate with your Arduino via USB.",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/arduino-serial-comunication",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "C++",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2014-10-09",
+      "pushedAt": "2019-08-16",
+      "updatedAt": "2019-08-16"
+    },
+    {
+      "name": "BinarySearchTree-Typescript",
+      "description": "A basic implementation of a binary search tree in Typescript",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/BinarySearchTree-Typescript",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "TypeScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2017-09-24",
+      "pushedAt": "2019-01-08",
+      "updatedAt": "2019-01-08"
+    },
+    {
+      "name": "metrics-collector",
+      "description": "Script Node.js che raccoglie metriche di utilizzo del pc e le memorizza su un'istanza di InfluxDB ",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/metrics-collector",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "JavaScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2019-01-05",
+      "pushedAt": "2019-01-05",
+      "updatedAt": "2019-08-16"
+    },
+    {
+      "name": "battlenet-wow-api",
+      "description": "A Node.js library for the Battle.Net Community World of Warcraft API.",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/battlenet-wow-api",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 1,
+      "language": "JavaScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2018-11-25",
+      "pushedAt": "2018-11-25",
+      "updatedAt": "2018-11-25"
+    },
+    {
+      "name": "scrambled-words",
+      "description": "The code used to solve the Replay's demo problem Scrambled words ",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/scrambled-words",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "JavaScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2018-09-16",
+      "pushedAt": "2018-09-16",
+      "updatedAt": "2019-08-16"
+    },
+    {
+      "name": "react-todo-demo",
+      "description": "A simple todo list in React.js",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/react-todo-demo",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "JavaScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2018-06-05",
+      "pushedAt": "2018-06-05",
+      "updatedAt": "2018-06-05"
+    },
+    {
+      "name": "webworker-demo",
+      "description": "Use WebWorkers to keep main thread jank free (demo)",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/webworker-demo",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "HTML",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2017-12-06",
+      "pushedAt": "2017-12-11",
+      "updatedAt": "2019-08-16"
+    }
+  ],
+  "events": [
+    {
+      "repo": "deepseek-ai/deepseek-harness",
+      "kind": "starred",
+      "detail": null,
+      "date": "2026-08-24"
+    }
+  ],
+  "eventCount": 1
+}

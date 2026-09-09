@@ -1,0 +1,14 @@
+{
+  "site": {
+    "title": "Jacopo Bonta",
+    "tagline": "Fullstack developer. Curious yet determined.",
+    "description": "Live portfolio of Jacopo Bonta — fullstack developer. Kept current automatically: repos, stars and public activity are pulled from GitHub and refreshed by the harness itself."
+  },
+  "about": "I am a fullstack developer at Cubbit, mainly working on the user-facing product applications. I like small tools that solve a real problem, typed languages that get out of the way, and interfaces that read as if someone actually designed them. This page is not a résumé frozen at some past date: it is generated from my public GitHub data and refreshed by the same agent that helps me build these projects.",
+  "links": [
+    { "label": "GitHub", "url": "https://github.com/JacopoBonta" },
+    { "label": "sugo", "url": "https://github.com/JacopoBonta/sugo" },
+    { "label": "opencode-artifacts-plugin", "url": "https://github.com/JacopoBonta/opencode-artifacts-plugin" }
+  ],
+  "featured": ["sugo", "opencode-artifacts-plugin", "photobrowse"]
+}
