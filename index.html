@@ -843,7 +843,7 @@
       cmds.push({ group: 'Languages', label: 'Filter repositories by ' + l.name, hint: 'filter', act: function () { applyLanguageFilter(l.name); } });
     });
     (data.repos || []).forEach(function (r) {
-      if (r.past) return;
+      if (!r) return;
       cmds.push({ group: 'Repos', label: r.name, hint: 'repo', act: function () { window.open(r.htmlUrl, '_blank', 'noopener'); } });
     });
     cmds.push({ group: 'Actions', label: 'Copy link to this page', hint: 'copy', act: copyLink });
