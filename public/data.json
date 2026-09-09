@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T18:41:52.096Z",
+  "generatedAt": "2026-09-09T18:56:57.947Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -15,7 +15,7 @@
     "tagline": "Fullstack developer",
     "description": "Live portfolio of Jacopo Bonta — fullstack developer. Kept current automatically: repos, stars and public activity are pulled from GitHub and refreshed by the harness itself."
   },
-  "about": "I am a fullstack developer currently working at Cubbit, mainly on the user-facing product applications. I like small tools that solve a real problem, typed languages that get out of the way, and interfaces that read as if someone actually designed them. This page is not a résumé frozen at some past date: it is generated from my public GitHub data and refreshed by the same agent that helps me build these projects.",
+  "about": "Most of my week goes into Cubbit, where I build the user-facing products — my favorite kind of work, because features people actually use are the ones worth getting right. When I build for myself, it's small tools that scratch a real itch. Right now AI agents are what I'm fascinated by: learning a lot, and building new tools with them. This page is generated from my public GitHub data and kept current automatically.",
   "links": [
     {
       "label": "GitHub",
@@ -55,8 +55,8 @@
       "past": false,
       "languageColor": "#e34c26",
       "languages": {
-        "HTML": 24859,
-        "JavaScript": 11743
+        "HTML": 43209,
+        "JavaScript": 14037
       }
     },
     {
@@ -90,18 +90,18 @@
       "color": "#3178c6"
     },
     {
+      "name": "HTML",
+      "bytes": 43514,
+      "color": "#e34c26"
+    },
+    {
       "name": "CSS",
       "bytes": 28161,
       "color": "#563d7c"
     },
     {
-      "name": "HTML",
-      "bytes": 25164,
-      "color": "#e34c26"
-    },
-    {
       "name": "JavaScript",
-      "bytes": 11743,
+      "bytes": 14037,
       "color": "#f1e05a"
     }
   ],
@@ -124,23 +124,6 @@
       "past": false
     },
     {
-      "name": "dsh-scheduler",
-      "description": "Cron scheduler plugin for DeepSeek Harness: persisted cron jobs fired through the harness shell, with a Cron jobs sidebar entry in the web GUI and a scheduler tool",
-      "homepage": null,
-      "htmlUrl": "https://github.com/JacopoBonta/dsh-scheduler",
-      "stars": 0,
-      "forks": 0,
-      "watchers": 0,
-      "openIssues": 0,
-      "language": "JavaScript",
-      "topics": [],
-      "isPrivate": false,
-      "createdAt": "2026-09-09",
-      "pushedAt": "2026-09-09",
-      "updatedAt": "2026-09-09",
-      "past": false
-    },
-    {
       "name": "live-portfolio",
       "description": "Live portfolio — static page generated from public GitHub data, refreshed by the harness",
       "homepage": null,
@@ -150,6 +133,23 @@
       "watchers": 0,
       "openIssues": 0,
       "language": "HTML",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2026-09-09",
+      "pushedAt": "2026-09-09",
+      "updatedAt": "2026-09-09",
+      "past": false
+    },
+    {
+      "name": "dsh-scheduler",
+      "description": "Cron scheduler plugin for DeepSeek Harness: persisted cron jobs fired through the harness shell, with a Cron jobs sidebar entry in the web GUI and a scheduler tool",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/dsh-scheduler",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "JavaScript",
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
@@ -426,7 +426,7 @@
   "contributions": {
     "start": "2025-09-09",
     "end": "2026-09-09",
-    "total": 167,
+    "total": 169,
     "days": [
       0,
       0,
@@ -795,7 +795,7 @@
       0,
       0,
       0,
-      20,
+      22,
       0,
       0,
       0
