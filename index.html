@@ -528,8 +528,8 @@
       a.href = l.url;
       a.textContent = l.label;
       a.rel = 'noopener noreferrer';
-      var gh = /^https:\/\/github\.com\//.test(l.url);
-      if (gh) { a.target = '_blank'; }
+      // Chips are external personal pages (GitHub, LinkedIn, …): always a new tab.
+      a.target = '_blank';
       links.appendChild(a);
     });
   }
