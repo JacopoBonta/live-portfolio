@@ -321,6 +321,9 @@ function buildData(cfg, profile, repos, pinned, languages, events, contributions
     },
     site: cfg.site,
     about: cfg.about ?? null,
+    aboutLinks: cfg.aboutInlineLinks ?? [
+      { text: 'Cubbit', url: 'https://github.com/cubbit' },
+    ],
     links: cfg.links ?? [],
     stats,
     featured: featured.map((r) => ({
