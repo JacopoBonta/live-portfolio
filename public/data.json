@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T17:47:23.165Z",
+  "generatedAt": "2026-09-09T18:20:43.078Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -12,10 +12,10 @@
   },
   "site": {
     "title": "Jacopo Bonta",
-    "tagline": "Fullstack developer. Curious yet determined.",
+    "tagline": "Fullstack developer",
     "description": "Live portfolio of Jacopo Bonta — fullstack developer. Kept current automatically: repos, stars and public activity are pulled from GitHub and refreshed by the harness itself."
   },
-  "about": "I am a fullstack developer at Cubbit, mainly working on the user-facing product applications. I like small tools that solve a real problem, typed languages that get out of the way, and interfaces that read as if someone actually designed them. This page is not a résumé frozen at some past date: it is generated from my public GitHub data and refreshed by the same agent that helps me build these projects.",
+  "about": "I am a fullstack developer currently working at Cubbit, mainly on the user-facing product applications. I like small tools that solve a real problem, typed languages that get out of the way, and interfaces that read as if someone actually designed them. This page is not a résumé frozen at some past date: it is generated from my public GitHub data and refreshed by the same agent that helps me build these projects.",
   "links": [
     {
       "label": "GitHub",
@@ -55,7 +55,7 @@
       "past": false,
       "languageColor": "#e34c26",
       "languages": {
-        "HTML": 21317,
+        "HTML": 24411,
         "JavaScript": 11743
       }
     },
@@ -96,7 +96,7 @@
     },
     {
       "name": "HTML",
-      "bytes": 21622,
+      "bytes": 24716,
       "color": "#e34c26"
     },
     {
