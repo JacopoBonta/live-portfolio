@@ -372,6 +372,13 @@
     .repo-row .meta { grid-column: 2; justify-self: end; }
     .repo-row .desc { grid-column: 1 / -1; }
     .feed .when { width: 76px; }
+    /* Secnav: links stay on one horizontal line but the bar scrolls on the
+       x-axis inside — no button ever overflows the fixed bar. The scrollbar is
+       hidden; touch momentum scrolling still works. flex-start + link padding
+       keep the first/last buttons off the bar's rounded edges while scrolled. */
+    .secnav { left: 8px; right: 8px; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
+    .secnav::-webkit-scrollbar { display: none; }
+    .secnav a { padding: 8px 12px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .live-dot { animation: none; }
@@ -386,8 +393,8 @@
 <nav class="secnav" id="secnav" aria-label="Sections">
   <a href="#stats-section">Stats</a>
   <a href="#about">About</a>
-  <a href="#contributions-section">Contributions</a>
   <a href="#featured-section">Featured</a>
+  <a href="#contributions-section">Contributions</a>
   <a href="#repos-section">Repos</a>
   <a href="#activity">Activity</a>
 </nav>
@@ -422,15 +429,15 @@
     <div class="links" id="links"></div>
   </section>
 
+  <section id="featured-section">
+    <h2>Featured</h2>
+    <div class="cards" id="featured"><p class="repo-empty">Loading…</p></div>
+  </section>
+
   <section id="contributions-section" aria-label="Contribution activity" hidden>
     <h2>Public contributions</h2>
     <p class="heat-summary" id="heat-summary"></p>
     <div class="heatmap"><div class="heatgrid" id="heatgrid" aria-hidden="true"></div></div>
-  </section>
-
-  <section id="featured-section">
-    <h2>Featured</h2>
-    <div class="cards" id="featured"><p class="repo-empty">Loading…</p></div>
   </section>
 
   <section id="repos-section">
@@ -920,8 +927,8 @@
       });
     });
     var sections = [
-      ['Stats', 'stats-section'], ['About', 'about'], ['Public contributions', 'contributions-section'],
-      ['Featured', 'featured-section'], ['Repositories', 'repos-section'], ['Activity', 'activity'],
+      ['Stats', 'stats-section'], ['About', 'about'], ['Featured', 'featured-section'],
+      ['Public contributions', 'contributions-section'], ['Repositories', 'repos-section'], ['Activity', 'activity'],
     ];
     sections.forEach(function (s) {
       if (!document.getElementById(s[1])) return;
