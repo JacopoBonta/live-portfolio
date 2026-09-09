@@ -7,8 +7,7 @@
   "about": "Most of my week goes into Cubbit, where I build the user-facing products — my favorite kind of work, because features people actually use are the ones worth getting right. When I build for myself, it's small tools that scratch a real itch. Right now AI agents are what I'm fascinated by: learning a lot, and building new tools with them. This page is generated from my public GitHub data and kept current automatically.",
   "links": [
     { "label": "GitHub", "url": "https://github.com/JacopoBonta" },
-    { "label": "live-portfolio", "url": "https://github.com/JacopoBonta/live-portfolio" },
-    { "label": "opencode-artifacts-plugin", "url": "https://github.com/JacopoBonta/opencode-artifacts-plugin" }
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/jacopobnt/" }
   ],
   "featured": ["live-portfolio", "opencode-artifacts-plugin", "photobrowse"],
   "hide": [],
