@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T14:12:56.253Z",
+  "generatedAt": "2026-09-09T17:02:40.308Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -31,7 +31,7 @@
     }
   ],
   "stats": {
-    "publicRepos": 19,
+    "publicRepos": 20,
     "totalStars": 1,
     "followers": 17,
     "lastPush": "2026-09-09"
@@ -119,6 +119,22 @@
       "createdAt": "2026-04-24",
       "pushedAt": "2026-05-29",
       "updatedAt": "2026-04-25"
+    },
+    {
+      "name": "dsh-scheduler",
+      "description": "Cron scheduler plugin for DeepSeek Harness: persisted cron jobs fired through the harness shell, with a Cron jobs sidebar entry in the web GUI and a scheduler tool",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/dsh-scheduler",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "JavaScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2026-09-09",
+      "pushedAt": "2026-09-09",
+      "updatedAt": "2026-09-09"
     },
     {
       "name": "live-portfolio",
@@ -372,11 +388,20 @@
       "date": "2026-09-09"
     },
     {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
       "repo": "deepseek-ai/deepseek-harness",
       "kind": "starred",
       "detail": null,
       "date": "2026-08-24"
     }
   ],
-  "eventCount": 2
+  "eventCount": 3
 }
