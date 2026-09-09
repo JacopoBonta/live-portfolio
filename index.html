@@ -141,6 +141,29 @@
   details[open] > .past-summary .chev { transform: rotate(90deg); }
   .past-body { margin-top: 8px; }
 
+  /* mouse effects: ambient cursor glow + card spotlight (amber = --accent) */
+  .glow-layer {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    opacity: 0; transition: opacity 400ms ease;
+    background: radial-gradient(560px circle at var(--mx, 50%) var(--my, 40%),
+                rgba(255, 180, 84, 0.06), transparent 70%);
+  }
+  .glow-layer.on { opacity: 1; }
+  main.wrap { position: relative; z-index: 1; }
+  .card { position: relative; }
+  /* Spotlight only when JS enabled the effects (body.fx): the touch/reduced-motion
+     path never gets the class, so :hover there behaves exactly as before. */
+  body.fx .card::after {
+    content: ""; position: absolute; inset: 0; border-radius: 6px; pointer-events: none;
+    opacity: 0; transition: opacity 300ms ease;
+    background: radial-gradient(240px circle at var(--cx, 50%) var(--cy, 50%),
+                rgba(255, 180, 84, 0.08), transparent 65%);
+  }
+  body.fx .card:hover::after { opacity: 1; }
+  .card, .about .links a, .chip, .repo-row .name, .feed .repo-link, .past-summary {
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+
   @media (max-width: 640px) {
     .wrap { padding: 32px 16px 48px; }
     .masthead { flex-direction: column; gap: 16px; }
@@ -153,6 +176,8 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .live-dot { animation: none; }
+    .glow-layer, .card::after { display: none; }
+    .card, .about .links a, .chip, .repo-row .name, .feed .repo-link, .past-summary { transition: none; }
   }
 </style>
 </head>
@@ -490,6 +515,50 @@
       $('events').innerHTML = '<li><span class="what">Snapshot unavailable.</span></li>';
       $('generated-at').textContent = 'live snapshot — unavailable';
     });
+})();
+
+/* Mouse effects: ambient cursor glow + card spotlight.
+   Bound only for fine pointers with no reduced-motion preference; the glow
+   layer is removed from the DOM otherwise, so touch and reduced-motion users
+   get exactly the pre-effects page. */
+(function () {
+  'use strict';
+
+  var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var pointerQuery = window.matchMedia('(pointer: fine)');
+  if (motionQuery.matches || !pointerQuery.matches) return;
+
+  var layer = document.createElement('div');
+  layer.className = 'glow-layer';
+  layer.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(layer);
+  document.body.classList.add('fx');
+
+  // Ambient glow: one rAF-throttled pointermove sets --mx/--my (viewport px).
+  var frame = 0;
+  var latest = null;
+  function applyGlow() {
+    frame = 0;
+    if (!latest) return;
+    layer.style.setProperty('--mx', latest.x + 'px');
+    layer.style.setProperty('--my', latest.y + 'px');
+    layer.classList.add('on');
+  }
+  window.addEventListener('pointermove', function (e) {
+    latest = { x: e.clientX, y: e.clientY };
+    if (!frame) frame = window.requestAnimationFrame(applyGlow);
+  }, { passive: true });
+
+  // Card spotlight: delegated on #featured so filter-chip re-renders never
+  // leave a dangling listener; ::after is pure CSS so recreated cards work.
+  var featured = document.getElementById('featured');
+  featured.addEventListener('pointermove', function (e) {
+    var card = e.target.closest ? e.target.closest('.card') : null;
+    if (!card) return;
+    var rect = card.getBoundingClientRect();
+    card.style.setProperty('--cx', (e.clientX - rect.left) + 'px');
+    card.style.setProperty('--cy', (e.clientY - rect.top) + 'px');
+  }, { passive: true });
 })();
 </script>
 </body>
