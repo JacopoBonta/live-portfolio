@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T17:45:05.232Z",
+  "generatedAt": "2026-09-09T17:47:23.165Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -55,8 +55,8 @@
       "past": false,
       "languageColor": "#e34c26",
       "languages": {
-        "HTML": 17546,
-        "JavaScript": 10611
+        "HTML": 21317,
+        "JavaScript": 11743
       }
     },
     {
@@ -96,12 +96,12 @@
     },
     {
       "name": "HTML",
-      "bytes": 17851,
+      "bytes": 21622,
       "color": "#e34c26"
     },
     {
       "name": "JavaScript",
-      "bytes": 10611,
+      "bytes": 11743,
       "color": "#f1e05a"
     }
   ],
