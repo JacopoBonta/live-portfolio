@@ -12,8 +12,8 @@
 <meta property="og:image" content="https://JacopoBonta.github.io/live-portfolio/public/avatar.png">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#0d0f12">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230d0f12'/%3E%3Ccircle cx='8' cy='8' r='3.5' fill='%237fb3cc'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0e1220">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%230e1220'/%3E%3Ccircle cx='8' cy='8' r='3.5' fill='%237fd0e8'/%3E%3C/svg%3E">
 <script>
 /* Theme bootstrap: runs before <style> so data-theme is set before any CSS
    applies (no flash of the wrong theme). Modes: "system" (default), "light",
@@ -37,7 +37,7 @@
     var t = resolve();
     document.documentElement.setAttribute('data-theme', t);
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', t === 'dark' ? '#0d0f12' : '#f5f6f8');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#0e1220' : '#dfe6f2');
   }
 
   function set(next) {
@@ -70,8 +70,8 @@
     /* Glass: deep indigo-blue field, frosted panels float over it. The fixed
        layered backdrop is the identity; surfaces are translucent + blurred. */
     --bg: #0e1220;
-    --surface: rgba(255, 255, 255, 0.05);
-    --surface-2: rgba(255, 255, 255, 0.09);
+    --surface: rgba(255, 255, 255, 0.07);
+    --surface-2: rgba(255, 255, 255, 0.12);
     --border: rgba(255, 255, 255, 0.12);
     --border-strong: rgba(255, 255, 255, 0.22);
     --muted: #9aa6c0;
@@ -91,8 +91,8 @@
   :root[data-theme="light"] {
     color-scheme: light;
     --bg: #dfe6f2;
-    --surface: rgba(255, 255, 255, 0.55);
-    --surface-2: rgba(255, 255, 255, 0.75);
+    --surface: rgba(255, 255, 255, 0.6);
+    --surface-2: rgba(255, 255, 255, 0.8);
     --border: rgba(255, 255, 255, 0.65);
     --border-strong: rgba(255, 255, 255, 0.9);
     --muted: #4d5a74;
@@ -265,7 +265,7 @@
     content: ""; position: absolute; inset: 0; border-radius: 16px; pointer-events: none;
     opacity: 0; transition: opacity 300ms ease;
     background: radial-gradient(240px circle at var(--cx, 50%) var(--cy, 50%),
-                rgba(255, 255, 255, 0.1), transparent 65%);
+                rgba(255, 255, 255, 0.14), transparent 65%);
   }
   body.fx .card:hover::after { opacity: 1; }
   .card, .about .links a, .chip, .repo-row .name, .feed .repo-link, .past-summary {
@@ -478,7 +478,7 @@
     'C++': '#f34b7d', 'C#': '#178600', Java: '#b07219', Kotlin: '#A97BFF',
     Swift: '#F05138', Ruby: '#701516', PHP: '#4F5D95', Vue: '#41b883', Dart: '#00B4AB'
   };
-  var NEUTRAL = '#8b949e';
+  var NEUTRAL = '#9aa6c0';
 
   var state = { data: null, filter: 'all' };
 
