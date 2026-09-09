@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T20:22:29.421Z",
+  "generatedAt": "2026-09-09T21:56:36.691Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -11,9 +11,9 @@
     "avatar": "public/avatar.png"
   },
   "site": {
-    "title": "Jacopo Bonta",
+    "title": "Jacopo Bontà",
     "tagline": "Fullstack developer",
-    "description": "Live portfolio of Jacopo Bonta — fullstack developer. Kept current automatically: repos, stars and public activity are pulled from GitHub and refreshed by the harness itself."
+    "description": "Live portfolio of Jacopo Bontà — fullstack developer. Kept current automatically: repos, stars and public activity are pulled from GitHub and refreshed by the harness itself."
   },
   "about": "Most of my week goes into Cubbit, where I build the user-facing products — my favorite kind of work, because features people actually use are the ones worth getting right. When I build for myself, it's small tools that scratch a real itch. Right now AI agents are what I'm fascinated by: learning a lot, and building new tools with them. This page is generated from my public GitHub data and kept current automatically.",
   "aboutLinks": [
@@ -57,7 +57,7 @@
       "past": false,
       "languageColor": "#e34c26",
       "languages": {
-        "HTML": 44242,
+        "HTML": 48166,
         "JavaScript": 14146
       }
     },
@@ -93,7 +93,7 @@
     },
     {
       "name": "HTML",
-      "bytes": 44547,
+      "bytes": 48471,
       "color": "#e34c26"
     },
     {
@@ -409,6 +409,24 @@
       "date": "2026-09-09"
     },
     {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
       "repo": "JacopoBonta/dsh-scheduler",
       "kind": "push",
       "detail": {
@@ -442,11 +460,11 @@
       "date": "2026-08-24"
     }
   ],
-  "eventCount": 5,
+  "eventCount": 7,
   "contributions": {
     "start": "2025-09-09",
     "end": "2026-09-09",
-    "total": 177,
+    "total": 180,
     "days": [
       0,
       0,
@@ -815,7 +833,7 @@
       0,
       0,
       0,
-      30,
+      33,
       0,
       0,
       0

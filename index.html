@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jacopo Bonta — live portfolio</title>
-<meta name="description" content="Live portfolio of Jacopo Bonta, fullstack developer. Repos, stars and public activity pulled from GitHub and refreshed automatically.">
-<meta property="og:title" content="Jacopo Bonta — live portfolio">
-<meta property="og:description" content="Live portfolio of Jacopo Bonta, fullstack developer. Repos, stars and public activity pulled from GitHub and refreshed automatically.">
+<title>Jacopo Bontà — live portfolio</title>
+<meta name="description" content="Live portfolio of Jacopo Bontà, fullstack developer. Repos, stars and public activity pulled from GitHub and refreshed automatically.">
+<meta property="og:title" content="Jacopo Bontà — live portfolio">
+<meta property="og:description" content="Live portfolio of Jacopo Bontà, fullstack developer. Repos, stars and public activity pulled from GitHub and refreshed automatically.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://JacopoBonta.github.io/live-portfolio/">
 <meta property="og:image" content="https://JacopoBonta.github.io/live-portfolio/public/avatar.png">
@@ -404,7 +404,7 @@
   <header class="masthead">
     <img class="avatar" src="public/avatar.png" alt="" width="88" height="88">
     <div>
-      <h1>Jacopo Bonta</h1>
+      <h1>Jacopo Bontà</h1>
       <p class="tagline">Fullstack developer</p>
       <p class="live-line"><span class="live-dot" aria-hidden="true"></span><span id="generated-at">live snapshot — loading…</span></p>
     </div>
@@ -513,7 +513,10 @@
     var p = data.profile || {};
     var h1 = document.querySelector('.masthead h1');
     var tag = document.querySelector('.tagline');
-    if (p.name && h1) h1.textContent = p.name;
+    // site.title (curated in site.config.json) is the source of truth for the
+    // masthead — profile.name is just the GitHub display name ("Jacopo").
+    var title = data.site && data.site.title ? data.site.title : (p.name || null);
+    if (title && h1) h1.textContent = title;
     if (data.site && data.site.tagline && tag) tag.textContent = data.site.tagline;
     var avatar = document.querySelector('.avatar');
     if (avatar && p.login) avatar.alt = p.login + "'s avatar";
