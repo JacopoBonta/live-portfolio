@@ -130,7 +130,7 @@
     cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 8px;
     font-family: var(--mono); font-size: 12px; font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
-    border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px;
+    border: 1px solid var(--border); border-radius: 6px; padding: 8px 16px;
     transition: color 0.15s ease, border-color 0.15s ease;
   }
   .past-summary::-webkit-details-marker { display: none; }
@@ -172,6 +172,13 @@
     .stats { grid-template-columns: repeat(2, 1fr); }
     .repo-row { flex-wrap: wrap; gap: 4px 12px; }
     .repo-row .name { min-width: 0; }
+    /* Description flows full-width below the name on mobile instead of being
+       squeezed into a 1–2-word column. Grid: name + meta share line 1, desc
+       spans line 2; leftover space lives in the 1fr track, not an auto margin. */
+    .repo-row { display: grid; grid-template-columns: 1fr auto; align-items: baseline; }
+    .repo-row .name { grid-column: 1; }
+    .repo-row .meta { grid-column: 2; justify-self: end; }
+    .repo-row .desc { grid-column: 1 / -1; }
     .feed .when { width: 76px; }
   }
   @media (prefers-reduced-motion: reduce) {
