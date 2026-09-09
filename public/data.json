@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T13:55:11.353Z",
+  "generatedAt": "2026-09-09T14:12:56.253Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -363,11 +363,20 @@
   ],
   "events": [
     {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
       "repo": "deepseek-ai/deepseek-harness",
       "kind": "starred",
       "detail": null,
       "date": "2026-08-24"
     }
   ],
-  "eventCount": 1
+  "eventCount": 2
 }
