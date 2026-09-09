@@ -12,8 +12,8 @@
 <meta property="og:image" content="https://JacopoBonta.github.io/live-portfolio/public/avatar.png">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#0d0f12">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230d0f12'/%3E%3Ccircle cx='8' cy='8' r='3.5' fill='%237fb3cc'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0e1220">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%230e1220'/%3E%3Ccircle cx='8' cy='8' r='3.5' fill='%237fd0e8'/%3E%3C/svg%3E">
 <script>
 /* Theme bootstrap: runs before <style> so data-theme is set before any CSS
    applies (no flash of the wrong theme). Modes: "system" (default), "light",
@@ -37,7 +37,7 @@
     var t = resolve();
     document.documentElement.setAttribute('data-theme', t);
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', t === 'dark' ? '#0d0f12' : '#f5f6f8');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#0e1220' : '#dfe6f2');
   }
 
   function set(next) {
@@ -67,43 +67,51 @@
 <style>
   :root {
     color-scheme: dark;
-    --bg: #0d0f12;
-    --surface: #12151a;
-    --surface-2: #171b21;
-    --border: #232830;
-    --border-strong: #323945;
-    --muted: #8b949e;
-    --text: #e6e9ee;
-    --accent: #7fb3cc;
-    /* rgba slots for gradients/overlays that today assume darkness */
-    --glow-rgb: 127, 179, 204;      /* ambient glow + card spotlight */
-    --heat-rgb: 127, 179, 204;      /* heatmap scale */
-    --nav-bg: rgba(13, 15, 18, 0.82);   /* sticky nav blur backdrop */
-    --overlay-bg: rgba(13, 15, 18, 0.6);/* palette backdrop */
+    /* Glass: deep indigo-blue field, frosted panels float over it. The fixed
+       layered backdrop is the identity; surfaces are translucent + blurred. */
+    --bg: #0e1220;
+    --surface: rgba(255, 255, 255, 0.07);
+    --surface-2: rgba(255, 255, 255, 0.12);
+    --border: rgba(255, 255, 255, 0.12);
+    --border-strong: rgba(255, 255, 255, 0.22);
+    --muted: #9aa6c0;
+    --text: #e8ecf6;
+    --accent: #7fd0e8;
+    --glass-blur: 14px;
+    --heat-rgb: 127, 208, 232;      /* heatmap scale */
+    --nav-bg: rgba(14, 18, 32, 0.6);
+    --overlay-bg: rgba(8, 10, 20, 0.55);/* palette backdrop */
     --shadow: 0 16px 48px rgba(0, 0, 0, 0.5); /* palette drop shadow */
+    --field: linear-gradient(160deg, #1a2340 0%, #0e1220 48%, #0d1a26 100%);
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
   }
   /* Light mode: resolved in JS (data-theme), so no prefers-color-scheme
-     duplication here. Accent is the same-hue blue darkened to pass AA as text. */
+     duplication here. Pale glass: daylight blue field, white frosted panels. */
   :root[data-theme="light"] {
     color-scheme: light;
-    --bg: #f5f6f8;
-    --surface: #ffffff;
-    --surface-2: #eef0f3;
-    --border: #dde1e6;
-    --border-strong: #c3c9d1;
-    --muted: #5c6470;
-    --text: #1a1d21;
-    --accent: #276d9e;
-    --glow-rgb: 39, 109, 158;
-    --heat-rgb: 39, 109, 158;
-    --nav-bg: rgba(245, 246, 248, 0.85);
-    --overlay-bg: rgba(15, 19, 26, 0.4);
-    --shadow: 0 16px 48px rgba(15, 19, 26, 0.18);
+    --bg: #dfe6f2;
+    --surface: rgba(255, 255, 255, 0.6);
+    --surface-2: rgba(255, 255, 255, 0.8);
+    --border: rgba(255, 255, 255, 0.65);
+    --border-strong: rgba(255, 255, 255, 0.9);
+    --muted: #4d5a74;
+    --text: #17203a;
+    --accent: #175a80;
+    --glass-blur: 14px;
+    --heat-rgb: 23, 90, 128;
+    --nav-bg: rgba(223, 230, 242, 0.6);
+    --overlay-bg: rgba(23, 32, 58, 0.35);
+    --shadow: 0 16px 48px rgba(23, 32, 58, 0.2);
+    --field: linear-gradient(160deg, #eef2fa 0%, #dfe6f2 52%, #d3e4ec 100%);
   }
   * { box-sizing: border-box; }
   html { background: var(--bg); }
+  /* the fixed layered backdrop: the identity of the glass direction */
+  .field {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: var(--field);
+  }
   body {
     margin: 0;
     background: var(--bg);
@@ -121,7 +129,7 @@
 
   /* masthead */
   .masthead { display: flex; gap: 24px; align-items: flex-start; margin-bottom: 40px; }
-  .avatar { width: 88px; height: 88px; border-radius: 6px; border: 1px solid var(--border); flex: none; }
+  .avatar { width: 88px; height: 88px; border-radius: 16px; border: 1px solid var(--border-strong); flex: none; box-shadow: 0 0 0 4px var(--surface-2); }
   .masthead h1 { font-size: 40px; line-height: 1.1; margin: 0 0 4px; letter-spacing: -0.02em; font-weight: 700; }
   .tagline { margin: 0 0 8px; color: var(--muted); font-size: 20px; line-height: 1.3; }
   .live-line { margin: 0; font-family: var(--mono); font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
@@ -140,9 +148,15 @@
     margin: 0 0 16px;
   }
 
-  /* stats */
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
-  .stat { background: var(--surface); padding: 16px 20px; }
+  /* stats: one frosted slab, inner hairline column rules */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur));
+    overflow: hidden;
+  }
+  .stat { padding: 20px; }
+  .stat + .stat { border-left: 1px solid var(--border); }
   .stat .num { font-family: var(--mono); font-size: 28px; line-height: 1.2; font-weight: 600; }
   .stat .num#stat-langs, .stat .num#stat-push { font-size: 20px; line-height: 1.7; white-space: nowrap; }
   .stat .lbl { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 2px; }
@@ -159,13 +173,18 @@
   .about .links { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
   .about .links a {
     font-family: var(--mono); font-size: 13px; color: var(--muted);
-    border: 1px solid var(--border); border-radius: 6px; padding: 4px 12px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 999px;
+    padding: 4px 16px;
   }
-  .about .links a:hover { color: var(--accent); border-color: var(--border-strong); }
+  .about .links a:hover { color: var(--text); border-color: var(--border-strong); }
 
-  /* featured */
+  /* featured: frosted panels */
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px;
+    display: flex; flex-direction: column; gap: 8px;
+    backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur));
+  }
   .card .name { font-family: var(--mono); font-size: 16px; font-weight: 600; }
   .card .name:hover { color: var(--accent); }
   .card .desc { font-size: 16px; color: var(--muted); margin: 0; flex: 1; }
@@ -179,11 +198,13 @@
   /* repo index */
   .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
   .chip {
-    font-family: var(--mono); font-size: 13px; color: var(--muted); background: none;
-    border: 1px solid var(--border); border-radius: 6px; padding: 4px 12px; cursor: pointer;
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+    background: var(--surface); border: 1px solid var(--border); border-radius: 999px;
+    padding: 4px 16px; cursor: pointer;
+    transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
   }
   .chip:hover { color: var(--text); border-color: var(--border-strong); }
-  .chip[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
+  .chip[aria-pressed="true"] { color: var(--accent); background: var(--surface-2); border-color: var(--border-strong); }
   .repo-row {
     display: flex; align-items: baseline; gap: 16px; padding: 12px 0;
     border-bottom: 1px solid var(--border);
@@ -210,9 +231,10 @@
   footer a:hover { color: var(--accent); }
 
   .error-banner {
-    display: none; background: var(--surface); border: 1px solid var(--border-strong);
-    border-left: 3px solid var(--accent); border-radius: 6px; padding: 16px 20px; margin-bottom: 8px;
+    display: none; background: var(--surface-2); border: 1px solid var(--border-strong);
+    border-left: 3px solid var(--accent); border-radius: 16px; padding: 16px 20px; margin-bottom: 8px;
     max-width: 72ch;
+    backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur));
   }
   .error-banner.show { display: block; }
 
@@ -222,7 +244,8 @@
     cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 8px;
     font-family: var(--mono); font-size: 12px; font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
-    border: 1px solid var(--border); border-radius: 6px; padding: 8px 16px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 999px;
+    padding: 8px 16px;
     transition: color 0.15s ease, border-color 0.15s ease;
   }
   .past-summary::-webkit-details-marker { display: none; }
@@ -233,23 +256,16 @@
   details[open] > .past-summary .chev { transform: rotate(90deg); }
   .past-body { margin-top: 8px; }
 
-  /* mouse effects: ambient cursor glow + card spotlight (light blue-gray = --accent) */
-  .glow-layer {
-    position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    opacity: 0; transition: opacity 400ms ease;
-    background: radial-gradient(560px circle at var(--mx, 50%) var(--my, 40%),
-                rgba(var(--glow-rgb), 0.06), transparent 70%);
-  }
-  .glow-layer.on { opacity: 1; }
   main.wrap { position: relative; z-index: 1; }
   .card { position: relative; }
   /* Spotlight only when JS enabled the effects (body.fx): the touch/reduced-motion
-     path never gets the class, so :hover there behaves exactly as before. */
+     path never gets the class, so :hover there behaves exactly as before. On
+     frosted panels the spotlight reads as a highlight passing through glass. */
   body.fx .card::after {
-    content: ""; position: absolute; inset: 0; border-radius: 6px; pointer-events: none;
+    content: ""; position: absolute; inset: 0; border-radius: 16px; pointer-events: none;
     opacity: 0; transition: opacity 300ms ease;
     background: radial-gradient(240px circle at var(--cx, 50%) var(--cy, 50%),
-                rgba(var(--glow-rgb), 0.08), transparent 65%);
+                rgba(255, 255, 255, 0.14), transparent 65%);
   }
   body.fx .card:hover::after { opacity: 1; }
   .card, .about .links a, .chip, .repo-row .name, .feed .repo-link, .past-summary {
@@ -278,20 +294,20 @@
 
   /* sticky section nav (appears on scroll) */
   .secnav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+    position: fixed; top: 8px; left: 16px; right: 16px; z-index: 20;
     display: none; justify-content: center; gap: 4px; padding: 8px 16px;
-    background: var(--nav-bg); backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-    transform: translateY(-100%); transition: transform 240ms ease;
+    background: var(--nav-bg); backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--border); border-radius: 16px;
+    transform: translateY(-140%); transition: transform 240ms ease;
   }
   .secnav.on { transform: translateY(0); }
   body.fxnav .secnav { display: flex; }
   .secnav a {
     font-family: var(--mono); font-size: 13px; color: var(--muted);
-    border-radius: 6px; padding: 4px 12px; white-space: nowrap;
+    border-radius: 999px; padding: 4px 12px; white-space: nowrap;
   }
-  .secnav a:hover { color: var(--accent); background: var(--surface); }
+  .secnav a:hover { color: var(--text); background: var(--surface-2); }
 
   /* command palette */
   .palette-backdrop {
@@ -301,10 +317,11 @@
   }
   .palette-backdrop.open { display: flex; align-items: flex-start; justify-content: center; padding: 12vh 16px 16px; }
   .palette {
-    width: 100%; max-width: 560px; background: var(--surface);
-    border: 1px solid var(--border-strong); border-radius: 6px;
+    width: 100%; max-width: 560px; background: var(--surface-2);
+    border: 1px solid var(--border-strong); border-radius: 16px;
     box-shadow: var(--shadow); overflow: hidden;
     display: flex; flex-direction: column; max-height: 60vh;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   }
   .palette .palette-input {
     width: 100%; background: none; border: none; outline: none;
@@ -321,7 +338,7 @@
   }
   .palette .opt {
     display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
-    color: var(--text); font-size: 16px; border-radius: 4px; padding: 8px 10px;
+    color: var(--text); font-size: 16px; border-radius: 8px; padding: 8px 10px;
     cursor: pointer;
   }
   .palette .opt .hint { font-family: var(--mono); font-size: 13px; color: var(--muted); flex: none; }
@@ -329,7 +346,7 @@
   .palette .palette-empty { color: var(--muted); font-size: 16px; padding: 12px 10px; }
   .palette kbd {
     font-family: var(--mono); font-size: 12px; color: var(--muted);
-    border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
     padding: 1px 6px;
   }
 
@@ -355,21 +372,29 @@
     .repo-row .meta { grid-column: 2; justify-self: end; }
     .repo-row .desc { grid-column: 1 / -1; }
     .feed .when { width: 76px; }
+    /* Secnav: links stay on one horizontal line but the bar scrolls on the
+       x-axis inside — no button ever overflows the fixed bar. The scrollbar is
+       hidden; touch momentum scrolling still works. flex-start + link padding
+       keep the first/last buttons off the bar's rounded edges while scrolled. */
+    .secnav { left: 8px; right: 8px; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
+    .secnav::-webkit-scrollbar { display: none; }
+    .secnav a { padding: 8px 12px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .live-dot { animation: none; }
-    .glow-layer, .card::after { display: none; }
+    .card::after { display: none; }
     .card, .about .links a, .chip, .repo-row .name, .feed .repo-link, .past-summary { transition: none; }
     .secnav { transform: none; transition: none; }
     body.js section.pre { opacity: 1; transform: none; }
   }</style>
 </head>
 <body>
+<div class="field" aria-hidden="true"></div>
 <nav class="secnav" id="secnav" aria-label="Sections">
   <a href="#stats-section">Stats</a>
   <a href="#about">About</a>
-  <a href="#contributions-section">Contributions</a>
   <a href="#featured-section">Featured</a>
+  <a href="#contributions-section">Contributions</a>
   <a href="#repos-section">Repos</a>
   <a href="#activity">Activity</a>
 </nav>
@@ -404,15 +429,15 @@
     <div class="links" id="links"></div>
   </section>
 
+  <section id="featured-section">
+    <h2>Featured</h2>
+    <div class="cards" id="featured"><p class="repo-empty">Loading…</p></div>
+  </section>
+
   <section id="contributions-section" aria-label="Contribution activity" hidden>
     <h2>Public contributions</h2>
     <p class="heat-summary" id="heat-summary"></p>
     <div class="heatmap"><div class="heatgrid" id="heatgrid" aria-hidden="true"></div></div>
-  </section>
-
-  <section id="featured-section">
-    <h2>Featured</h2>
-    <div class="cards" id="featured"><p class="repo-empty">Loading…</p></div>
   </section>
 
   <section id="repos-section">
@@ -460,7 +485,7 @@
     'C++': '#f34b7d', 'C#': '#178600', Java: '#b07219', Kotlin: '#A97BFF',
     Swift: '#F05138', Ruby: '#701516', PHP: '#4F5D95', Vue: '#41b883', Dart: '#00B4AB'
   };
-  var NEUTRAL = '#8b949e';
+  var NEUTRAL = '#9aa6c0';
 
   var state = { data: null, filter: 'all' };
 
@@ -840,10 +865,9 @@
     });
 })();
 
-/* Mouse effects: ambient cursor glow + card spotlight.
-   Bound only for fine pointers with no reduced-motion preference; the glow
-   layer is removed from the DOM otherwise, so touch and reduced-motion users
-   get exactly the pre-effects page. */
+/* Card spotlight on frosted panels.
+   Bound only for fine pointers with no reduced-motion preference; without JS
+   effects the class is never added, so :hover behaves exactly as before. */
 (function () {
   'use strict';
 
@@ -851,26 +875,7 @@
   var pointerQuery = window.matchMedia('(pointer: fine)');
   if (motionQuery.matches || !pointerQuery.matches) return;
 
-  var layer = document.createElement('div');
-  layer.className = 'glow-layer';
-  layer.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(layer);
   document.body.classList.add('fx');
-
-  // Ambient glow: one rAF-throttled pointermove sets --mx/--my (viewport px).
-  var frame = 0;
-  var latest = null;
-  function applyGlow() {
-    frame = 0;
-    if (!latest) return;
-    layer.style.setProperty('--mx', latest.x + 'px');
-    layer.style.setProperty('--my', latest.y + 'px');
-    layer.classList.add('on');
-  }
-  window.addEventListener('pointermove', function (e) {
-    latest = { x: e.clientX, y: e.clientY };
-    if (!frame) frame = window.requestAnimationFrame(applyGlow);
-  }, { passive: true });
 
   // Card spotlight: delegated on #featured so filter-chip re-renders never
   // leave a dangling listener; ::after is pure CSS so recreated cards work.
@@ -922,8 +927,8 @@
       });
     });
     var sections = [
-      ['Stats', 'stats-section'], ['About', 'about'], ['Public contributions', 'contributions-section'],
-      ['Featured', 'featured-section'], ['Repositories', 'repos-section'], ['Activity', 'activity'],
+      ['Stats', 'stats-section'], ['About', 'about'], ['Featured', 'featured-section'],
+      ['Public contributions', 'contributions-section'], ['Repositories', 'repos-section'], ['Activity', 'activity'],
     ];
     sections.forEach(function (s) {
       if (!document.getElementById(s[1])) return;
