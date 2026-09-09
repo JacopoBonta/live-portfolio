@@ -1,0 +1,59 @@
+name: Refresh live snapshot
+
+# Daily cloud-side refresh: regenerates public/data.json from the public GitHub
+# API (using the workflow's own GITHUB_TOKEN — no secrets needed) and deploys,
+# so the site stays current even when no local machine runs scripts/update.mjs.
+# Pushes to main keep deploying through deploy.yml as before.
+
+on:
+  schedule:
+    - cron: '30 5 * * *' # 05:30 UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Regenerate snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/update.mjs
+      - name: Commit refreshed snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data.json public/avatar.png
+          if git diff --cached --quiet; then
+            echo "Snapshot unchanged — nothing to commit."
+          else
+            git commit -m "data: auto refresh $(date -u +%F)"
+            git pull --rebase origin main
+            git push origin main
+          fi
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp -r public _site/public
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
