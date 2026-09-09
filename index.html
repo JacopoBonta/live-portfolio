@@ -254,14 +254,6 @@
     padding: 1px 6px;
   }
 
-  /* footer palette trigger */
-  .palette-trigger {
-    font-family: var(--mono); font-size: 13px; color: var(--muted); background: none;
-    border: 1px solid var(--border); border-radius: 6px; padding: 4px 12px; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .palette-trigger:hover { color: var(--accent); border-color: var(--border-strong); }
-
   /* scroll reveals: default visible; JS adds .pre only when motion is welcome */
   @media (prefers-reduced-motion: no-preference) {
     body.js section { opacity: 1; transform: none; transition: opacity 400ms ease, transform 400ms ease; }
@@ -365,7 +357,6 @@
   <footer>
     <span>generated from GitHub data by the harness</span>
     <span style="display:inline-flex; gap:8px; flex-wrap:wrap;">
-      <button class="palette-trigger" id="palette-open" type="button">Menu <kbd>⌘K</kbd></button>
       <a href="https://github.com/JacopoBonta" class="mono">github.com/JacopoBonta</a>
     </span>
   </footer>
@@ -835,6 +826,8 @@
   var filtered = [];
   var active = 0;
   var lastFocus = null;
+  // No visible trigger: the palette is keyboard-only (Cmd/Ctrl+K), so it can
+  // stay an easter egg for those who explore.
 
   function buildCommands(data) {
     var cmds = [];
@@ -954,7 +947,7 @@
     if (c) c.act();
   }
 
-  openBtn.addEventListener('click', openPalette);
+  if (openBtn) openBtn.addEventListener('click', openPalette);
   backdrop.addEventListener('pointerdown', function (e) {
     if (e.target === backdrop) closePalette();
   });
