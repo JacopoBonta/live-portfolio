@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T19:04:58.562Z",
+  "generatedAt": "2026-09-09T20:09:12.003Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -28,12 +28,8 @@
       "url": "https://github.com/JacopoBonta"
     },
     {
-      "label": "Cubbit",
-      "url": "https://github.com/cubbit"
-    },
-    {
-      "label": "sugo — PR review agent",
-      "url": "https://github.com/JacopoBonta/sugo"
+      "label": "live-portfolio — this page",
+      "url": "https://github.com/JacopoBonta/live-portfolio"
     },
     {
       "label": "opencode-artifacts-plugin",
@@ -65,8 +61,8 @@
       "past": false,
       "languageColor": "#e34c26",
       "languages": {
-        "HTML": 43209,
-        "JavaScript": 14037
+        "HTML": 44242,
+        "JavaScript": 14146
       }
     },
     {
@@ -101,7 +97,7 @@
     },
     {
       "name": "HTML",
-      "bytes": 43514,
+      "bytes": 44547,
       "color": "#e34c26"
     },
     {
@@ -111,7 +107,7 @@
     },
     {
       "name": "JavaScript",
-      "bytes": 14037,
+      "bytes": 14146,
       "color": "#f1e05a"
     }
   ],
@@ -417,6 +413,24 @@
       "date": "2026-09-09"
     },
     {
+      "repo": "JacopoBonta/dsh-scheduler",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
       "repo": "JacopoBonta/live-portfolio",
       "kind": "push",
       "detail": {
@@ -432,11 +446,11 @@
       "date": "2026-08-24"
     }
   ],
-  "eventCount": 3,
+  "eventCount": 5,
   "contributions": {
     "start": "2025-09-09",
     "end": "2026-09-09",
-    "total": 169,
+    "total": 175,
     "days": [
       0,
       0,
@@ -805,7 +819,7 @@
       0,
       0,
       0,
-      22,
+      28,
       0,
       0,
       0
