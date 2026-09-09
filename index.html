@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jacopo Bonta — live portfolio</title>
 <meta name="description" content="Live portfolio of Jacopo Bonta, fullstack developer. Repos, stars and public activity pulled from GitHub and refreshed automatically.">
+<meta property="og:title" content="Jacopo Bonta — live portfolio">
+<meta property="og:description" content="Live portfolio of Jacopo Bonta, fullstack developer. Repos, stars and public activity pulled from GitHub and refreshed automatically.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://JacopoBonta.github.io/live-portfolio/">
+<meta property="og:image" content="https://JacopoBonta.github.io/live-portfolio/public/avatar.png">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230d0f12'/%3E%3Ccircle cx='8' cy='8' r='3.5' fill='%237fb3cc'/%3E%3C/svg%3E">
 <style>
   :root {
@@ -83,6 +89,8 @@
   .card .meta .stars { color: var(--text); }
   .lang { display: inline-flex; align-items: center; gap: 8px; }
   .lang-dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .minibar { display: flex; height: 4px; border-radius: 2px; overflow: hidden; background: var(--surface-2); margin-top: 4px; }
+  .minibar span { display: block; height: 100%; min-width: 2px; }
 
   /* repo index */
   .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
@@ -164,6 +172,97 @@
     transition: color 160ms ease, border-color 160ms ease;
   }
 
+  /* language distribution */
+  .langdist { margin-top: 16px; }  .langdist .bar { display: flex; height: 6px; border-radius: 3px; overflow: hidden; background: var(--surface-2); }
+  .langdist .bar span { display: block; height: 100%; min-width: 2px; }
+  .langdist .legend { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 8px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+  .langdist .legend .pct { color: var(--text); }
+
+  /* contribution heatmap */
+  .heatmap { position: relative; overflow-x: auto; padding-bottom: 4px; }
+  .heatgrid {
+    display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 10px);
+    gap: 3px; width: max-content; padding: 2px 0;
+  }
+  .heatcell { width: 10px; height: 10px; border-radius: 2px; background: var(--surface-2); }
+  .heatcell.l1 { background: rgba(127, 179, 204, 0.25); }
+  .heatcell.l2 { background: rgba(127, 179, 204, 0.45); }
+  .heatcell.l3 { background: rgba(127, 179, 204, 0.65); }
+  .heatcell.l4 { background: rgba(127, 179, 204, 0.9); }
+  .heat-summary { font-family: var(--mono); font-size: 13px; color: var(--muted); margin: 0 0 12px; }
+  .heat-summary .total { color: var(--text); }
+
+  /* sticky section nav (appears on scroll) */
+  .secnav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+    display: none; justify-content: center; gap: 4px; padding: 8px 16px;
+    background: rgba(13, 15, 18, 0.82); backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    transform: translateY(-100%); transition: transform 240ms ease;
+  }
+  .secnav.on { transform: translateY(0); }
+  body.fxnav .secnav { display: flex; }
+  .secnav a {
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+    border-radius: 6px; padding: 4px 12px; white-space: nowrap;
+  }
+  .secnav a:hover { color: var(--accent); background: var(--surface); }
+
+  /* command palette */
+  .palette-backdrop {
+    position: fixed; inset: 0; z-index: 50; display: none;
+    background: rgba(13, 15, 18, 0.6); backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+  .palette-backdrop.open { display: flex; align-items: flex-start; justify-content: center; padding: 12vh 16px 16px; }
+  .palette {
+    width: 100%; max-width: 560px; background: var(--surface);
+    border: 1px solid var(--border-strong); border-radius: 6px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5); overflow: hidden;
+    display: flex; flex-direction: column; max-height: 60vh;
+  }
+  .palette .palette-input {
+    width: 100%; background: none; border: none; outline: none;
+    border-bottom: 1px solid var(--border);
+    color: var(--text); font-family: var(--mono); font-size: 16px;
+    padding: 14px 16px;
+  }
+  .palette .palette-input::placeholder { color: var(--border-strong); }
+  .palette .palette-list { list-style: none; margin: 0; padding: 6px; overflow-y: auto; flex: 1; }
+  .palette .group-label {
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
+    padding: 8px 10px 4px;
+  }
+  .palette .opt {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    color: var(--text); font-size: 16px; border-radius: 4px; padding: 8px 10px;
+    cursor: pointer;
+  }
+  .palette .opt .hint { font-family: var(--mono); font-size: 13px; color: var(--muted); flex: none; }
+  .palette .opt[aria-selected="true"] { background: var(--surface-2); color: var(--accent); }
+  .palette .palette-empty { color: var(--muted); font-size: 16px; padding: 12px 10px; }
+  .palette kbd {
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+    border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px;
+    padding: 1px 6px;
+  }
+
+  /* footer palette trigger */
+  .palette-trigger {
+    font-family: var(--mono); font-size: 13px; color: var(--muted); background: none;
+    border: 1px solid var(--border); border-radius: 6px; padding: 4px 12px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .palette-trigger:hover { color: var(--accent); border-color: var(--border-strong); }
+
+  /* scroll reveals: default visible; JS adds .pre only when motion is welcome */
+  @media (prefers-reduced-motion: no-preference) {
+    body.js section { opacity: 1; transform: none; transition: opacity 400ms ease, transform 400ms ease; }
+    body.js section.pre { opacity: 0; transform: translateY(12px); }
+  }
+
   @media (max-width: 640px) {
     .wrap { padding: 32px 16px 48px; }
     .masthead { flex-direction: column; gap: 16px; }
@@ -185,10 +284,19 @@
     .live-dot { animation: none; }
     .glow-layer, .card::after { display: none; }
     .card, .about .links a, .chip, .repo-row .name, .feed .repo-link, .past-summary { transition: none; }
+    .secnav { transform: none; transition: none; }
+    body.js section.pre { opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
+<nav class="secnav" id="secnav" aria-label="Sections">
+  <a href="#stats-section">Stats</a>
+  <a href="#about">About</a>
+  <a href="#featured-section">Featured</a>
+  <a href="#repos-section">Repos</a>
+  <a href="#activity">Activity</a>
+</nav>
 <main class="wrap">
   <div class="error-banner" id="error-banner" role="alert"></div>
 
@@ -201,27 +309,37 @@
     </div>
   </header>
 
-  <section aria-label="GitHub stats">
+  <section aria-label="GitHub stats" id="stats-section">
     <div class="stats" id="stats">
       <div class="stat"><div class="num" id="stat-repos">–</div><div class="lbl">public repos</div></div>
       <div class="stat"><div class="num" id="stat-langs">–</div><div class="lbl">main language</div></div>
       <div class="stat"><div class="num" id="stat-followers">–</div><div class="lbl">followers</div></div>
       <div class="stat"><div class="num mono" id="stat-push">–</div><div class="lbl">last push</div></div>
     </div>
+    <div class="langdist" id="langdist" hidden>
+      <div class="bar" id="langdist-bar" aria-hidden="true"></div>
+      <div class="legend" id="langdist-legend"></div>
+    </div>
   </section>
 
-  <section class="about">
+  <section id="contributions-section" aria-label="Contribution activity" hidden>
+    <h2>Public contributions</h2>
+    <p class="heat-summary" id="heat-summary"></p>
+    <div class="heatmap"><div class="heatgrid" id="heatgrid" aria-hidden="true"></div></div>
+  </section>
+
+  <section class="about" id="about">
     <h2>About</h2>
     <p id="about-text">Loading snapshot…</p>
     <div class="links" id="links"></div>
   </section>
 
-  <section>
+  <section id="featured-section">
     <h2>Featured</h2>
     <div class="cards" id="featured"><p class="repo-empty">Loading…</p></div>
   </section>
 
-  <section>
+  <section id="repos-section">
     <h2>All public repositories</h2>
     <div class="filters" id="filters"></div>
     <div id="repos" aria-live="polite"><p class="repo-empty">Loading…</p></div>
@@ -234,16 +352,28 @@
     </details>
   </section>
 
-  <section>
+  <section id="activity">
     <h2>Recent public activity</h2>
     <ul class="feed" id="events"><li><span class="when">…</span><span class="what">Loading…</span></li></ul>
   </section>
 
   <footer>
     <span>generated from GitHub data by the harness</span>
-    <a href="https://github.com/JacopoBonta" class="mono">github.com/JacopoBonta</a>
+    <span style="display:inline-flex; gap:8px; flex-wrap:wrap;">
+      <button class="palette-trigger" id="palette-open" type="button">Menu <kbd>⌘K</kbd></button>
+      <a href="https://github.com/JacopoBonta" class="mono">github.com/JacopoBonta</a>
+    </span>
   </footer>
 </main>
+
+<div class="palette-backdrop" id="palette-backdrop">
+  <div class="palette" role="dialog" aria-modal="true" aria-label="Command palette">
+    <input class="palette-input" id="palette-input" type="text"
+           placeholder="Jump to a section, language or repo…" autocomplete="off" spellcheck="false"
+           role="combobox" aria-expanded="true" aria-controls="palette-list" aria-autocomplete="list">
+    <ul class="palette-list" id="palette-list" role="listbox" aria-label="Commands"></ul>
+  </div>
+</div>
 
 <script>
 (function () {
@@ -296,6 +426,74 @@
     $('stat-langs').textContent = langs.length ? langs[0].name : '–';
     $('stat-followers').textContent = s.followers != null ? s.followers : '–';
     $('stat-push').textContent = s.lastPush || '–';
+    renderLangDist(langs);
+    renderHeatmap(data.contributions);
+  }
+
+  function renderLangDist(langs) {
+    var box = $('langdist');
+    var bar = $('langdist-bar');
+    var legend = $('langdist-legend');
+    if (!box || !bar || !legend) return;
+    bar.innerHTML = '';
+    legend.innerHTML = '';
+    var total = 0;
+    langs.forEach(function (l) { total += l.bytes || 0; });
+    if (!langs.length || !total) { box.hidden = true; return; }
+    langs.forEach(function (l) {
+      var seg = document.createElement('span');
+      seg.style.background = l.color || NEUTRAL;
+      seg.style.width = ((l.bytes / total) * 100) + '%';
+      bar.appendChild(seg);
+      var item = document.createElement('span');
+      item.className = 'lang';
+      var dot = document.createElement('span');
+      dot.className = 'lang-dot';
+      dot.style.background = l.color || NEUTRAL;
+      item.appendChild(dot);
+      item.appendChild(document.createTextNode(l.name + ' '));
+      var pct = document.createElement('span');
+      pct.className = 'pct';
+      pct.textContent = Math.round((l.bytes / total) * 100) + '%';
+      item.appendChild(pct);
+      legend.appendChild(item);
+    });
+    box.hidden = false;
+  }
+
+  function renderHeatmap(contrib) {
+    var section = $('contributions-section');
+    var grid = $('heatgrid');
+    var summary = $('heat-summary');
+    if (!section || !grid || !summary) return;
+    if (!contrib || !Array.isArray(contrib.days) || !contrib.days.length) {
+      section.hidden = true;
+      return;
+    }
+    grid.innerHTML = '';
+    var counts = contrib.days.filter(function (n) { return n > 0; }).sort(function (a, b) { return a - b; });
+    function quintile(n) {
+      if (n <= 0) return 0;
+      // 4 thresholds at the 25/50/75/90th percentiles of active days, so the
+      // scale tracks this profile's real distribution instead of hardcoding.
+      var t = [0.25, 0.5, 0.75, 0.9].map(function (q) {
+        return counts[Math.min(counts.length - 1, Math.floor(q * counts.length))] || 1;
+      });
+      return n >= t[3] ? 4 : n >= t[2] ? 3 : n >= t[1] ? 2 : n >= t[0] ? 1 : 0;
+    }
+    var frag = document.createDocumentFragment();
+    contrib.days.forEach(function (n) {
+      var cell = document.createElement('div');
+      cell.className = 'heatcell' + (n > 0 ? ' l' + quintile(n) : '');
+      frag.appendChild(cell);
+    });
+    grid.appendChild(frag);
+    var start = new Date(contrib.start + 'T00:00:00Z');
+    var end = new Date(contrib.end + 'T00:00:00Z');
+    var fmt = { year: 'numeric', month: 'short', day: 'numeric' };
+    summary.innerHTML = '<span class="total">' + contrib.total + '</span> public contributions · ' +
+      start.toLocaleDateString(undefined, fmt) + ' → ' + end.toLocaleDateString(undefined, fmt);
+    section.hidden = false;
   }
 
   function renderAbout(data) {
@@ -370,11 +568,27 @@
       card.innerHTML =
         '<a class="name" href="' + esc(r.htmlUrl) + '">' + esc(r.name) + '</a>' +
         '<p class="desc">' + esc(r.description || 'No description.') + '</p>' +
-        '<div class="meta">' + meta + '</div>';
+        '<div class="meta">' + meta + '</div>' +
+        miniLangs(r.languages);
       card.querySelector('.name').target = '_blank';
       card.querySelector('.name').rel = 'noopener noreferrer';
       box.appendChild(card);
     });
+  }
+
+  // Stacked byte-share bar from the per-repo languages map (already in the
+  // snapshot for featured repos); omitted when the map is missing.
+  function miniLangs(languages) {
+    if (!languages || typeof languages !== 'object') return '';
+    var entries = Object.entries(languages).sort(function (a, b) { return b[1] - a[1]; }).slice(0, 4);
+    var total = 0;
+    entries.forEach(function (e) { total += e[1]; });
+    if (!total) return '';
+    var bar = '<div class="minibar" aria-hidden="true">';
+    entries.forEach(function (e) {
+      bar += '<span style="width:' + ((e[1] / total) * 100) + '%;background:' + langColor(e[0]) + '"></span>';
+    });
+    return bar + '</div>';
   }
 
   function renderFilters(data) {
@@ -511,6 +725,7 @@
     })
     .then(function (data) {
       state.data = data;
+      window.__portfolioData = data; // consumed by the command-palette script
       renderAll(data);
     })
     .catch(function (err) {
@@ -566,6 +781,213 @@
     card.style.setProperty('--cx', (e.clientX - rect.left) + 'px');
     card.style.setProperty('--cy', (e.clientY - rect.top) + 'px');
   }, { passive: true });
+})();
+
+/* Command palette (Cmd/Ctrl+K), sticky on-scroll section nav, and scroll
+   reveals. All three are progressive: without JS the page is exactly the
+   previous static version; with reduced motion the reveals never hide content. */
+(function () {
+  'use strict';
+
+  var body = document.body;
+  body.classList.add('js');
+
+  // ------------------------------------------------------------ palette
+
+  var backdrop = document.getElementById('palette-backdrop');
+  var input = document.getElementById('palette-input');
+  var list = document.getElementById('palette-list');
+  var openBtn = document.getElementById('palette-open');
+  if (!backdrop || !input || !list) return;
+
+  var commands = [];
+  var filtered = [];
+  var active = 0;
+  var lastFocus = null;
+
+  function buildCommands(data) {
+    var cmds = [];
+    var sections = [
+      ['Stats', 'stats-section'], ['About', 'about'], ['Featured', 'featured-section'],
+      ['Repositories', 'repos-section'], ['Activity', 'activity'], ['Contributions', 'contributions-section'],
+    ];
+    sections.forEach(function (s) {
+      if (!document.getElementById(s[1])) return;
+      cmds.push({ group: 'Sections', label: 'Go to ' + s[0], hint: 'section', act: function () { scrollToSection(s[1]); } });
+    });
+    (data.languages || []).forEach(function (l) {
+      cmds.push({ group: 'Languages', label: 'Filter repositories by ' + l.name, hint: 'filter', act: function () { applyLanguageFilter(l.name); } });
+    });
+    (data.repos || []).forEach(function (r) {
+      if (r.past) return;
+      cmds.push({ group: 'Repos', label: r.name, hint: 'repo', act: function () { window.open(r.htmlUrl, '_blank', 'noopener'); } });
+    });
+    cmds.push({ group: 'Actions', label: 'Copy link to this page', hint: 'copy', act: copyLink });
+    cmds.push({ group: 'Actions', label: 'Open GitHub profile', hint: 'github', act: function () { window.open('https://github.com/JacopoBonta', '_blank', 'noopener'); } });
+    commands = cmds;
+  }
+
+  function scrollToSection(id) {
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function applyLanguageFilter(name) {
+    // Reuse the existing filter chips: find the chip and click it so state,
+    // aria-pressed and the past-list all update through one code path.
+    var chips = document.querySelectorAll('#filters .chip');
+    for (var i = 0; i < chips.length; i++) {
+      if (chips[i].textContent.indexOf(name + ' · ') === 0) { chips[i].click(); break; }
+    }
+    scrollToSection('repos-section');
+  }
+
+  function copyLink() {
+    var url = 'https://JacopoBonta.github.io/live-portfolio/';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url);
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = url;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) { /* headless/older: ignore */ }
+      document.body.removeChild(ta);
+    }
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function normalize(s) {
+    return String(s || '').toLowerCase();
+  }
+
+  function renderList() {
+    var q = normalize(input.value.trim());
+    filtered = q
+      ? commands.filter(function (c) { return normalize(c.label).indexOf(q) !== -1 || normalize(c.group).indexOf(q) !== -1; })
+      : commands.slice(0, 30);
+    active = filtered.length ? 0 : -1;
+    var html = '';
+    var lastGroup = null;
+    if (!filtered.length) {
+      list.innerHTML = '<li class="palette-empty">No matching commands.</li>';
+      input.setAttribute('aria-activedescendant', '');
+      return;
+    }
+    filtered.forEach(function (c, i) {
+      if (c.group !== lastGroup) {
+        html += '<li class="group-label" role="presentation">' + esc(c.group) + '</li>';
+        lastGroup = c.group;
+      }
+      html += '<li class="opt" role="option" id="palette-opt-' + i + '" aria-selected="' + (i === active) + '"' +
+        (i === active ? ' data-active="true"' : '') + '>' +
+        '<span>' + esc(c.label) + '</span><span class="hint">' + esc(c.hint) + '</span></li>';
+    });
+    list.innerHTML = html;
+    input.setAttribute('aria-activedescendant', 'palette-opt-0');
+  }
+
+  function setActive(i) {
+    if (!filtered.length) return;
+    active = (i + filtered.length) % filtered.length;
+    var opts = list.querySelectorAll('.opt');
+    for (var k = 0; k < opts.length; k++) {
+      var idx = Number(opts[k].id.replace('palette-opt-', ''));
+      opts[k].setAttribute('aria-selected', idx === active ? 'true' : 'false');
+    }
+    var el = document.getElementById('palette-opt-' + active);
+    if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+    input.setAttribute('aria-activedescendant', 'palette-opt-' + active);
+  }
+
+  function openPalette() {
+    lastFocus = document.activeElement;
+    backdrop.classList.add('open');
+    input.value = '';
+    renderList();
+    input.focus();
+  }
+
+  function closePalette() {
+    backdrop.classList.remove('open');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function runCommand(c) {
+    closePalette();
+    if (c) c.act();
+  }
+
+  openBtn.addEventListener('click', openPalette);
+  backdrop.addEventListener('pointerdown', function (e) {
+    if (e.target === backdrop) closePalette();
+  });
+  list.addEventListener('click', function (e) {
+    var opt = e.target.closest ? e.target.closest('.opt') : null;
+    if (!opt) return;
+    runCommand(filtered[Number(opt.id.replace('palette-opt-', ''))]);
+  });
+  input.addEventListener('input', renderList);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setActive(active + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(active - 1); }
+    else if (e.key === 'Enter') { e.preventDefault(); runCommand(filtered[active]); }
+    else if (e.key === 'Escape') { e.preventDefault(); closePalette(); }
+  });
+  window.addEventListener('keydown', function (e) {
+    if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+      e.preventDefault();
+      if (backdrop.classList.contains('open')) closePalette();
+      else openPalette();
+    } else if (e.key === 'Escape' && backdrop.classList.contains('open')) {
+      closePalette();
+    }
+  });
+
+  // ------------------------------------------------- nav + reveals
+
+  var secnav = document.getElementById('secnav');
+  var masthead = document.querySelector('.masthead');
+  var fineMotion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (secnav && masthead && 'IntersectionObserver' in window) {
+    body.classList.add('fxnav');
+    // Nav appears once the masthead has scrolled away, disappears on return.
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        secnav.classList.toggle('on', !en.isIntersecting);
+      });
+    }, { rootMargin: '-8px 0px 0px 0px' }).observe(masthead);
+  }
+
+  if (fineMotion && 'IntersectionObserver' in window) {
+    var sections = document.querySelectorAll('main section');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.remove('pre');
+          observer.unobserve(en.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+    sections.forEach(function (s) {
+      s.classList.add('pre');
+      observer.observe(s);
+    });
+  }
+
+  // Commands need the snapshot; build after data.json resolves (the existing
+  // fetch in the first IIFE sets window state). Poll cheaply for it.
+  function waitForData() {
+    if (window.__portfolioData) { buildCommands(window.__portfolioData); renderList(); return; }
+    setTimeout(waitForData, 200);
+  }
+  waitForData();
 })();
 </script>
 </body>
