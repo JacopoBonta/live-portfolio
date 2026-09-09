@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T13:07:19.221Z",
+  "generatedAt": "2026-09-09T13:14:17.554Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -38,23 +38,24 @@
   },
   "featured": [
     {
-      "name": "sugo",
-      "description": null,
+      "name": "live-portfolio",
+      "description": "Live portfolio — static page generated from public GitHub data, refreshed by the harness",
       "homepage": null,
-      "htmlUrl": "https://github.com/JacopoBonta/sugo",
-      "stars": 1,
+      "htmlUrl": "https://github.com/JacopoBonta/live-portfolio",
+      "stars": 0,
       "forks": 0,
-      "watchers": 1,
-      "openIssues": 2,
-      "language": "Go",
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "HTML",
       "topics": [],
       "isPrivate": false,
-      "createdAt": "2026-04-24",
-      "pushedAt": "2026-05-29",
-      "updatedAt": "2026-04-25",
-      "languageColor": "#00ADD8",
+      "createdAt": "2026-09-09",
+      "pushedAt": "2026-09-09",
+      "updatedAt": "2026-09-09",
+      "languageColor": "#e34c26",
       "languages": {
-        "Go": 92719
+        "HTML": 17546,
+        "JavaScript": 10611
       }
     },
     {
@@ -87,19 +88,19 @@
       "color": "#3178c6"
     },
     {
-      "name": "Go",
-      "bytes": 92719,
-      "color": "#00ADD8"
-    },
-    {
       "name": "CSS",
       "bytes": 28161,
       "color": "#563d7c"
     },
     {
       "name": "HTML",
-      "bytes": 305,
+      "bytes": 17851,
       "color": "#e34c26"
+    },
+    {
+      "name": "JavaScript",
+      "bytes": 10611,
+      "color": "#f1e05a"
     }
   ],
   "repos": [

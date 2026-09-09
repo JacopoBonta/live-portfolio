@@ -36,9 +36,18 @@ scripts/update.mjs      zero-dependency fetcher/generator (Node ≥ 20, `gh` CLI
 
 ## Editing curated content
 
-Change `site.config.json` and run `node scripts/update.mjs --push`. The
-`featured` list resolves in order: exact repo names from the config → GitHub
-pinned repos → top-starred repos. Names that are not public repos are skipped.
+Edit `site.config.json` (or the markup in `index.html`), regenerate the
+snapshot, then commit and push — a push to `main` is what triggers the Pages
+deploy:
+
+    node scripts/update.mjs        # refresh public/data.json if the edit affects it
+    git add -A && git commit -m "…" && git push
+
+Note: `node scripts/update.mjs --push` only commits the generated snapshot
+(`public/data.json` + `public/avatar.png`), never your curated edits — those
+need their own commit. The `featured` list resolves in order: exact repo names
+from the config → GitHub pinned repos → top-starred repos. Names that are not
+public repos are skipped.
 
 ## Privacy
 

@@ -10,5 +10,5 @@
     { "label": "sugo", "url": "https://github.com/JacopoBonta/sugo" },
     { "label": "opencode-artifacts-plugin", "url": "https://github.com/JacopoBonta/opencode-artifacts-plugin" }
   ],
-  "featured": ["sugo", "opencode-artifacts-plugin", "photobrowse"]
+  "featured": ["live-portfolio", "opencode-artifacts-plugin", "photobrowse"]
 }
