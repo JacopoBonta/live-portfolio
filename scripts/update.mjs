@@ -192,7 +192,10 @@ function fetchContributions() {
 }
 
 function fetchEvents() {
-  const events = ghJson([`users/${OWNER}/events/public?per_page=30`]);
+  // per_page=100 (the endpoint's maximum): bursts of same-repo events (e.g.
+  // every push that triggers a data refresh) collapse when grouped below, so
+  // the raw page needs headroom for 10 distinct activities to survive.
+  const events = ghJson([`users/${OWNER}/events/public?per_page=100`]);
   const out = [];
   for (const e of events) {
     const repo = e.repo?.name ?? null;
@@ -254,12 +257,35 @@ function fetchEvents() {
 
 // ---------------------------------------------------------------- merge
 
+// Collapse same kind+repo events (e.g. repeated "pushed to live-portfolio"
+// rows) into their latest occurrence. Events arrive newest first; keeping the
+// first seen per key keeps the most recent date/detail. The number of events
+// folded into each row is attached as `count` for the feed badge.
+function groupEvents(events) {
+  const byKey = new Map();
+  const grouped = [];
+  for (const e of events) {
+    const key = `${e.repo ?? ''}|${e.kind ?? ''}`;
+    const hit = byKey.get(key);
+    if (hit) {
+      hit.count += 1;
+      continue;
+    }
+    const kept = { ...e, count: 1 };
+    byKey.set(key, kept);
+    grouped.push(kept);
+  }
+  return grouped;
+}
+
 function buildData(cfg, profile, repos, pinned, languages, events, contributions) {
   // Config-driven curation: hide list, description/homepage overrides, and the
   // Past-projects cutoff (repos not pushed within archiveAfterDays days).
   const hide = new Set(Array.isArray(cfg.hide) ? cfg.hide : []);
   const overrides = cfg.overrides && typeof cfg.overrides === 'object' ? cfg.overrides : {};
   const archiveAfterDays = Number.isFinite(cfg.archiveAfterDays) ? cfg.archiveAfterDays : 730;
+  const maxEvents = Number.isFinite(cfg.maxEvents) && cfg.maxEvents > 0 ? cfg.maxEvents : 10;
+  const groupedEvents = groupEvents(events);
   const cutoff = Date.now() - archiveAfterDays * 24 * 60 * 60 * 1000;
   const curated = repos
     .filter((r) => !hide.has(r.name))
@@ -333,8 +359,8 @@ function buildData(cfg, profile, repos, pinned, languages, events, contributions
     })),
     languages: languagesSummary,
     repos: [...curated].sort((a, b) => b.stars - a.stars || (b.pushedAt || '').localeCompare(a.pushedAt || '')),
-    events: events.slice(0, 15),
-    eventCount: events.length,
+    events: groupedEvents.slice(0, maxEvents),
+    eventCount: groupedEvents.length,
     contributions: contributions ?? null,
   };
 }
@@ -381,9 +407,9 @@ const featuredNames = (cfg.featured ?? []).slice(0, 10);
 const languages = fetchLanguages(featuredNames);
 const contributions = fetchContributions();
 const events = fetchEvents();
-console.log(`update: ${repos.length} own public repos, ${events.length} recent public events, ${pinned.length} pinned, ${contributions ? contributions.total : 'no'} public contributions`);
-
 const data = buildData(cfg, profile, repos, pinned, languages, events, contributions);
+
+console.log(`update: ${repos.length} own public repos, ${data.eventCount} recent public activities (${events.length} raw events), ${pinned.length} pinned, ${contributions ? contributions.total : 'no'} public contributions`);
 
 writeAtomic(DATA_OUT, JSON.stringify(data, null, 2) + '\n');
 console.log(`update: wrote ${DATA_OUT} (${data.repos.length} repos, generated ${data.generatedAt})`);

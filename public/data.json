@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T09:58:31.848Z",
+  "generatedAt": "2026-09-10T13:46:31.273Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -36,7 +36,7 @@
     "publicRepos": 20,
     "totalStars": 1,
     "followers": 17,
-    "lastPush": "2026-09-09"
+    "lastPush": "2026-09-10"
   },
   "featured": [
     {
@@ -52,8 +52,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-09-09",
-      "updatedAt": "2026-09-09",
+      "pushedAt": "2026-09-10",
+      "updatedAt": "2026-09-10",
       "past": false,
       "languageColor": "#e34c26",
       "languages": {
@@ -138,8 +138,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-09-09",
-      "updatedAt": "2026-09-09",
+      "pushedAt": "2026-09-10",
+      "updatedAt": "2026-09-10",
       "past": false
     },
     {
@@ -406,61 +406,8 @@
         "commits": 0,
         "message": null
       },
-      "date": "2026-09-09"
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-09"
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-09"
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-09"
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-09"
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-09"
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-09"
+      "date": "2026-09-09",
+      "count": 12
     },
     {
       "repo": "JacopoBonta/dsh-scheduler",
@@ -469,70 +416,25 @@
         "commits": 0,
         "message": null
       },
-      "date": "2026-09-09"
+      "date": "2026-09-09",
+      "count": 2
     },
     {
       "repo": "Viger1/dsh-design",
       "kind": "starred",
       "detail": null,
-      "date": "2026-09-09"
+      "date": "2026-09-09",
+      "count": 1
     },
     {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-09"
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-09"
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-09"
-    },
-    {
-      "repo": "JacopoBonta/dsh-scheduler",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-09"
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-09"
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-09"
+      "repo": "deepseek-ai/deepseek-harness",
+      "kind": "starred",
+      "detail": null,
+      "date": "2026-08-24",
+      "count": 1
     }
   ],
-  "eventCount": 16,
+  "eventCount": 4,
   "contributions": {
     "start": "2025-09-10",
     "end": "2026-09-10",

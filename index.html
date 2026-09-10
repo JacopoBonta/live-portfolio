@@ -225,6 +225,11 @@
   .feed .what { color: var(--text); min-width: 0; }
   .feed .what .repo-link { font-family: var(--mono); font-size: 13px; display: inline-block; padding: 2px 0; }
   .feed .what .detail { color: var(--muted); }
+  .feed .what .times {
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px;
+    padding: 1px 8px; margin-left: 6px; display: inline-block; vertical-align: 1px;
+  }
 
   footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); font-family: var(--mono); font-size: 13px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   footer a { color: var(--muted); border-bottom: 1px solid var(--border-strong); display: inline-block; padding: 2px 0; }
@@ -821,10 +826,14 @@
         if (e.kind.indexOf('pr-') === 0) numLink = repoUrl + '/pull/' + d.number;
         if (e.kind.indexOf('issue-') === 0) numLink = repoUrl + '/issues/' + d.number;
       }
+      // Grouped rows carry `count` from the generator: same kind+repo events
+      // collapsed to their latest occurrence. A badge of 1 would be noise.
+      var times = e.count > 1 ? '<span class="times">' + esc(e.count) + '×</span>' : '';
       li.innerHTML =
         '<span class="when">' + esc(e.date || '') + '</span>' +
         '<span class="what">' + esc(verb) + ' ' +
         (repoUrl ? '<a class="repo-link" href="' + esc(repoUrl) + '">' + esc(e.repo) + '</a>' : esc(e.repo || '')) +
+        times +
         (detail ? ' <span class="detail">' + esc(detail) + '</span>' : '') +
         '</span>';
       if (numLink) {

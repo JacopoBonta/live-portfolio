@@ -12,6 +12,7 @@
   "featured": ["live-portfolio", "opencode-artifacts-plugin", "photobrowse"],
   "hide": [],
   "archiveAfterDays": 730,
+  "maxEvents": 10,
   "overrides": {
     "sugo": { "description": "Go CLI (Cobra) that prepares human reviewers for GitHub PRs — fetches a PR, runs independent analysis agents in parallel, and produces a structured report. Never posts comments." },
     "opencode-artifacts-plugin": { "description": "Agent-generated plans and reports for opencode, reviewed in your browser: anchored inline comments, approve/request-changes, and a plan-first gate that blocks file edits until you sign off." },

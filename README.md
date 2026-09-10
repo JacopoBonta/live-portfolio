@@ -71,7 +71,7 @@ current about a minute later.
 ```
 index.html              the whole site: markup, inline CSS, inline JS, no build step
 site.config.json        curated content: title, tagline, about, links, featured,
-                        hide, archiveAfterDays, overrides
+                        hide, archiveAfterDays, maxEvents, overrides
 public/data.json        generated snapshot (committed — source of truth for the page)
 public/avatar.png       downloaded at snapshot time (no hotlinking)
 scripts/update.mjs      zero-dependency fetcher/generator (Node ≥ 20, `gh` CLI)
@@ -103,6 +103,10 @@ public repos are skipped.
   are flagged `past: true`; the page lists them under the collapsed
   **"Past projects"** disclosure instead of the main repo list. The split is
   recomputed on every snapshot, so repos migrate automatically as they age.
+- `maxEvents` — maximum rows in **"Recent public activity"** (default 10).
+  Before capping, events with the same kind + repo (e.g. repeated
+  "pushed to live-portfolio") are grouped into their latest occurrence; each
+  grouped row shows a `×N` badge with how many events it folded.
 - The stats row shows public repos, main language, followers and last push —
   computed from the snapshot, not configured.
 
