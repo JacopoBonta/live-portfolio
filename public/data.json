@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T22:00:25.751Z",
+  "generatedAt": "2026-09-10T09:58:31.848Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -427,6 +427,84 @@
       "date": "2026-09-09"
     },
     {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
+      "repo": "JacopoBonta/dsh-scheduler",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
+      "repo": "Viger1/dsh-design",
+      "kind": "starred",
+      "detail": null,
+      "date": "2026-09-09"
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-09"
+    },
+    {
       "repo": "JacopoBonta/dsh-scheduler",
       "kind": "push",
       "detail": {
@@ -452,18 +530,12 @@
         "message": null
       },
       "date": "2026-09-09"
-    },
-    {
-      "repo": "deepseek-ai/deepseek-harness",
-      "kind": "starred",
-      "detail": null,
-      "date": "2026-08-24"
     }
   ],
-  "eventCount": 7,
+  "eventCount": 16,
   "contributions": {
-    "start": "2025-09-09",
-    "end": "2026-09-09",
+    "start": "2025-09-10",
+    "end": "2026-09-10",
     "total": 185,
     "days": [
       0,
