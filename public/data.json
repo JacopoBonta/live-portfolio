@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T13:46:31.273Z",
+  "generatedAt": "2026-09-11T08:06:53.610Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -33,10 +33,10 @@
     }
   ],
   "stats": {
-    "publicRepos": 20,
+    "publicRepos": 21,
     "totalStars": 1,
     "followers": 17,
-    "lastPush": "2026-09-10"
+    "lastPush": "2026-09-11"
   },
   "featured": [
     {
@@ -57,8 +57,8 @@
       "past": false,
       "languageColor": "#e34c26",
       "languages": {
-        "HTML": 49153,
-        "JavaScript": 14146
+        "HTML": 49682,
+        "JavaScript": 15232
       }
     },
     {
@@ -93,7 +93,7 @@
     },
     {
       "name": "HTML",
-      "bytes": 49458,
+      "bytes": 49987,
       "color": "#e34c26"
     },
     {
@@ -103,7 +103,7 @@
     },
     {
       "name": "JavaScript",
-      "bytes": 14146,
+      "bytes": 15232,
       "color": "#f1e05a"
     }
   ],
@@ -123,6 +123,23 @@
       "createdAt": "2026-04-24",
       "pushedAt": "2026-05-29",
       "updatedAt": "2026-04-25",
+      "past": false
+    },
+    {
+      "name": "dsh-sidebar",
+      "description": "dsh-sidebar — docked side panel for the DeepSeek Harness web interface: a tree-view file explorer, a git diff explorer, and an integrated PTY terminal",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/dsh-sidebar",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "JavaScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2026-09-11",
+      "pushedAt": "2026-09-11",
+      "updatedAt": "2026-09-11",
       "past": false
     },
     {
@@ -400,6 +417,16 @@
   ],
   "events": [
     {
+      "repo": "JacopoBonta/dsh-sidebar",
+      "kind": "create-branch",
+      "detail": {
+        "ref": "main",
+        "refType": "branch"
+      },
+      "date": "2026-09-11",
+      "count": 1
+    },
+    {
       "repo": "JacopoBonta/live-portfolio",
       "kind": "push",
       "detail": {
@@ -407,7 +434,7 @@
         "message": null
       },
       "date": "2026-09-09",
-      "count": 12
+      "count": 14
     },
     {
       "repo": "JacopoBonta/dsh-scheduler",
@@ -417,7 +444,17 @@
         "message": null
       },
       "date": "2026-09-09",
-      "count": 2
+      "count": 3
+    },
+    {
+      "repo": "JacopoBonta/dsh-scheduler",
+      "kind": "create-branch",
+      "detail": {
+        "ref": "main",
+        "refType": "branch"
+      },
+      "date": "2026-09-09",
+      "count": 1
     },
     {
       "repo": "Viger1/dsh-design",
@@ -434,11 +471,11 @@
       "count": 1
     }
   ],
-  "eventCount": 4,
+  "eventCount": 6,
   "contributions": {
-    "start": "2025-09-10",
-    "end": "2026-09-10",
-    "total": 185,
+    "start": "2025-09-11",
+    "end": "2026-09-11",
+    "total": 192,
     "days": [
       0,
       0,
@@ -808,8 +845,8 @@
       0,
       0,
       38,
-      0,
-      0,
+      1,
+      6,
       0
     ]
   }
