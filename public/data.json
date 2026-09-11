@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T08:06:53.610Z",
+  "generatedAt": "2026-09-11T09:56:51.609Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -52,8 +52,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-09-10",
-      "updatedAt": "2026-09-10",
+      "pushedAt": "2026-09-11",
+      "updatedAt": "2026-09-11",
       "past": false,
       "languageColor": "#e34c26",
       "languages": {
@@ -143,23 +143,6 @@
       "past": false
     },
     {
-      "name": "live-portfolio",
-      "description": "Live portfolio — static page generated from public GitHub data, refreshed by the harness",
-      "homepage": null,
-      "htmlUrl": "https://github.com/JacopoBonta/live-portfolio",
-      "stars": 0,
-      "forks": 0,
-      "watchers": 0,
-      "openIssues": 0,
-      "language": "HTML",
-      "topics": [],
-      "isPrivate": false,
-      "createdAt": "2026-09-09",
-      "pushedAt": "2026-09-10",
-      "updatedAt": "2026-09-10",
-      "past": false
-    },
-    {
       "name": "dsh-scheduler",
       "description": "Cron scheduler plugin for DeepSeek Harness: persisted cron jobs fired through the harness shell, with a Cron jobs sidebar entry in the web GUI and a scheduler tool",
       "homepage": null,
@@ -172,8 +155,25 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-09-09",
-      "updatedAt": "2026-09-09",
+      "pushedAt": "2026-09-11",
+      "updatedAt": "2026-09-11",
+      "past": false
+    },
+    {
+      "name": "live-portfolio",
+      "description": "Live portfolio — static page generated from public GitHub data, refreshed by the harness",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/live-portfolio",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "HTML",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2026-09-09",
+      "pushedAt": "2026-09-11",
+      "updatedAt": "2026-09-11",
       "past": false
     },
     {
@@ -417,6 +417,56 @@
   ],
   "events": [
     {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "create-branch",
+      "detail": {
+        "ref": "main",
+        "refType": "branch"
+      },
+      "date": "2026-09-09",
+      "count": 1
+    },
+    {
+      "repo": "JacopoBonta/dsh-sidebar",
+      "kind": "pr-merged",
+      "detail": {
+        "title": null,
+        "number": 1
+      },
+      "date": "2026-09-11",
+      "count": 1
+    },
+    {
+      "repo": "JacopoBonta/dsh-scheduler",
+      "kind": "pr-merged",
+      "detail": {
+        "title": null,
+        "number": 1
+      },
+      "date": "2026-09-11",
+      "count": 1
+    },
+    {
+      "repo": "JacopoBonta/dsh-scheduler",
+      "kind": "pr-opened",
+      "detail": {
+        "title": null,
+        "number": 1
+      },
+      "date": "2026-09-11",
+      "count": 1
+    },
+    {
+      "repo": "JacopoBonta/dsh-sidebar",
+      "kind": "pr-opened",
+      "detail": {
+        "title": null,
+        "number": 1
+      },
+      "date": "2026-09-11",
+      "count": 1
+    },
+    {
       "repo": "JacopoBonta/dsh-sidebar",
       "kind": "create-branch",
       "detail": {
@@ -462,20 +512,13 @@
       "detail": null,
       "date": "2026-09-09",
       "count": 1
-    },
-    {
-      "repo": "deepseek-ai/deepseek-harness",
-      "kind": "starred",
-      "detail": null,
-      "date": "2026-08-24",
-      "count": 1
     }
   ],
-  "eventCount": 6,
+  "eventCount": 11,
   "contributions": {
     "start": "2025-09-11",
     "end": "2026-09-11",
-    "total": 192,
+    "total": 197,
     "days": [
       0,
       0,
@@ -846,7 +889,7 @@
       0,
       38,
       1,
-      6,
+      11,
       0
     ]
   }
