@@ -13,6 +13,71 @@
   "hide": [],
   "archiveAfterDays": 730,
   "maxEvents": 10,
+  "career": {
+    "experience": [
+      {
+        "title": "Full Stack Developer",
+        "org": "Cubbit",
+        "employmentType": "Full-time",
+        "start": "Dec 2019",
+        "startISO": "2019-12-01",
+        "end": "Present",
+        "endISO": null,
+        "location": null,
+        "url": "https://github.com/cubbit",
+        "description": null,
+        "skills": ["TypeScript", "Scrum"]
+      },
+      {
+        "title": "Internship Trainee",
+        "org": "Phinergy",
+        "employmentType": null,
+        "start": "Dec 2018",
+        "startISO": "2018-12-01",
+        "end": "Jun 2019",
+        "endISO": "2019-06-30",
+        "location": "Greater Padova (Padua) Metropolitan Area",
+        "url": null,
+        "description": null,
+        "skills": ["Node.js"]
+      },
+      {
+        "title": "Web Developer Internship",
+        "org": "MOLO17 SRL",
+        "employmentType": null,
+        "start": "Jun 2018",
+        "startISO": "2018-06-01",
+        "end": "Jul 2018",
+        "endISO": "2018-07-31",
+        "location": "Pordenone, Friuli-Venezia Giulia, Italy",
+        "url": null,
+        "description": "Developed the company's website from a pre-designed mockup in a small team, where ideas were compared and refined before any code was written — a formative first experience.",
+        "skills": ["React.js", "Next.js", "i18n", "Docker", "Angular 2", "Git", "Bitbucket", "Zeplin"]
+      },
+      {
+        "title": "Web Developer Internship",
+        "org": "BP Sistema",
+        "employmentType": null,
+        "start": "Mar 2017",
+        "startISO": "2017-03-01",
+        "end": "Sep 2017",
+        "endISO": "2017-09-30",
+        "location": "Padua, Veneto, Italy",
+        "url": null,
+        "description": null,
+        "skills": ["TypeScript", "Node.js"]
+      }
+    ],
+    "education": [
+      {
+        "school": "ICT Kennedy",
+        "field": "Information Technology",
+        "period": "2017 – 2019",
+        "url": "https://itstkennedy.edu.it",
+        "note": "Two-year program on cloud architectures and web technologies (\"Architetture cloud e tecnologie web\")."
+      }
+    ]
+  },
   "overrides": {
     "sugo": { "description": "Go CLI (Cobra) that prepares human reviewers for GitHub PRs — fetches a PR, runs independent analysis agents in parallel, and produces a structured report. Never posts comments." },
     "opencode-artifacts-plugin": { "description": "Agent-generated plans and reports for opencode, reviewed in your browser: anchored inline comments, approve/request-changes, and a plan-first gate that blocks file edits until you sign off." },

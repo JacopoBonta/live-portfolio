@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T11:52:28.226Z",
+  "generatedAt": "2026-09-12T15:37:14.712Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -16,6 +16,88 @@
     "description": "Live portfolio of Jacopo Bontà — fullstack developer. Kept current automatically: repos, stars and public activity are pulled from GitHub and refreshed by the harness itself."
   },
   "about": "Most of my week goes into Cubbit, where I build the user-facing products — my favorite kind of work, because features people actually use are the ones worth getting right. When I build for myself, it's small tools that scratch a real itch. Right now AI agents are what I'm fascinated by: learning a lot, and building new tools with them. This page is generated from my public GitHub data and kept current automatically.",
+  "career": {
+    "experience": [
+      {
+        "title": "Full Stack Developer",
+        "org": "Cubbit",
+        "employmentType": "Full-time",
+        "start": "Dec 2019",
+        "startISO": "2019-12-01",
+        "end": "Present",
+        "endISO": null,
+        "location": null,
+        "url": "https://github.com/cubbit",
+        "description": null,
+        "skills": [
+          "TypeScript",
+          "Scrum"
+        ]
+      },
+      {
+        "title": "Internship Trainee",
+        "org": "Phinergy",
+        "employmentType": null,
+        "start": "Dec 2018",
+        "startISO": "2018-12-01",
+        "end": "Jun 2019",
+        "endISO": "2019-06-30",
+        "location": "Greater Padova (Padua) Metropolitan Area",
+        "url": null,
+        "description": null,
+        "skills": [
+          "Node.js"
+        ]
+      },
+      {
+        "title": "Web Developer Internship",
+        "org": "MOLO17 SRL",
+        "employmentType": null,
+        "start": "Jun 2018",
+        "startISO": "2018-06-01",
+        "end": "Jul 2018",
+        "endISO": "2018-07-31",
+        "location": "Pordenone, Friuli-Venezia Giulia, Italy",
+        "url": null,
+        "description": "Developed the company's website from a pre-designed mockup in a small team, where ideas were compared and refined before any code was written — a formative first experience.",
+        "skills": [
+          "React.js",
+          "Next.js",
+          "i18n",
+          "Docker",
+          "Angular 2",
+          "Git",
+          "Bitbucket",
+          "Zeplin"
+        ]
+      },
+      {
+        "title": "Web Developer Internship",
+        "org": "BP Sistema",
+        "employmentType": null,
+        "start": "Mar 2017",
+        "startISO": "2017-03-01",
+        "end": "Sep 2017",
+        "endISO": "2017-09-30",
+        "location": "Padua, Veneto, Italy",
+        "url": null,
+        "description": null,
+        "skills": [
+          "TypeScript",
+          "Node.js"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "school": "ICT Kennedy",
+        "field": "Information Technology",
+        "period": "2017 – 2019",
+        "url": "https://itstkennedy.edu.it",
+        "note": "Two-year program on cloud architectures and web technologies (\"Architetture cloud e tecnologie web\")."
+      }
+    ]
+  },
   "aboutLinks": [
     {
       "text": "Cubbit",
@@ -52,8 +134,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-06-30",
-      "pushedAt": "2026-07-06",
-      "updatedAt": "2026-07-01",
+      "pushedAt": "2026-09-12",
+      "updatedAt": "2026-09-12",
       "past": false,
       "languageColor": "#3178c6",
       "languages": {
@@ -70,17 +152,17 @@
       "stars": 0,
       "forks": 0,
       "watchers": 0,
-      "openIssues": 1,
+      "openIssues": 0,
       "language": "JavaScript",
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-11",
-      "pushedAt": "2026-09-11",
-      "updatedAt": "2026-09-11",
+      "pushedAt": "2026-09-12",
+      "updatedAt": "2026-09-12",
       "past": false,
       "languageColor": "#f1e05a",
       "languages": {
-        "JavaScript": 113836
+        "JavaScript": 148236
       }
     }
   ],
@@ -92,7 +174,7 @@
     },
     {
       "name": "JavaScript",
-      "bytes": 113836,
+      "bytes": 148236,
       "color": "#f1e05a"
     },
     {
@@ -115,7 +197,7 @@
       "stars": 0,
       "forks": 0,
       "watchers": 0,
-      "openIssues": 0,
+      "openIssues": 1,
       "language": "HTML",
       "topics": [],
       "isPrivate": false,
@@ -132,13 +214,30 @@
       "stars": 0,
       "forks": 0,
       "watchers": 0,
-      "openIssues": 1,
+      "openIssues": 0,
       "language": "JavaScript",
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-11",
-      "pushedAt": "2026-09-11",
-      "updatedAt": "2026-09-11",
+      "pushedAt": "2026-09-12",
+      "updatedAt": "2026-09-12",
+      "past": false
+    },
+    {
+      "name": "opencode-artifacts-plugin",
+      "description": "Agent-generated plans and reports for opencode, reviewed in your browser: anchored inline comments, approve/request-changes, and a plan-first gate that blocks file edits until you sign off.",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/opencode-artifacts-plugin",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "TypeScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2026-06-30",
+      "pushedAt": "2026-09-12",
+      "updatedAt": "2026-09-12",
       "past": false
     },
     {
@@ -156,23 +255,6 @@
       "createdAt": "2026-09-09",
       "pushedAt": "2026-09-11",
       "updatedAt": "2026-09-11",
-      "past": false
-    },
-    {
-      "name": "opencode-artifacts-plugin",
-      "description": "Agent-generated plans and reports for opencode, reviewed in your browser: anchored inline comments, approve/request-changes, and a plan-first gate that blocks file edits until you sign off.",
-      "homepage": null,
-      "htmlUrl": "https://github.com/JacopoBonta/opencode-artifacts-plugin",
-      "stars": 0,
-      "forks": 0,
-      "watchers": 0,
-      "openIssues": 0,
-      "language": "TypeScript",
-      "topics": [],
-      "isPrivate": false,
-      "createdAt": "2026-06-30",
-      "pushedAt": "2026-07-06",
-      "updatedAt": "2026-07-01",
       "past": false
     },
     {
@@ -417,16 +499,56 @@
   "events": [
     {
       "repo": "JacopoBonta/live-portfolio",
+      "kind": "pr-opened",
+      "detail": {
+        "title": null,
+        "number": 2
+      },
+      "date": "2026-09-12",
+      "count": 2
+    },
+    {
+      "repo": "JacopoBonta/dsh-sidebar",
       "kind": "push",
       "detail": {
         "commits": 0,
         "message": null
       },
-      "date": "2026-09-10",
-      "count": 17
+      "date": "2026-09-12",
+      "count": 3
     },
     {
       "repo": "JacopoBonta/dsh-sidebar",
+      "kind": "pr-merged",
+      "detail": {
+        "title": null,
+        "number": 2
+      },
+      "date": "2026-09-12",
+      "count": 2
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-12",
+      "count": 18
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "pr-merged",
+      "detail": {
+        "title": null,
+        "number": 1
+      },
+      "date": "2026-09-12",
+      "count": 1
+    },
+    {
+      "repo": "JacopoBonta/dsh-scheduler",
       "kind": "push",
       "detail": {
         "commits": 0,
@@ -446,31 +568,11 @@
       "count": 2
     },
     {
-      "repo": "JacopoBonta/dsh-sidebar",
-      "kind": "pr-opened",
-      "detail": {
-        "title": null,
-        "number": 2
-      },
-      "date": "2026-09-11",
-      "count": 2
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
+      "repo": "JacopoBonta/dsh-scheduler",
       "kind": "create-branch",
       "detail": {
         "ref": "security/audit-fixes",
         "refType": "branch"
-      },
-      "date": "2026-09-11",
-      "count": 2
-    },
-    {
-      "repo": "JacopoBonta/dsh-sidebar",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
       },
       "date": "2026-09-11",
       "count": 2
@@ -494,43 +596,13 @@
       },
       "date": "2026-09-09",
       "count": 1
-    },
-    {
-      "repo": "JacopoBonta/dsh-sidebar",
-      "kind": "pr-merged",
-      "detail": {
-        "title": null,
-        "number": 1
-      },
-      "date": "2026-09-11",
-      "count": 1
-    },
-    {
-      "repo": "JacopoBonta/dsh-scheduler",
-      "kind": "pr-merged",
-      "detail": {
-        "title": null,
-        "number": 1
-      },
-      "date": "2026-09-11",
-      "count": 1
-    },
-    {
-      "repo": "JacopoBonta/dsh-scheduler",
-      "kind": "pr-opened",
-      "detail": {
-        "title": null,
-        "number": 1
-      },
-      "date": "2026-09-11",
-      "count": 1
     }
   ],
-  "eventCount": 12,
+  "eventCount": 14,
   "contributions": {
     "start": "2025-09-12",
     "end": "2026-09-12",
-    "total": 200,
+    "total": 208,
     "days": [
       0,
       0,
@@ -902,7 +974,7 @@
       38,
       1,
       14,
-      0
+      8
     ]
   }
 }

@@ -65,13 +65,17 @@ current about a minute later.
   counts). Fetched with `onlyPublicContributions: true` so private activity
   never leaves GitHub, regardless of which token runs the generator. `null`
   when the fetch fails — the page just omits the heatmap.
+- `career` — `{ experience[], education[] }`: curated career data copied from
+  the LinkedIn public page (see below), emitted by `sanitizeCareer` in the
+  generator. `null` when absent or malformed — the page just omits the
+  Career section.
 
 ## Layout
 
 ```
 index.html              the whole site: markup, inline CSS, inline JS, no build step
 site.config.json        curated content: title, tagline, about, links, featured,
-                        hide, archiveAfterDays, maxEvents, overrides
+                        hide, archiveAfterDays, maxEvents, career, overrides
 public/data.json        generated snapshot (committed — source of truth for the page)
 public/avatar.png       downloaded at snapshot time (no hotlinking)
 scripts/update.mjs      zero-dependency fetcher/generator (Node ≥ 20, `gh` CLI)
@@ -109,6 +113,24 @@ public repos are skipped.
   grouped row shows a `×N` badge with how many events it folded.
 - The **"All public repositories"** list is sorted by last push, most recent
   first (stars break ties between repos pushed the same day).
+- `career` — curated **Experience + Education** for the Career section,
+  copied by hand from the LinkedIn public page
+  (`linkedin.com/in/jacopobnt`). LinkedIn bot-blocks automated retrieval
+  (HTTP 999 on every route, proxies included) and its ToS forbids scraping,
+  so — unlike the GitHub data — this content can't be fetched at snapshot
+  time; it lives in the config and flows into the snapshot through
+  `sanitizeCareer` (entries missing `title`+`org`+`start`, or education
+  missing `school`, are dropped rather than breaking the generator).
+  Experience entries render newest-first in config order with
+  title · org (linked when `url` is set) · "start – end · duration" (the
+  duration is computed at render time from `startISO`/`endISO`, so the
+  current role stays current), plus optional location, description and
+  `skills` chips. Education entries render with school (linked when
+  `url` is set), `period`, `field` and `note`. Both kinds merge into one
+  chronological timeline (sorted by start, oldest → newest, education
+  keyed on the year the period starts with), drawn as a vertical hairline
+  connecting glass beads: the current role's bead pulses with the accent,
+  education is a hollow bead.
 - The stats row shows public repos, main language, followers and last push —
   computed from the snapshot, not configured.
 
