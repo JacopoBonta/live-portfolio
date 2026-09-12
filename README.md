@@ -107,6 +107,8 @@ public repos are skipped.
   Before capping, events with the same kind + repo (e.g. repeated
   "pushed to live-portfolio") are grouped into their latest occurrence; each
   grouped row shows a `×N` badge with how many events it folded.
+- The **"All public repositories"** list is sorted by last push, most recent
+  first (stars break ties between repos pushed the same day).
 - The stats row shows public repos, main language, followers and last push —
   computed from the snapshot, not configured.
 

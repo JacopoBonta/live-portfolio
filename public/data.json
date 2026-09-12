@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T09:31:35.238Z",
+  "generatedAt": "2026-09-12T11:32:05.469Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -36,7 +36,7 @@
     "publicRepos": 21,
     "totalStars": 1,
     "followers": 17,
-    "lastPush": "2026-09-11"
+    "lastPush": "2026-09-12"
   },
   "featured": [
     {
@@ -52,8 +52,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-09-11",
-      "updatedAt": "2026-09-11",
+      "pushedAt": "2026-09-12",
+      "updatedAt": "2026-09-12",
       "past": false,
       "languageColor": "#e34c26",
       "languages": {
@@ -109,20 +109,20 @@
   ],
   "repos": [
     {
-      "name": "sugo",
-      "description": "Go CLI (Cobra) that prepares human reviewers for GitHub PRs — fetches a PR, runs independent analysis agents in parallel, and produces a structured report. Never posts comments.",
+      "name": "live-portfolio",
+      "description": "Live portfolio — static page generated from public GitHub data, refreshed by the harness",
       "homepage": null,
-      "htmlUrl": "https://github.com/JacopoBonta/sugo",
-      "stars": 1,
+      "htmlUrl": "https://github.com/JacopoBonta/live-portfolio",
+      "stars": 0,
       "forks": 0,
-      "watchers": 1,
-      "openIssues": 2,
-      "language": "Go",
+      "watchers": 0,
+      "openIssues": 0,
+      "language": "HTML",
       "topics": [],
       "isPrivate": false,
-      "createdAt": "2026-04-24",
-      "pushedAt": "2026-05-29",
-      "updatedAt": "2026-04-25",
+      "createdAt": "2026-09-09",
+      "pushedAt": "2026-09-12",
+      "updatedAt": "2026-09-12",
       "past": false
     },
     {
@@ -138,23 +138,6 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-11",
-      "pushedAt": "2026-09-11",
-      "updatedAt": "2026-09-11",
-      "past": false
-    },
-    {
-      "name": "live-portfolio",
-      "description": "Live portfolio — static page generated from public GitHub data, refreshed by the harness",
-      "homepage": null,
-      "htmlUrl": "https://github.com/JacopoBonta/live-portfolio",
-      "stars": 0,
-      "forks": 0,
-      "watchers": 0,
-      "openIssues": 0,
-      "language": "HTML",
-      "topics": [],
-      "isPrivate": false,
-      "createdAt": "2026-09-09",
       "pushedAt": "2026-09-11",
       "updatedAt": "2026-09-11",
       "past": false
@@ -191,6 +174,23 @@
       "createdAt": "2026-06-30",
       "pushedAt": "2026-07-06",
       "updatedAt": "2026-07-01",
+      "past": false
+    },
+    {
+      "name": "sugo",
+      "description": "Go CLI (Cobra) that prepares human reviewers for GitHub PRs — fetches a PR, runs independent analysis agents in parallel, and produces a structured report. Never posts comments.",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/sugo",
+      "stars": 1,
+      "forks": 0,
+      "watchers": 1,
+      "openIssues": 2,
+      "language": "Go",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2026-04-24",
+      "pushedAt": "2026-05-29",
+      "updatedAt": "2026-04-25",
       "past": false
     },
     {
@@ -417,7 +417,17 @@
   ],
   "events": [
     {
-      "repo": "JacopoBonta/dsh-scheduler",
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-10",
+      "count": 17
+    },
+    {
+      "repo": "JacopoBonta/dsh-sidebar",
       "kind": "push",
       "detail": {
         "commits": 0,
@@ -437,7 +447,17 @@
       "count": 2
     },
     {
-      "repo": "JacopoBonta/dsh-scheduler",
+      "repo": "JacopoBonta/dsh-sidebar",
+      "kind": "pr-opened",
+      "detail": {
+        "title": null,
+        "number": 2
+      },
+      "date": "2026-09-11",
+      "count": 2
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
       "kind": "create-branch",
       "detail": {
         "ref": "security/audit-fixes",
@@ -445,16 +465,6 @@
       },
       "date": "2026-09-11",
       "count": 2
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-09",
-      "count": 16
     },
     {
       "repo": "JacopoBonta/dsh-sidebar",
