@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T11:32:05.469Z",
+  "generatedAt": "2026-09-12T11:47:16.049Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -83,6 +83,27 @@
         "CSS": 28161,
         "HTML": 305
       }
+    },
+    {
+      "name": "dsh-sidebar",
+      "description": "dsh-sidebar — docked side panel for the DeepSeek Harness web interface: a tree-view file explorer, a git diff explorer, and an integrated PTY terminal",
+      "homepage": null,
+      "htmlUrl": "https://github.com/JacopoBonta/dsh-sidebar",
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "openIssues": 1,
+      "language": "JavaScript",
+      "topics": [],
+      "isPrivate": false,
+      "createdAt": "2026-09-11",
+      "pushedAt": "2026-09-11",
+      "updatedAt": "2026-09-11",
+      "past": false,
+      "languageColor": "#f1e05a",
+      "languages": {
+        "JavaScript": 113836
+      }
     }
   ],
   "languages": [
@@ -90,6 +111,11 @@
       "name": "TypeScript",
       "bytes": 326741,
       "color": "#3178c6"
+    },
+    {
+      "name": "JavaScript",
+      "bytes": 129068,
+      "color": "#f1e05a"
     },
     {
       "name": "HTML",
@@ -100,11 +126,6 @@
       "name": "CSS",
       "bytes": 28161,
       "color": "#563d7c"
-    },
-    {
-      "name": "JavaScript",
-      "bytes": 15232,
-      "color": "#f1e05a"
     }
   ],
   "repos": [
