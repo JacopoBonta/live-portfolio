@@ -358,7 +358,7 @@ function buildData(cfg, profile, repos, pinned, languages, events, contributions
       languages: languages[r.name] || null,
     })),
     languages: languagesSummary,
-    repos: [...curated].sort((a, b) => b.stars - a.stars || (b.pushedAt || '').localeCompare(a.pushedAt || '')),
+    repos: [...curated].sort((a, b) => (b.pushedAt || '').localeCompare(a.pushedAt || '') || b.stars - a.stars),
     events: groupedEvents.slice(0, maxEvents),
     eventCount: groupedEvents.length,
     contributions: contributions ?? null,
