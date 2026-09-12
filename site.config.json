@@ -9,7 +9,7 @@
     { "label": "GitHub", "url": "https://github.com/JacopoBonta" },
     { "label": "LinkedIn", "url": "https://www.linkedin.com/in/jacopobnt/" }
   ],
-  "featured": ["live-portfolio", "opencode-artifacts-plugin", "dsh-sidebar"],
+  "featured": ["opencode-artifacts-plugin", "dsh-sidebar"],
   "hide": [],
   "archiveAfterDays": 730,
   "maxEvents": 10,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T11:47:16.049Z",
+  "generatedAt": "2026-09-12T11:52:28.226Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -39,28 +39,6 @@
     "lastPush": "2026-09-12"
   },
   "featured": [
-    {
-      "name": "live-portfolio",
-      "description": "Live portfolio — static page generated from public GitHub data, refreshed by the harness",
-      "homepage": null,
-      "htmlUrl": "https://github.com/JacopoBonta/live-portfolio",
-      "stars": 0,
-      "forks": 0,
-      "watchers": 0,
-      "openIssues": 0,
-      "language": "HTML",
-      "topics": [],
-      "isPrivate": false,
-      "createdAt": "2026-09-09",
-      "pushedAt": "2026-09-12",
-      "updatedAt": "2026-09-12",
-      "past": false,
-      "languageColor": "#e34c26",
-      "languages": {
-        "HTML": 49682,
-        "JavaScript": 15232
-      }
-    },
     {
       "name": "opencode-artifacts-plugin",
       "description": "Agent-generated plans and reports for opencode, reviewed in your browser: anchored inline comments, approve/request-changes, and a plan-first gate that blocks file edits until you sign off.",
@@ -114,18 +92,18 @@
     },
     {
       "name": "JavaScript",
-      "bytes": 129068,
+      "bytes": 113836,
       "color": "#f1e05a"
-    },
-    {
-      "name": "HTML",
-      "bytes": 49987,
-      "color": "#e34c26"
     },
     {
       "name": "CSS",
       "bytes": 28161,
       "color": "#563d7c"
+    },
+    {
+      "name": "HTML",
+      "bytes": 305,
+      "color": "#e34c26"
     }
   ],
   "repos": [
