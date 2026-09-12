@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T15:36:49.009Z",
+  "generatedAt": "2026-09-12T15:36:55.149Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -59,10 +59,16 @@
         "endISO": "2018-07-31",
         "location": "Pordenone, Friuli-Venezia Giulia, Italy",
         "url": null,
-        "description": "During my internship period at Molo17 I developed the company's website following a pre-designed mockup. I worked in a team with other colleagues, which was a great and very instructive experience for me since I was able to compare my ideas with others before actually coding them down. Technologies I learned and used: react.js & next.js framework, i18n, docker, angular 2, git & bitbucket, zeplin.",
+        "description": "Developed the company's website from a pre-designed mockup in a small team, where ideas were compared and refined before any code was written — a formative first experience.",
         "skills": [
-          "TypeScript",
-          "Node.js"
+          "React.js",
+          "Next.js",
+          "i18n",
+          "Docker",
+          "Angular 2",
+          "Git",
+          "Bitbucket",
+          "Zeplin"
         ]
       },
       {
@@ -88,7 +94,7 @@
         "field": "Information Technology",
         "period": "2017 – 2019",
         "url": "https://itstkennedy.edu.it",
-        "note": "Two-year program on cloud architectures and web technologies (\"Architetture cloud e tecnologie web\"), a course that no longer exists."
+        "note": "Two-year program on cloud architectures and web technologies (\"Architetture cloud e tecnologie web\")."
       }
     ]
   },

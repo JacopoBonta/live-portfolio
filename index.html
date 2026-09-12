@@ -178,12 +178,48 @@
   }
   .about .links a:hover { color: var(--text); border-color: var(--border-strong); }
 
-  /* career: LinkedIn experience + education, same hairline-row language as
-     the repo index — one frosted section, mono meta, pill skill chips */
-  .timeline, .career-skills, .career-edu ul { list-style: none; margin: 0; padding: 0; }
-  .timeline li { padding: 20px 0; border-bottom: 1px solid var(--border); }
-  .timeline li:first-child { padding-top: 4px; }
-  .timeline li:last-child { border-bottom: none; }
+  /* career: one chronological timeline (oldest → newest) — a vertical hairline
+     connects glass beads, one per entry; the current role's bead pulses with
+     the accent, education is a hollow bead. Same frosted-panel language. */
+  .timeline, .career-skills { list-style: none; margin: 0; padding: 0; }
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+  /* the vertical bar connecting the beads */
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: var(--border-strong);
+  }
+  .timeline li { position: relative; padding: 16px 0 20px; }
+  .timeline li:last-child { padding-bottom: 4px; }
+  /* the bead on the bar, per entry */
+  .timeline li::before {
+    content: "";
+    position: absolute;
+    left: -28px;
+    top: 24px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 1px solid var(--border-strong);
+  }
+  /* current role: the accent bead, pulsing like the masthead's live dot */
+  .timeline li.current::before {
+    background: var(--accent);
+    border-color: var(--accent);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  .timeline li.current { padding-bottom: 24px; }
+  .timeline li.current .career-when { color: var(--accent); }
+  /* education: hollow bead to read as a different kind of milestone */
+  .timeline li.edu::before { background: var(--bg); }
   .career-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
   .career-role { font-size: 16px; font-weight: 600; }
   .career-org { color: var(--text); }
@@ -198,15 +234,6 @@
     background: var(--surface); border: 1px solid var(--border); border-radius: 999px;
     padding: 2px 12px;
   }
-  .career-edu { margin-top: 32px; }
-  .career-edu h3 {
-    font-family: var(--mono); font-size: 12px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
-    margin: 0 0 8px;
-  }
-  .career-edu li { padding: 12px 0; border-bottom: 1px solid var(--border); }
-  .career-edu li:first-child { padding-top: 4px; }
-  .career-edu li:last-child { border-bottom: none; }
 
   /* featured: frosted panels */
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
@@ -417,6 +444,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .live-dot { animation: none; }
+    .timeline li.current::before { animation: none; }
     .card::after { display: none; }
     .card, .about .links a, .chip, .repo-row .name, .feed .repo-link, .past-summary { transition: none; }
     .secnav { transform: none; transition: none; }
@@ -468,10 +496,6 @@
   <section id="career" class="career" hidden>
     <h2>Career</h2>
     <ol class="timeline" id="career-timeline"></ol>
-    <div class="career-edu" id="career-edu-wrap" hidden>
-      <h3>Education</h3>
-      <ul id="career-edu"></ul>
-    </div>
   </section>
 
   <section id="featured-section">
@@ -717,11 +741,8 @@
   function renderCareer(data) {
     var section = $('career');
     var timeline = $('career-timeline');
-    var eduWrap = $('career-edu-wrap');
-    var eduBox = $('career-edu');
-    if (!section || !timeline || !eduWrap || !eduBox) return;
+    if (!section || !timeline) return;
     timeline.innerHTML = '';
-    eduBox.innerHTML = '';
     var career = data.career || {};
     var experience = Array.isArray(career.experience) ? career.experience : [];
     var education = Array.isArray(career.education) ? career.education : [];
@@ -729,51 +750,103 @@
       section.hidden = true;
       return;
     }
+    // One chronological timeline: entries get a sortable key (experience from
+    // startISO, education from the year the period string starts with), then
+    // sort ascending — a journey that ends at the current role. Ties (or
+    // missing dates) keep config order.
+    var entries = [];
     experience.forEach(function (e) {
+      entries.push({ kind: 'exp', e: e, key: e.startISO || null });
+    });
+    education.forEach(function (ed) {
+      var year = typeof ed.period === 'string' ? ed.period.slice(0, 4) : null;
+      // Year-only periods sort at mid-year, so education interleaves with the
+      // roles it overlaps instead of jumping to an edge of the timeline.
+      var key = year && /^\d{4}$/.test(year) ? year + '-07-01' : null;
+      entries.push({ kind: 'edu', e: ed, key: key });
+    });
+    entries.sort(function (a, b) {
+      if (a.key && b.key) return a.key < b.key ? -1 : (a.key > b.key ? 1 : 0);
+      if (a.key) return -1;
+      if (b.key) return 1;
+      return 0;
+    });
+    entries.forEach(function (entry) {
+      var e = entry.e;
       var li = document.createElement('li');
+      li.className = entry.kind === 'edu' ? 'edu' : '';
+      // The current role (present-tense experience) pulses its bead.
+      if (entry.kind === 'exp' && e.end === 'Present') li.classList.add('current');
       var head = document.createElement('div');
       head.className = 'career-head';
       var role = document.createElement('span');
       role.className = 'career-role';
-      role.textContent = e.title;
-      head.appendChild(role);
-      // Org links only where the config carries one (same rule as About).
-      if (e.url && /^https?:\/\//.test(e.url)) {
-        var org = document.createElement('a');
-        org.className = 'career-org';
-        org.href = e.url;
-        org.textContent = e.org;
-        org.target = '_blank';
-        org.rel = 'noopener noreferrer';
-        head.appendChild(org);
+      if (entry.kind === 'edu') {
+        // Education: school as the role line, linked when the config carries
+        // a url (same rule as orgs).
+        if (e.url && /^https?:\/\//.test(e.url)) {
+          var a = document.createElement('a');
+          a.className = 'career-org';
+          a.href = e.url;
+          a.textContent = e.school;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          role.appendChild(a);
+        } else {
+          role.textContent = e.school;
+        }
+        head.appendChild(role);
+        var period = document.createElement('span');
+        period.className = 'career-when';
+        period.textContent = e.period || '';
+        head.appendChild(period);
       } else {
-        var orgText = document.createElement('span');
-        orgText.className = 'career-org';
-        orgText.textContent = e.org;
-        head.appendChild(orgText);
+        role.textContent = e.title;
+        head.appendChild(role);
+        // Org links only where the config carries one (same rule as About).
+        if (e.url && /^https?:\/\//.test(e.url)) {
+          var org = document.createElement('a');
+          org.className = 'career-org';
+          org.href = e.url;
+          org.textContent = e.org;
+          org.target = '_blank';
+          org.rel = 'noopener noreferrer';
+          head.appendChild(org);
+        } else {
+          var orgText = document.createElement('span');
+          orgText.className = 'career-org';
+          orgText.textContent = e.org;
+          head.appendChild(orgText);
+        }
+        var when = document.createElement('span');
+        when.className = 'career-when';
+        var dur = careerDuration(e.startISO, e.endISO, e.end);
+        // No curated end → just the start; never a dangling separator.
+        when.textContent = e.end
+          ? (e.start || '') + ' – ' + e.end + (dur ? ' · ' + dur : '')
+          : (e.start || '') + (dur ? ' · ' + dur : '');
+        head.appendChild(when);
       }
-      var when = document.createElement('span');
-      when.className = 'career-when';
-      var dur = careerDuration(e.startISO, e.endISO, e.end);
-      // No curated end → just the start; never a dangling separator.
-      when.textContent = e.end
-        ? (e.start || '') + ' – ' + e.end + (dur ? ' · ' + dur : '')
-        : (e.start || '') + (dur ? ' · ' + dur : '');
-      head.appendChild(when);
       li.appendChild(head);
-      if (e.location) {
+      if (entry.kind === 'exp' && e.location) {
         var loc = document.createElement('p');
         loc.className = 'career-loc';
         loc.textContent = e.location;
         li.appendChild(loc);
       }
-      if (e.description) {
+      if (entry.kind === 'edu' && (e.field || e.note)) {
         var desc = document.createElement('p');
         desc.className = 'career-desc';
-        desc.textContent = e.description;
+        desc.textContent = [e.field, e.note].filter(Boolean).join(' — ');
         li.appendChild(desc);
       }
-      if (e.skills && e.skills.length) {
+      if (entry.kind === 'exp' && e.description) {
+        var expDesc = document.createElement('p');
+        expDesc.className = 'career-desc';
+        expDesc.textContent = e.description;
+        li.appendChild(expDesc);
+      }
+      if (entry.kind === 'exp' && e.skills && e.skills.length) {
         var skills = document.createElement('ul');
         skills.className = 'career-skills';
         e.skills.forEach(function (s) {
@@ -785,40 +858,6 @@
       }
       timeline.appendChild(li);
     });
-    if (education.length) {
-      education.forEach(function (ed) {
-        var li = document.createElement('li');
-        var head = document.createElement('div');
-        head.className = 'career-head';
-        var school = document.createElement('span');
-        school.className = 'career-role';
-        if (ed.url && /^https?:\/\//.test(ed.url)) {
-          var a = document.createElement('a');
-          a.className = 'career-org';
-          a.href = ed.url;
-          a.textContent = ed.school;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          school.appendChild(a);
-        } else {
-          school.textContent = ed.school;
-        }
-        head.appendChild(school);
-        var period = document.createElement('span');
-        period.className = 'career-when';
-        period.textContent = ed.period || '';
-        head.appendChild(period);
-        li.appendChild(head);
-        if (ed.field || ed.note) {
-          var desc = document.createElement('p');
-          desc.className = 'career-desc';
-          desc.textContent = [ed.field, ed.note].filter(Boolean).join(' — ');
-          li.appendChild(desc);
-        }
-        eduBox.appendChild(li);
-      });
-      eduWrap.hidden = false;
-    }
     section.hidden = false;
   }
 

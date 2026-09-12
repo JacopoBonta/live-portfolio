@@ -125,8 +125,12 @@ public repos are skipped.
   title · org (linked when `url` is set) · "start – end · duration" (the
   duration is computed at render time from `startISO`/`endISO`, so the
   current role stays current), plus optional location, description and
-  `skills` chips. Education entries render as a nested list with school
-  (linked when `url` is set), `period`, `field` and `note`.
+  `skills` chips. Education entries render with school (linked when
+  `url` is set), `period`, `field` and `note`. Both kinds merge into one
+  chronological timeline (sorted by start, oldest → newest, education
+  keyed on the year the period starts with), drawn as a vertical hairline
+  connecting glass beads: the current role's bead pulses with the accent,
+  education is a hollow bead.
 - The stats row shows public repos, main language, followers and last push —
   computed from the snapshot, not configured.
 
