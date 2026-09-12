@@ -269,8 +269,12 @@ function strOrNull(v) {
 
 function validISODate(v) {
   const s = strOrNull(v);
-  if (!s || !/^\d{4}-\d{2}-\d{2}$/.test(s) || isNaN(new Date(`${s}T00:00:00Z`).getTime())) return null;
-  return s;
+  if (!s || !/^\d{4}-\d{2}-\d{2}$/.test(s)) return null;
+  // Round-trip: JS Date rolls out-of-range days forward (2025-02-30 → Mar 2),
+  // so re-serialize and compare to catch impossible calendar dates.
+  const d = new Date(`${s}T00:00:00Z`);
+  if (isNaN(d.getTime())) return null;
+  return d.toISOString().slice(0, 10) === s ? s : null;
 }
 
 function sanitizeCareer(raw) {

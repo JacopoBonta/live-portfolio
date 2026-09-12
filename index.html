@@ -710,7 +710,7 @@
     var rem = months % 12;
     var parts = [];
     if (years) parts.push(years + (years === 1 ? ' yr' : ' yrs'));
-    if (rem) parts.push(rem + ' mos');
+    if (rem) parts.push(rem + (rem === 1 ? ' mo' : ' mos'));
     return parts.join(' ');
   }
 
@@ -755,7 +755,10 @@
       var when = document.createElement('span');
       when.className = 'career-when';
       var dur = careerDuration(e.startISO, e.endISO, e.end);
-      when.textContent = (e.start || '') + ' – ' + (e.end || '') + (dur ? ' · ' + dur : '');
+      // No curated end → just the start; never a dangling separator.
+      when.textContent = e.end
+        ? (e.start || '') + ' – ' + e.end + (dur ? ' · ' + dur : '')
+        : (e.start || '') + (dur ? ' · ' + dur : '');
       head.appendChild(when);
       li.appendChild(head);
       if (e.location) {
