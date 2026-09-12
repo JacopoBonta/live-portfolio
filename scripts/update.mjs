@@ -255,6 +255,69 @@ function fetchEvents() {
   return out;
 }
 
+// ---------------------------------------------------------------- career
+
+// Curated career data (Experience + Education copied from the LinkedIn public
+// page — LinkedIn bot-blocks automated retrieval, so it can't be fetched like
+// the GitHub data). Validates the config shape so a malformed edit is dropped
+// instead of reaching the snapshot or breaking the generator.
+function strOrNull(v) {
+  if (typeof v !== 'string') return null;
+  const s = v.trim();
+  return s ? s : null;
+}
+
+function validISODate(v) {
+  const s = strOrNull(v);
+  if (!s || !/^\d{4}-\d{2}-\d{2}$/.test(s) || isNaN(new Date(`${s}T00:00:00Z`).getTime())) return null;
+  return s;
+}
+
+function sanitizeCareer(raw) {
+  if (!raw || typeof raw !== 'object') return null;
+  const experience = (Array.isArray(raw.experience) ? raw.experience : [])
+    .map((e) => {
+      if (!e || typeof e !== 'object') return null;
+      const title = strOrNull(e.title);
+      const org = strOrNull(e.org);
+      const start = strOrNull(e.start);
+      if (!title || !org || !start) return null;
+      return {
+        title,
+        org,
+        employmentType: strOrNull(e.employmentType),
+        start,
+        startISO: validISODate(e.startISO),
+        end: strOrNull(e.end),
+        endISO: validISODate(e.endISO),
+        location: strOrNull(e.location),
+        url: strOrNull(e.url),
+        description: strOrNull(e.description),
+        skills: (Array.isArray(e.skills) ? e.skills : [])
+          .map((s) => strOrNull(s))
+          .filter(Boolean)
+          .slice(0, 12),
+      };
+    })
+    .filter(Boolean);
+  const education = (Array.isArray(raw.education) ? raw.education : [])
+    .map((e) => {
+      if (!e || typeof e !== 'object') return null;
+      const school = strOrNull(e.school);
+      if (!school) return null;
+      return {
+        school,
+        field: strOrNull(e.field),
+        period: strOrNull(e.period),
+        url: strOrNull(e.url),
+        note: strOrNull(e.note),
+      };
+    })
+    .filter(Boolean);
+  if (!experience.length && !education.length) return null;
+  return { experience, education };
+}
+
 // ---------------------------------------------------------------- merge
 
 // Collapse same kind+repo events (e.g. repeated "pushed to live-portfolio"
@@ -347,6 +410,7 @@ function buildData(cfg, profile, repos, pinned, languages, events, contributions
     },
     site: cfg.site,
     about: cfg.about ?? null,
+    career: sanitizeCareer(cfg.career),
     aboutLinks: cfg.aboutInlineLinks ?? [
       { text: 'Cubbit', url: 'https://github.com/cubbit' },
     ],
@@ -409,7 +473,7 @@ const contributions = fetchContributions();
 const events = fetchEvents();
 const data = buildData(cfg, profile, repos, pinned, languages, events, contributions);
 
-console.log(`update: ${repos.length} own public repos, ${data.eventCount} recent public activities (${events.length} raw events), ${pinned.length} pinned, ${contributions ? contributions.total : 'no'} public contributions`);
+console.log(`update: ${repos.length} own public repos, ${data.eventCount} recent public activities (${events.length} raw events), ${pinned.length} pinned, ${contributions ? contributions.total : 'no'} public contributions, ${data.career ? `${data.career.experience.length} career entries + ${data.career.education.length} education` : 'no career data'}`);
 
 writeAtomic(DATA_OUT, JSON.stringify(data, null, 2) + '\n');
 console.log(`update: wrote ${DATA_OUT} (${data.repos.length} repos, generated ${data.generatedAt})`);

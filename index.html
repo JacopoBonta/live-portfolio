@@ -178,6 +178,36 @@
   }
   .about .links a:hover { color: var(--text); border-color: var(--border-strong); }
 
+  /* career: LinkedIn experience + education, same hairline-row language as
+     the repo index — one frosted section, mono meta, pill skill chips */
+  .timeline, .career-skills, .career-edu ul { list-style: none; margin: 0; padding: 0; }
+  .timeline li { padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .timeline li:first-child { padding-top: 4px; }
+  .timeline li:last-child { border-bottom: none; }
+  .career-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .career-role { font-size: 16px; font-weight: 600; }
+  .career-org { color: var(--text); }
+  a.career-org { color: var(--accent); padding: 4px 0; }
+  a.career-org:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .career-when { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+  .career-loc { font-family: var(--mono); font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+  .career-desc { margin: 8px 0 0; color: var(--muted); font-size: 16px; max-width: 560px; }
+  .career-skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .career-skills li {
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+    background: var(--surface); border: 1px solid var(--border); border-radius: 999px;
+    padding: 2px 12px;
+  }
+  .career-edu { margin-top: 32px; }
+  .career-edu h3 {
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
+    margin: 0 0 8px;
+  }
+  .career-edu li { padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .career-edu li:first-child { padding-top: 4px; }
+  .career-edu li:last-child { border-bottom: none; }
+
   /* featured: frosted panels */
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
   .card {
@@ -398,6 +428,7 @@
 <nav class="secnav" id="secnav" aria-label="Sections">
   <a href="#stats-section">Stats</a>
   <a href="#about">About</a>
+  <a href="#career">Career</a>
   <a href="#featured-section">Featured</a>
   <a href="#contributions-section">Contributions</a>
   <a href="#repos-section">Repos</a>
@@ -432,6 +463,15 @@
     <h2>About</h2>
     <p id="about-text">Loading snapshot…</p>
     <div class="links" id="links"></div>
+  </section>
+
+  <section id="career" class="career" hidden>
+    <h2>Career</h2>
+    <ol class="timeline" id="career-timeline"></ol>
+    <div class="career-edu" id="career-edu-wrap" hidden>
+      <h3>Education</h3>
+      <ul id="career-edu"></ul>
+    </div>
   </section>
 
   <section id="featured-section">
@@ -646,6 +686,139 @@
     });
   }
 
+  // Duration label from the ISO start/end dates: "· 6 yrs 10 mos" like
+  // LinkedIn. Computed at render time (not hardcoded in the config) so the
+  // current role stays current. Falls back to the curated period string.
+  function careerDuration(startISO, endISO, endLabel) {
+    if (!startISO) return null;
+    var start = new Date(startISO + 'T00:00:00Z');
+    if (isNaN(start.getTime())) return null;
+    var end;
+    if (endISO) {
+      end = new Date(endISO + 'T00:00:00Z');
+      if (isNaN(end.getTime())) return null;
+    } else if (endLabel === 'Present') {
+      end = new Date();
+    } else {
+      return null;
+    }
+    // Inclusive calendar months (start month through end month), matching
+    // how LinkedIn displays durations: Jun–Jul 2018 = "2 mos".
+    var months = (end.getUTCFullYear() - start.getUTCFullYear()) * 12 + (end.getUTCMonth() - start.getUTCMonth()) + 1;
+    if (months <= 0) return null;
+    var years = Math.floor(months / 12);
+    var rem = months % 12;
+    var parts = [];
+    if (years) parts.push(years + (years === 1 ? ' yr' : ' yrs'));
+    if (rem) parts.push(rem + ' mos');
+    return parts.join(' ');
+  }
+
+  function renderCareer(data) {
+    var section = $('career');
+    var timeline = $('career-timeline');
+    var eduWrap = $('career-edu-wrap');
+    var eduBox = $('career-edu');
+    if (!section || !timeline || !eduWrap || !eduBox) return;
+    timeline.innerHTML = '';
+    eduBox.innerHTML = '';
+    var career = data.career || {};
+    var experience = Array.isArray(career.experience) ? career.experience : [];
+    var education = Array.isArray(career.education) ? career.education : [];
+    if (!experience.length && !education.length) {
+      section.hidden = true;
+      return;
+    }
+    experience.forEach(function (e) {
+      var li = document.createElement('li');
+      var head = document.createElement('div');
+      head.className = 'career-head';
+      var role = document.createElement('span');
+      role.className = 'career-role';
+      role.textContent = e.title;
+      head.appendChild(role);
+      // Org links only where the config carries one (same rule as About).
+      if (e.url && /^https?:\/\//.test(e.url)) {
+        var org = document.createElement('a');
+        org.className = 'career-org';
+        org.href = e.url;
+        org.textContent = e.org;
+        org.target = '_blank';
+        org.rel = 'noopener noreferrer';
+        head.appendChild(org);
+      } else {
+        var orgText = document.createElement('span');
+        orgText.className = 'career-org';
+        orgText.textContent = e.org;
+        head.appendChild(orgText);
+      }
+      var when = document.createElement('span');
+      when.className = 'career-when';
+      var dur = careerDuration(e.startISO, e.endISO, e.end);
+      when.textContent = (e.start || '') + ' – ' + (e.end || '') + (dur ? ' · ' + dur : '');
+      head.appendChild(when);
+      li.appendChild(head);
+      if (e.location) {
+        var loc = document.createElement('p');
+        loc.className = 'career-loc';
+        loc.textContent = e.location;
+        li.appendChild(loc);
+      }
+      if (e.description) {
+        var desc = document.createElement('p');
+        desc.className = 'career-desc';
+        desc.textContent = e.description;
+        li.appendChild(desc);
+      }
+      if (e.skills && e.skills.length) {
+        var skills = document.createElement('ul');
+        skills.className = 'career-skills';
+        e.skills.forEach(function (s) {
+          var item = document.createElement('li');
+          item.textContent = s;
+          skills.appendChild(item);
+        });
+        li.appendChild(skills);
+      }
+      timeline.appendChild(li);
+    });
+    if (education.length) {
+      education.forEach(function (ed) {
+        var li = document.createElement('li');
+        var head = document.createElement('div');
+        head.className = 'career-head';
+        var school = document.createElement('span');
+        school.className = 'career-role';
+        if (ed.url && /^https?:\/\//.test(ed.url)) {
+          var a = document.createElement('a');
+          a.className = 'career-org';
+          a.href = ed.url;
+          a.textContent = ed.school;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          school.appendChild(a);
+        } else {
+          school.textContent = ed.school;
+        }
+        head.appendChild(school);
+        var period = document.createElement('span');
+        period.className = 'career-when';
+        period.textContent = ed.period || '';
+        head.appendChild(period);
+        li.appendChild(head);
+        if (ed.field || ed.note) {
+          var desc = document.createElement('p');
+          desc.className = 'career-desc';
+          desc.textContent = [ed.field, ed.note].filter(Boolean).join(' — ');
+          li.appendChild(desc);
+        }
+        eduBox.appendChild(li);
+      });
+      eduWrap.hidden = false;
+    }
+    section.hidden = false;
+  }
+
   function relativeDate(iso) {
     if (!iso) return null;
     var then = new Date(iso + 'T00:00:00Z').getTime();
@@ -850,6 +1023,7 @@
     renderHeader(data);
     renderStats(data);
     renderAbout(data);
+    renderCareer(data);
     renderFeatured(data);
     renderFilters(data);
     renderRepos(data);
@@ -939,7 +1113,7 @@
       });
     });
     var sections = [
-      ['Stats', 'stats-section'], ['About', 'about'], ['Featured', 'featured-section'],
+      ['Stats', 'stats-section'], ['About', 'about'], ['Career', 'career'], ['Featured', 'featured-section'],
       ['Public contributions', 'contributions-section'], ['Repositories', 'repos-section'], ['Activity', 'activity'],
     ];
     sections.forEach(function (s) {
