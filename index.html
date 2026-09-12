@@ -186,23 +186,32 @@
     position: relative;
     padding-left: 32px;
   }
-  /* the vertical bar connecting the beads */
-  .timeline::before {
+  /* the vertical bar: drawn per entry (except the last) as a segment from
+     this bead's bottom to the next bead's top, so the rail runs exactly
+     bead-to-bead with no overshoot above the first or below the last */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+  .timeline > li:not(:last-child)::after {
     content: "";
     position: absolute;
-    left: 8px;
-    top: 10px;
-    bottom: 10px;
+    left: -24px;   /* centers the 1px segment on the beads' axis (8.5px) */
+    top: 35px;     /* starts exactly at this bead's bottom (bead ends at 35px) */
+    bottom: -24px; /* ends exactly at the next entry's bead top */
     width: 1px;
     background: var(--border-strong);
   }
-  .timeline li { position: relative; padding: 16px 0 20px; }
-  .timeline li:last-child { padding-bottom: 4px; }
-  /* the bead on the bar, per entry */
-  .timeline li::before {
+  /* One bead per timeline ENTRY — child combinator so the nested skill
+     <li>s inside .career-skills never grow phantom beads or entry padding. */
+  .timeline > li { position: relative; padding: 16px 0 20px; }
+  .timeline > li:last-child { padding-bottom: 4px; }
+  /* the bead on the bar, per entry — left −29px centers the 11px bead box
+     (9px + 2×1px border) exactly on the 1px bar at 8.5px from the rail edge */
+  .timeline > li::before {
     content: "";
     position: absolute;
-    left: -28px;
+    left: -29px;
     top: 24px;
     width: 9px;
     height: 9px;
@@ -211,15 +220,15 @@
     border: 1px solid var(--border-strong);
   }
   /* current role: the accent bead, pulsing like the masthead's live dot */
-  .timeline li.current::before {
+  .timeline > li.current::before {
     background: var(--accent);
     border-color: var(--accent);
     animation: pulse 2.4s ease-in-out infinite;
   }
-  .timeline li.current { padding-bottom: 24px; }
-  .timeline li.current .career-when { color: var(--accent); }
+  .timeline > li.current { padding-bottom: 24px; }
+  .timeline > li.current .career-when { color: var(--accent); }
   /* education: hollow bead to read as a different kind of milestone */
-  .timeline li.edu::before { background: var(--bg); }
+  .timeline > li.edu::before { background: var(--bg); }
   .career-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
   .career-role { font-size: 16px; font-weight: 600; }
   .career-org { color: var(--text); }
@@ -444,7 +453,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .live-dot { animation: none; }
-    .timeline li.current::before { animation: none; }
+    .timeline > li.current::before { animation: none; }
     .card::after { display: none; }
     .card, .about .links a, .chip, .repo-row .name, .feed .repo-link, .past-summary { transition: none; }
     .secnav { transform: none; transition: none; }
