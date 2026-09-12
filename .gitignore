@@ -4,3 +4,4 @@ _site/
 *.log
 .dsh-scheduler/
 .dsh-preview/
+.worktrees
