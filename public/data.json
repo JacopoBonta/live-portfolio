@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T15:37:14.712Z",
+  "generatedAt": "2026-09-13T10:31:08.320Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -197,7 +197,7 @@
       "stars": 0,
       "forks": 0,
       "watchers": 0,
-      "openIssues": 1,
+      "openIssues": 0,
       "language": "HTML",
       "topics": [],
       "isPrivate": false,
@@ -498,6 +498,56 @@
   ],
   "events": [
     {
+      "repo": "JacopoBonta/dsh-sidebar",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-11",
+      "count": 5
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-12",
+      "count": 23
+    },
+    {
+      "repo": "JacopoBonta/opencode-artifacts-plugin",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-12",
+      "count": 1
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "create-branch",
+      "detail": {
+        "ref": "feature/career-section",
+        "refType": "branch"
+      },
+      "date": "2026-09-12",
+      "count": 3
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "pr-merged",
+      "detail": {
+        "title": null,
+        "number": 2
+      },
+      "date": "2026-09-12",
+      "count": 2
+    },
+    {
       "repo": "JacopoBonta/live-portfolio",
       "kind": "pr-opened",
       "detail": {
@@ -509,16 +559,6 @@
     },
     {
       "repo": "JacopoBonta/dsh-sidebar",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-12",
-      "count": 3
-    },
-    {
-      "repo": "JacopoBonta/dsh-sidebar",
       "kind": "pr-merged",
       "detail": {
         "title": null,
@@ -526,26 +566,6 @@
       },
       "date": "2026-09-12",
       "count": 2
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-12",
-      "count": 18
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "pr-merged",
-      "detail": {
-        "title": null,
-        "number": 1
-      },
-      "date": "2026-09-12",
-      "count": 1
     },
     {
       "repo": "JacopoBonta/dsh-scheduler",
@@ -576,41 +596,14 @@
       },
       "date": "2026-09-11",
       "count": 2
-    },
-    {
-      "repo": "JacopoBonta/dsh-sidebar",
-      "kind": "pr-opened",
-      "detail": {
-        "title": null,
-        "number": 2
-      },
-      "date": "2026-09-11",
-      "count": 2
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "create-branch",
-      "detail": {
-        "ref": "main",
-        "refType": "branch"
-      },
-      "date": "2026-09-09",
-      "count": 1
     }
   ],
-  "eventCount": 14,
+  "eventCount": 15,
   "contributions": {
-    "start": "2025-09-12",
-    "end": "2026-09-12",
-    "total": 208,
+    "start": "2025-09-14",
+    "end": "2026-09-13",
+    "total": 209,
     "days": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
       0,
       0,
       0,
@@ -974,7 +967,14 @@
       38,
       1,
       14,
-      8
+      9,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
     ]
   }
 }
