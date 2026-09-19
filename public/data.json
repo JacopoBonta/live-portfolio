@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T09:59:38.074Z",
+  "generatedAt": "2026-09-19T09:40:56.425Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -116,9 +116,9 @@
   ],
   "stats": {
     "publicRepos": 21,
-    "totalStars": 1,
+    "totalStars": 2,
     "followers": 16,
-    "lastPush": "2026-09-17"
+    "lastPush": "2026-09-18"
   },
   "featured": [
     {
@@ -126,16 +126,16 @@
       "description": "Agent-generated plans and reports for opencode, reviewed in your browser: anchored inline comments, approve/request-changes, and a plan-first gate that blocks file edits until you sign off.",
       "homepage": null,
       "htmlUrl": "https://github.com/JacopoBonta/opencode-artifacts-plugin",
-      "stars": 0,
+      "stars": 1,
       "forks": 0,
-      "watchers": 0,
+      "watchers": 1,
       "openIssues": 0,
       "language": "TypeScript",
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-06-30",
       "pushedAt": "2026-09-12",
-      "updatedAt": "2026-09-12",
+      "updatedAt": "2026-09-18",
       "past": false,
       "languageColor": "#3178c6",
       "languages": {
@@ -202,8 +202,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-09-17",
-      "updatedAt": "2026-09-17",
+      "pushedAt": "2026-09-18",
+      "updatedAt": "2026-09-18",
       "past": false
     },
     {
@@ -228,16 +228,16 @@
       "description": "Agent-generated plans and reports for opencode, reviewed in your browser: anchored inline comments, approve/request-changes, and a plan-first gate that blocks file edits until you sign off.",
       "homepage": null,
       "htmlUrl": "https://github.com/JacopoBonta/opencode-artifacts-plugin",
-      "stars": 0,
+      "stars": 1,
       "forks": 0,
-      "watchers": 0,
+      "watchers": 1,
       "openIssues": 0,
       "language": "TypeScript",
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-06-30",
       "pushedAt": "2026-09-12",
-      "updatedAt": "2026-09-12",
+      "updatedAt": "2026-09-18",
       "past": false
     },
     {
@@ -499,6 +499,13 @@
   "events": [
     {
       "repo": "JacopoBonta/opencode-artifacts-plugin",
+      "kind": "starred",
+      "detail": null,
+      "date": "2026-09-18",
+      "count": 1
+    },
+    {
+      "repo": "JacopoBonta/opencode-artifacts-plugin",
       "kind": "push",
       "detail": {
         "commits": 0,
@@ -586,22 +593,12 @@
       },
       "date": "2026-09-11",
       "count": 4
-    },
-    {
-      "repo": "JacopoBonta/dsh-scheduler",
-      "kind": "create-branch",
-      "detail": {
-        "ref": "security/audit-fixes",
-        "refType": "branch"
-      },
-      "date": "2026-09-11",
-      "count": 2
     }
   ],
-  "eventCount": 15,
+  "eventCount": 16,
   "contributions": {
-    "start": "2025-09-18",
-    "end": "2026-09-18",
+    "start": "2025-09-19",
+    "end": "2026-09-19",
     "total": 209,
     "days": [
       0,
