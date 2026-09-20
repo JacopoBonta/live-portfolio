@@ -121,13 +121,13 @@ public repos are skipped.
   time; it lives in the config and flows into the snapshot through
   `sanitizeCareer` (entries missing `title`+`org`+`start`, or education
   missing `school`, are dropped rather than breaking the generator).
-  Experience entries render newest-first in config order with
+  Experience entries carry
   title · org (linked when `url` is set) · "start – end · duration" (the
   duration is computed at render time from `startISO`/`endISO`, so the
   current role stays current), plus optional location, description and
   `skills` chips. Education entries render with school (linked when
   `url` is set), `period`, `field` and `note`. Both kinds merge into one
-  chronological timeline (sorted by start, oldest → newest, education
+  chronological timeline (sorted by start, newest → oldest, education
   keyed on the year the period starts with), drawn as a vertical hairline
   connecting glass beads: the current role's bead pulses with the accent,
   education is a hollow bead.
