@@ -178,9 +178,10 @@
   }
   .about .links a:hover { color: var(--text); border-color: var(--border-strong); }
 
-  /* career: one chronological timeline (oldest → newest) — a vertical hairline
-     connects glass beads, one per entry; the current role's bead pulses with
-     the accent, education is a hollow bead. Same frosted-panel language. */
+  /* career: one reverse-chronological timeline (newest → oldest) — a vertical
+     hairline connects glass beads, one per entry; the current role's bead
+     pulses with the accent, education is a hollow bead. Same frosted-panel
+     language. */
   .timeline, .career-skills { list-style: none; margin: 0; padding: 0; }
   .timeline {
     position: relative;
@@ -759,10 +760,11 @@
       section.hidden = true;
       return;
     }
-    // One chronological timeline: entries get a sortable key (experience from
-    // startISO, education from the year the period string starts with), then
-    // sort ascending — a journey that ends at the current role. Ties (or
-    // missing dates) keep config order.
+    // One reverse-chronological timeline: entries get a sortable key
+    // (experience from startISO, education from the year the period string
+    // starts with), then sort descending — the current role opens the list
+    // and the earliest internship closes it. Ties (or missing dates) keep
+    // config order.
     var entries = [];
     experience.forEach(function (e) {
       entries.push({ kind: 'exp', e: e, key: e.startISO || null });
@@ -775,7 +777,7 @@
       entries.push({ kind: 'edu', e: ed, key: key });
     });
     entries.sort(function (a, b) {
-      if (a.key && b.key) return a.key < b.key ? -1 : (a.key > b.key ? 1 : 0);
+      if (a.key && b.key) return a.key < b.key ? 1 : (a.key > b.key ? -1 : 0);
       if (a.key) return -1;
       if (b.key) return 1;
       return 0;
