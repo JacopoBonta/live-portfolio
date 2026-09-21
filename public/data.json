@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T10:00:07.171Z",
+  "generatedAt": "2026-09-21T10:59:59.462Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -118,7 +118,7 @@
     "publicRepos": 21,
     "totalStars": 2,
     "followers": 16,
-    "lastPush": "2026-09-19"
+    "lastPush": "2026-09-20"
   },
   "featured": [
     {
@@ -202,8 +202,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-09-19",
-      "updatedAt": "2026-09-19",
+      "pushedAt": "2026-09-20",
+      "updatedAt": "2026-09-20",
       "past": false
     },
     {
@@ -498,6 +498,46 @@
   ],
   "events": [
     {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "push",
+      "detail": {
+        "commits": 0,
+        "message": null
+      },
+      "date": "2026-09-20",
+      "count": 26
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "pr-merged",
+      "detail": {
+        "title": null,
+        "number": 3
+      },
+      "date": "2026-09-20",
+      "count": 3
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "pr-opened",
+      "detail": {
+        "title": null,
+        "number": 3
+      },
+      "date": "2026-09-20",
+      "count": 3
+    },
+    {
+      "repo": "JacopoBonta/live-portfolio",
+      "kind": "create-branch",
+      "detail": {
+        "ref": "fix/career-newest-first",
+        "refType": "branch"
+      },
+      "date": "2026-09-20",
+      "count": 4
+    },
+    {
       "repo": "JacopoBonta/opencode-artifacts-plugin",
       "kind": "starred",
       "detail": null,
@@ -513,16 +553,6 @@
       },
       "date": "2026-09-12",
       "count": 2
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-12",
-      "count": 25
     },
     {
       "repo": "JacopoBonta/dsh-sidebar",
@@ -543,36 +573,6 @@
       },
       "date": "2026-09-11",
       "count": 3
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "create-branch",
-      "detail": {
-        "ref": "feature/career-section",
-        "refType": "branch"
-      },
-      "date": "2026-09-12",
-      "count": 3
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "pr-merged",
-      "detail": {
-        "title": null,
-        "number": 2
-      },
-      "date": "2026-09-12",
-      "count": 2
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "pr-opened",
-      "detail": {
-        "title": null,
-        "number": 2
-      },
-      "date": "2026-09-12",
-      "count": 2
     },
     {
       "repo": "JacopoBonta/dsh-sidebar",
@@ -598,8 +598,8 @@
   "eventCount": 16,
   "contributions": {
     "start": "2025-09-21",
-    "end": "2026-09-20",
-    "total": 209,
+    "end": "2026-09-21",
+    "total": 211,
     "days": [
       0,
       0,
@@ -965,7 +965,7 @@
       0,
       0,
       0,
-      0,
+      2,
       0,
       0,
       0,
