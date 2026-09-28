@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T10:41:04.394Z",
+  "generatedAt": "2026-09-28T11:54:42.730Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -118,7 +118,7 @@
     "publicRepos": 21,
     "totalStars": 2,
     "followers": 16,
-    "lastPush": "2026-09-26"
+    "lastPush": "2026-09-27"
   },
   "featured": [
     {
@@ -202,8 +202,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-09-26",
-      "updatedAt": "2026-09-26",
+      "pushedAt": "2026-09-27",
+      "updatedAt": "2026-09-27",
       "past": false
     },
     {
@@ -572,7 +572,7 @@
         "refType": "branch"
       },
       "date": "2026-09-11",
-      "count": 2
+      "count": 1
     },
     {
       "repo": "JacopoBonta/dsh-sidebar",
@@ -585,20 +585,20 @@
       "count": 2
     },
     {
-      "repo": "JacopoBonta/dsh-scheduler",
-      "kind": "push",
+      "repo": "JacopoBonta/dsh-sidebar",
+      "kind": "pr-opened",
       "detail": {
-        "commits": 0,
-        "message": null
+        "title": null,
+        "number": 2
       },
       "date": "2026-09-11",
-      "count": 1
+      "count": 2
     }
   ],
-  "eventCount": 15,
+  "eventCount": 13,
   "contributions": {
     "start": "2025-09-28",
-    "end": "2026-09-27",
+    "end": "2026-09-28",
     "total": 211,
     "days": [
       0,
