@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T11:30:11.928Z",
+  "generatedAt": "2026-09-30T11:18:28.943Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -118,7 +118,7 @@
     "publicRepos": 21,
     "totalStars": 2,
     "followers": 16,
-    "lastPush": "2026-09-28"
+    "lastPush": "2026-09-29"
   },
   "featured": [
     {
@@ -202,8 +202,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-09-28",
-      "updatedAt": "2026-09-28",
+      "pushedAt": "2026-09-29",
+      "updatedAt": "2026-09-29",
       "past": false
     },
     {
@@ -498,6 +498,13 @@
   ],
   "events": [
     {
+      "repo": "alibaba/open-code-review",
+      "kind": "starred",
+      "detail": null,
+      "date": "2026-09-30",
+      "count": 1
+    },
+    {
       "repo": "JacopoBonta/live-portfolio",
       "kind": "push",
       "detail": {
@@ -505,7 +512,7 @@
         "message": null
       },
       "date": "2026-09-20",
-      "count": 8
+      "count": 3
     },
     {
       "repo": "JacopoBonta/live-portfolio",
@@ -535,7 +542,7 @@
         "refType": "branch"
       },
       "date": "2026-09-20",
-      "count": 3
+      "count": 1
     },
     {
       "repo": "JacopoBonta/opencode-artifacts-plugin",
@@ -552,7 +559,7 @@
         "message": null
       },
       "date": "2026-09-12",
-      "count": 2
+      "count": 1
     },
     {
       "repo": "JacopoBonta/dsh-sidebar",
@@ -562,7 +569,7 @@
         "message": null
       },
       "date": "2026-09-11",
-      "count": 6
+      "count": 4
     },
     {
       "repo": "JacopoBonta/dsh-sidebar",
@@ -583,22 +590,12 @@
       },
       "date": "2026-09-12",
       "count": 2
-    },
-    {
-      "repo": "JacopoBonta/dsh-sidebar",
-      "kind": "pr-opened",
-      "detail": {
-        "title": null,
-        "number": 2
-      },
-      "date": "2026-09-11",
-      "count": 2
     }
   ],
-  "eventCount": 13,
+  "eventCount": 14,
   "contributions": {
-    "start": "2025-09-29",
-    "end": "2026-09-29",
+    "start": "2025-09-30",
+    "end": "2026-09-30",
     "total": 211,
     "days": [
       0,
