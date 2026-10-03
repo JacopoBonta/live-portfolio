@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T11:16:08.689Z",
+  "generatedAt": "2026-10-03T10:32:16.889Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -118,7 +118,7 @@
     "publicRepos": 21,
     "totalStars": 2,
     "followers": 16,
-    "lastPush": "2026-10-01"
+    "lastPush": "2026-10-02"
   },
   "featured": [
     {
@@ -202,8 +202,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-10-01",
-      "updatedAt": "2026-10-01",
+      "pushedAt": "2026-10-02",
+      "updatedAt": "2026-10-02",
       "past": false
     },
     {
@@ -512,7 +512,7 @@
         "message": null
       },
       "date": "2026-09-20",
-      "count": 3
+      "count": 1
     },
     {
       "repo": "JacopoBonta/live-portfolio",
@@ -563,16 +563,6 @@
     },
     {
       "repo": "JacopoBonta/dsh-sidebar",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-11",
-      "count": 2
-    },
-    {
-      "repo": "JacopoBonta/dsh-sidebar",
       "kind": "pr-merged",
       "detail": {
         "title": null,
@@ -590,12 +580,22 @@
       },
       "date": "2026-09-11",
       "count": 2
+    },
+    {
+      "repo": "JacopoBonta/dsh-scheduler",
+      "kind": "pr-merged",
+      "detail": {
+        "title": null,
+        "number": 1
+      },
+      "date": "2026-09-11",
+      "count": 1
     }
   ],
-  "eventCount": 13,
+  "eventCount": 12,
   "contributions": {
-    "start": "2025-10-02",
-    "end": "2026-10-02",
+    "start": "2025-10-03",
+    "end": "2026-10-03",
     "total": 211,
     "days": [
       0,
