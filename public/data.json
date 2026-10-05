@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T11:13:48.953Z",
+  "generatedAt": "2026-10-05T12:31:24.216Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -118,7 +118,7 @@
     "publicRepos": 21,
     "totalStars": 2,
     "followers": 16,
-    "lastPush": "2026-10-03"
+    "lastPush": "2026-10-04"
   },
   "featured": [
     {
@@ -202,8 +202,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-10-03",
-      "updatedAt": "2026-10-03",
+      "pushedAt": "2026-10-04",
+      "updatedAt": "2026-10-04",
       "past": false
     },
     {
@@ -552,16 +552,6 @@
       "count": 1
     },
     {
-      "repo": "JacopoBonta/opencode-artifacts-plugin",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-12",
-      "count": 1
-    },
-    {
       "repo": "JacopoBonta/dsh-sidebar",
       "kind": "pr-merged",
       "detail": {
@@ -590,12 +580,22 @@
       },
       "date": "2026-09-11",
       "count": 1
+    },
+    {
+      "repo": "JacopoBonta/dsh-scheduler",
+      "kind": "pr-opened",
+      "detail": {
+        "title": null,
+        "number": 1
+      },
+      "date": "2026-09-11",
+      "count": 1
     }
   ],
-  "eventCount": 12,
+  "eventCount": 11,
   "contributions": {
     "start": "2025-10-05",
-    "end": "2026-10-04",
+    "end": "2026-10-05",
     "total": 211,
     "days": [
       0,
