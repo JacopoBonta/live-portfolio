@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T11:32:21.623Z",
+  "generatedAt": "2026-10-12T13:26:04.101Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -118,7 +118,7 @@
     "publicRepos": 21,
     "totalStars": 2,
     "followers": 16,
-    "lastPush": "2026-10-10"
+    "lastPush": "2026-10-11"
   },
   "featured": [
     {
@@ -202,8 +202,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-10-10",
-      "updatedAt": "2026-10-10",
+      "pushedAt": "2026-10-11",
+      "updatedAt": "2026-10-11",
       "past": false
     },
     {
@@ -506,16 +506,6 @@
     },
     {
       "repo": "JacopoBonta/live-portfolio",
-      "kind": "push",
-      "detail": {
-        "commits": 0,
-        "message": null
-      },
-      "date": "2026-09-20",
-      "count": 1
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
       "kind": "pr-merged",
       "detail": {
         "title": null,
@@ -533,16 +523,6 @@
       },
       "date": "2026-09-20",
       "count": 3
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "create-branch",
-      "detail": {
-        "ref": "fix/career-newest-first",
-        "refType": "branch"
-      },
-      "date": "2026-09-20",
-      "count": 1
     },
     {
       "repo": "JacopoBonta/opencode-artifacts-plugin",
@@ -559,43 +539,13 @@
         "number": 2
       },
       "date": "2026-09-12",
-      "count": 2
-    },
-    {
-      "repo": "JacopoBonta/dsh-sidebar",
-      "kind": "pr-opened",
-      "detail": {
-        "title": null,
-        "number": 2
-      },
-      "date": "2026-09-11",
-      "count": 2
-    },
-    {
-      "repo": "JacopoBonta/dsh-scheduler",
-      "kind": "pr-merged",
-      "detail": {
-        "title": null,
-        "number": 1
-      },
-      "date": "2026-09-11",
-      "count": 1
-    },
-    {
-      "repo": "JacopoBonta/dsh-scheduler",
-      "kind": "pr-opened",
-      "detail": {
-        "title": null,
-        "number": 1
-      },
-      "date": "2026-09-11",
       "count": 1
     }
   ],
-  "eventCount": 10,
+  "eventCount": 5,
   "contributions": {
     "start": "2025-10-12",
-    "end": "2026-10-11",
+    "end": "2026-10-12",
     "total": 211,
     "days": [
       0,
