@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T09:48:17.899Z",
+  "generatedAt": "2026-10-19T11:05:59.041Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -118,7 +118,7 @@
     "publicRepos": 21,
     "totalStars": 2,
     "followers": 16,
-    "lastPush": "2026-10-17"
+    "lastPush": "2026-10-18"
   },
   "featured": [
     {
@@ -202,8 +202,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-10-17",
-      "updatedAt": "2026-10-17",
+      "pushedAt": "2026-10-18",
+      "updatedAt": "2026-10-18",
       "past": false
     },
     {
@@ -523,19 +523,12 @@
       },
       "date": "2026-09-20",
       "count": 1
-    },
-    {
-      "repo": "JacopoBonta/opencode-artifacts-plugin",
-      "kind": "starred",
-      "detail": null,
-      "date": "2026-09-18",
-      "count": 1
     }
   ],
-  "eventCount": 4,
+  "eventCount": 3,
   "contributions": {
     "start": "2025-10-19",
-    "end": "2026-10-18",
+    "end": "2026-10-19",
     "total": 211,
     "days": [
       0,
