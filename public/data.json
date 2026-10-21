@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T10:18:46.843Z",
+  "generatedAt": "2026-10-21T10:29:12.010Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -118,7 +118,7 @@
     "publicRepos": 21,
     "totalStars": 2,
     "followers": 16,
-    "lastPush": "2026-10-19"
+    "lastPush": "2026-10-20"
   },
   "featured": [
     {
@@ -202,8 +202,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-10-19",
-      "updatedAt": "2026-10-19",
+      "pushedAt": "2026-10-20",
+      "updatedAt": "2026-10-20",
       "past": false
     },
     {
@@ -503,32 +503,12 @@
       "detail": null,
       "date": "2026-09-30",
       "count": 1
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "pr-merged",
-      "detail": {
-        "title": null,
-        "number": 3
-      },
-      "date": "2026-09-20",
-      "count": 1
-    },
-    {
-      "repo": "JacopoBonta/live-portfolio",
-      "kind": "pr-opened",
-      "detail": {
-        "title": null,
-        "number": 3
-      },
-      "date": "2026-09-20",
-      "count": 1
     }
   ],
-  "eventCount": 3,
+  "eventCount": 1,
   "contributions": {
-    "start": "2025-10-20",
-    "end": "2026-10-20",
+    "start": "2025-10-21",
+    "end": "2026-10-21",
     "total": 211,
     "days": [
       0,
