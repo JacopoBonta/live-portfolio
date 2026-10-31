@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-30T11:31:58.014Z",
+  "generatedAt": "2026-10-31T11:05:17.021Z",
   "profile": {
     "login": "JacopoBonta",
     "name": "Jacopo",
@@ -118,7 +118,7 @@
     "publicRepos": 21,
     "totalStars": 2,
     "followers": 16,
-    "lastPush": "2026-10-29"
+    "lastPush": "2026-10-30"
   },
   "featured": [
     {
@@ -202,8 +202,8 @@
       "topics": [],
       "isPrivate": false,
       "createdAt": "2026-09-09",
-      "pushedAt": "2026-10-29",
-      "updatedAt": "2026-10-29",
+      "pushedAt": "2026-10-30",
+      "updatedAt": "2026-10-30",
       "past": false
     },
     {
@@ -496,19 +496,11 @@
       "past": true
     }
   ],
-  "events": [
-    {
-      "repo": "alibaba/open-code-review",
-      "kind": "starred",
-      "detail": null,
-      "date": "2026-09-30",
-      "count": 1
-    }
-  ],
-  "eventCount": 1,
+  "events": [],
+  "eventCount": 0,
   "contributions": {
-    "start": "2025-10-30",
-    "end": "2026-10-30",
+    "start": "2025-10-31",
+    "end": "2026-10-31",
     "total": 211,
     "days": [
       0,
